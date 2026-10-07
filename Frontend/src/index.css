@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #304037;
+  --color-primary-light: #3d5146;
+  --color-primary-dark: #222e27;
+  --color-gold: #d4af37;
+  --color-gold-light: #f3e5ab;
+  --font-roboto: 'Roboto', sans-serif;
+  --font-playfair: 'Playfair Display', serif;
+}
+
+.font-roboto {
+  font-family: 'Roboto', sans-serif;
+}
+
+.font-playfair {
+  font-family: 'Playfair Display', serif;
+}
+
