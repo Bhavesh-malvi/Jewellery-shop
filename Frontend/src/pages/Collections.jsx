@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { GoDotFill } from 'react-icons/go'
 import { FaWhatsapp } from 'react-icons/fa6'
 import { HiArrowRight } from 'react-icons/hi2'
@@ -126,6 +127,14 @@ const Collections = () => {
                                         <FaWhatsapp className="text-lg text-[#d4af37]" />
                                         <span>Consult on WhatsApp</span>
                                     </a>
+
+                                    <Link
+                                        to="/catalogue"
+                                        className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white hover:bg-gray-100 text-[#304037] text-xs sm:text-sm font-roboto font-medium tracking-wide transition-all duration-300 shadow-sm cursor-pointer border border-gray-300 hover:border-[#304037]"
+                                    >
+                                        <span>Browse Catalogue</span>
+                                        <HiArrowRight className="text-base" />
+                                    </Link>
                                 </div>
                             </div>
 

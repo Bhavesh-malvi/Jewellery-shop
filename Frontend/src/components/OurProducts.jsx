@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { GoDotFill } from 'react-icons/go'
 import { FaWhatsapp, FaRegHeart, FaHeart } from 'react-icons/fa6'
 import { BsBagPlus, BsBagCheck } from 'react-icons/bs'
@@ -237,7 +238,13 @@ const OurProducts = () => {
                 </div>
 
                 <div className="flex items-center justify-center w-full h-fit p-5">
-                    <button className='px-8 py-3.5 rounded-full bg-[#304037] text-[#f3e5ab] hover:bg-[#24312a] font-roboto font-medium text-sm tracking-wide shadow-xl flex items-center gap-2.5 cursor-pointer transition-all duration-300' >Explore more Designs</button>
+                    <Link
+                        to={activeTab === 'All' ? '/catalogue' : `/catalogue?category=${encodeURIComponent(activeTab)}`}
+                        className='px-8 py-3.5 rounded-full bg-[#304037] text-[#f3e5ab] hover:bg-[#24312a] font-roboto font-medium text-sm tracking-wide shadow-xl flex items-center gap-2.5 cursor-pointer transition-all duration-300'
+                    >
+                        <span>Explore more Designs</span>
+                        <HiArrowRight className="text-base" />
+                    </Link>
                 </div>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">

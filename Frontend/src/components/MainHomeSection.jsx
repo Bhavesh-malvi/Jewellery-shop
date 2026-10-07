@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { FaWhatsapp } from 'react-icons/fa6'
 import { GoDotFill } from 'react-icons/go'
 import { HiArrowRight } from 'react-icons/hi2'
@@ -50,10 +51,13 @@ const MainHomeSection = () => {
                         {/* Action Buttons */}
                         <div className="flex flex-wrap items-center gap-4 sm:gap-6 pt-1">
                             {/* Primary Button */}
-                            <button className="group px-8 py-3.5 rounded-full bg-[#d4af37] hover:bg-[#e0be53] text-[#1c2922] font-roboto font-semibold text-sm tracking-wide shadow-lg hover:shadow-[#d4af37]/30 transition-all duration-300 transform hover:-translate-y-0.5 flex items-center gap-2 cursor-pointer">
+                            <Link
+                                to="/catalogue"
+                                className="group px-8 py-3.5 rounded-full bg-[#d4af37] hover:bg-[#e0be53] text-[#1c2922] font-roboto font-semibold text-sm tracking-wide shadow-lg hover:shadow-[#d4af37]/30 transition-all duration-300 transform hover:-translate-y-0.5 flex items-center gap-2 cursor-pointer"
+                            >
                                 <span>Explore Collection</span>
                                 <HiArrowRight className="text-lg transition-transform duration-300 group-hover:translate-x-1" />
-                            </button>
+                            </Link>
 
                             {/* WhatsApp Button */}
                             <a

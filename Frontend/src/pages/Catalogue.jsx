@@ -1,9 +1,30 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { GoDotFill } from 'react-icons/go'
 import { FaWhatsapp, FaRegHeart, FaHeart, FaMagnifyingGlass } from 'react-icons/fa6'
 import { BsBagPlus, BsBagCheck } from 'react-icons/bs'
 import { IoCloseOutline } from 'react-icons/io5'
 import { useEnquiry } from '../context/EnquiryContext'
+
+const categories = ['All', 'Rings', 'Earrings', 'Necklaces', 'Bracelets', 'Bangles', 'Pendants', 'Chains']
+
+const normalizeCategory = (catName) => {
+    if (!catName) return 'All'
+    const clean = catName.trim().toLowerCase()
+    if (clean === 'all') return 'All'
+
+    const matched = categories.find((c) => {
+        if (c === 'All') return false
+        const cLower = c.toLowerCase()
+        return (
+            cLower === clean ||
+            cLower === `${clean}s` ||
+            clean === `${cLower}s` ||
+            cLower.replace(/s$/, '') === clean.replace(/s$/, '')
+        )
+    })
+    return matched || 'All'
+}
 
 const Catalogue = () => {
     const {
@@ -14,12 +35,29 @@ const Catalogue = () => {
         whatsappNumber,
     } = useEnquiry()
 
-    const [searchQuery, setSearchQuery] = useState('')
-    const [selectedCategory, setSelectedCategory] = useState('All')
+    const [searchParams, setSearchParams] = useSearchParams()
+    const categoryParam = searchParams.get('category')
+    const searchParam = searchParams.get('search')
+
+    const [selectedCategory, setSelectedCategory] = useState(() => normalizeCategory(categoryParam))
+    const [searchQuery, setSearchQuery] = useState(() => searchParam || '')
     const [selectedPurity, setSelectedPurity] = useState('All')
     const [wishlist, setWishlist] = useState([])
 
-    const categories = ['All', 'Rings', 'Earrings', 'Necklaces', 'Bracelets', 'Bangles', 'Pendants']
+    useEffect(() => {
+        if (categoryParam) {
+            setSelectedCategory(normalizeCategory(categoryParam))
+        } else {
+            setSelectedCategory('All')
+        }
+    }, [categoryParam])
+
+    useEffect(() => {
+        if (searchParam !== null && searchParam !== undefined) {
+            setSearchQuery(searchParam)
+        }
+    }, [searchParam])
+
     const purities = ['All', '22K Hallmarked Gold', '18K Diamond']
 
     const allDesigns = [
@@ -143,6 +181,86 @@ const Catalogue = () => {
             specs: '22K Heavy Hallmark Gold • Solid Carved Finish',
             img: 'https://html.awaikenthemes.com/cignet/images/top-selling-item-image-4.jpg',
         },
+        {
+            id: 13,
+            code: 'RJ-EAR-213',
+            category: 'Earrings',
+            purity: '18K Diamond',
+            tag: 'Exclusive',
+            name: 'Solitaire Floral Diamond Studs',
+            specs: '18K Yellow Gold • Certified VVS-EF Diamonds',
+            img: 'https://html.awaikenthemes.com/cignet/images/product-image-2.png',
+        },
+        {
+            id: 14,
+            code: 'RJ-EAR-214',
+            category: 'Earrings',
+            purity: '22K Hallmarked Gold',
+            tag: 'Heritage',
+            name: 'Kundan Polki Royal Chandelier Earrings',
+            specs: '22K Yellow Gold • Natural Uncut Polki & Emerald Beads',
+            img: 'https://html.awaikenthemes.com/cignet/images/top-selling-item-image-1.jpg',
+        },
+        {
+            id: 15,
+            code: 'RJ-CHN-715',
+            category: 'Chains',
+            purity: '22K Hallmarked Gold',
+            tag: 'Classic',
+            name: 'Imperial BIS Solid Gold Rope Chain',
+            specs: '22K BIS 916 Hallmark Gold • Handcrafted Italian Weave',
+            img: 'https://html.awaikenthemes.com/cignet/images/top-selling-item-image-6.jpg',
+        },
+        {
+            id: 16,
+            code: 'RJ-CHN-716',
+            category: 'Chains',
+            purity: '18K Diamond',
+            tag: 'Modern Lux',
+            name: 'Italian Diamond-Faceted Curb Link Chain',
+            specs: '18K Yellow Gold • Precision Diamond Bevel Edge',
+            img: 'https://html.awaikenthemes.com/cignet/images/top-selling-item-image-6.jpg',
+        },
+        {
+            id: 17,
+            code: 'RJ-BNG-617',
+            category: 'Bangles',
+            purity: '22K Hallmarked Gold',
+            tag: 'Bridal Set',
+            name: 'Royal Rajasthani Meenakari Kada Bangles',
+            specs: '22K Hallmarked Gold • Pair of Traditional Hand-Carved Kadas',
+            img: 'https://html.awaikenthemes.com/cignet/images/top-selling-item-image-4.jpg',
+        },
+        {
+            id: 18,
+            code: 'RJ-BNG-618',
+            category: 'Bangles',
+            purity: '18K Diamond',
+            tag: 'Signature',
+            name: 'Aura Brilliant Diamond Pavé Sleek Bangle',
+            specs: '18K Rose Gold • Continuous Solitaire Diamond Line',
+            img: 'https://html.awaikenthemes.com/cignet/images/product-image-5.png',
+        },
+        {
+            id: 19,
+            code: 'RJ-PND-419',
+            category: 'Pendants',
+            purity: '22K Hallmarked Gold',
+            tag: 'Temple Art',
+            name: 'Sacred Lakshmi Nakshi Gold Pendant',
+            specs: '22K Antique Hallmarked Gold • Hand-engraved Nakshi Detailing',
+            img: 'https://html.awaikenthemes.com/cignet/images/top-selling-item-image-3.jpg',
+        },
+        {
+            id: 20,
+            code: 'RJ-NCK-320',
+            category: 'Necklaces',
+            purity: '22K Hallmarked Gold',
+            tag: 'Royal Bridal',
+            name: 'Imperial Polki Kundan Maharani Necklace Set',
+            specs: '22K Gold • Handcrafted Jadau Cluster with Matching Earrings',
+            img: 'https://html.awaikenthemes.com/cignet/images/top-selling-item-image-2.jpg',
+        },
     ]
 
     const toggleWishlist = (id) => {
@@ -151,15 +269,54 @@ const Catalogue = () => {
         )
     }
 
+    const handleCategorySelect = (cat) => {
+        setSelectedCategory(cat)
+        const nextParams = new URLSearchParams(searchParams)
+        if (cat === 'All') {
+            nextParams.delete('category')
+        } else {
+            nextParams.set('category', cat)
+        }
+        setSearchParams(nextParams, { replace: true })
+    }
+
+    const handleResetFilters = () => {
+        setSelectedCategory('All')
+        setSelectedPurity('All')
+        setSearchQuery('')
+        const nextParams = new URLSearchParams(searchParams)
+        nextParams.delete('category')
+        nextParams.delete('search')
+        setSearchParams(nextParams, { replace: true })
+    }
+
+    const handleSearchChange = (val) => {
+        setSearchQuery(val)
+        const nextParams = new URLSearchParams(searchParams)
+        if (val.trim()) {
+            nextParams.set('search', val)
+        } else {
+            nextParams.delete('search')
+        }
+        setSearchParams(nextParams, { replace: true })
+    }
+
     const filteredDesigns = allDesigns.filter((item) => {
         const matchesCategory =
-            selectedCategory === 'All' || item.category.toLowerCase() === selectedCategory.toLowerCase()
+            selectedCategory === 'All' ||
+            item.category.toLowerCase() === selectedCategory.toLowerCase() ||
+            item.category.toLowerCase().replace(/s$/, '') === selectedCategory.toLowerCase().replace(/s$/, '')
+
         const matchesPurity =
             selectedPurity === 'All' || item.purity.toLowerCase() === selectedPurity.toLowerCase()
+
+        const searchLower = searchQuery.toLowerCase().trim()
         const matchesSearch =
-            item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            item.code.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            item.specs.toLowerCase().includes(searchQuery.toLowerCase())
+            !searchLower ||
+            item.name.toLowerCase().includes(searchLower) ||
+            item.code.toLowerCase().includes(searchLower) ||
+            item.specs.toLowerCase().includes(searchLower) ||
+            item.category.toLowerCase().includes(searchLower)
 
         return matchesCategory && matchesPurity && matchesSearch
     })
@@ -190,13 +347,14 @@ const Catalogue = () => {
                                 type="text"
                                 placeholder="Search by name, code (e.g. RJ-RNG-101), or stone..."
                                 value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
+                                onChange={(e) => handleSearchChange(e.target.value)}
                                 className="w-full bg-transparent px-3 py-2 text-sm text-white placeholder-gray-400 focus:outline-none font-roboto"
                             />
                             {searchQuery && (
                                 <button
-                                    onClick={() => setSearchQuery('')}
-                                    className="p-1.5 mr-2 text-gray-400 hover:text-white"
+                                    onClick={() => handleSearchChange('')}
+                                    className="p-1.5 mr-2 text-gray-400 hover:text-white cursor-pointer"
+                                    title="Clear search"
                                 >
                                     <IoCloseOutline className="text-lg" />
                                 </button>
@@ -214,10 +372,10 @@ const Catalogue = () => {
                         {categories.map((cat) => (
                             <button
                                 key={cat}
-                                onClick={() => setSelectedCategory(cat)}
+                                onClick={() => handleCategorySelect(cat)}
                                 className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-roboto tracking-wide transition-all cursor-pointer ${
                                     selectedCategory === cat
-                                        ? 'bg-[#304037] text-[#f3e5ab] font-medium shadow-sm'
+                                        ? 'bg-[#304037] text-[#f3e5ab] font-medium shadow-sm ring-1 ring-[#d4af37]/40'
                                         : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
                                 }`}
                             >
@@ -243,19 +401,41 @@ const Catalogue = () => {
                     </div>
                 </div>
 
-                {/* Results Count */}
-                <div className="flex items-center justify-between text-xs text-gray-500 font-roboto">
-                    <span>
-                        Showing <strong className="text-gray-800">{filteredDesigns.length}</strong> Designs
-                    </span>
+                {/* Results Count & Active Category Indicator */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-gray-500 font-roboto">
+                    <div className="flex items-center gap-2 flex-wrap">
+                        <span>
+                            Showing <strong className="text-gray-800">{filteredDesigns.length}</strong> Designs
+                        </span>
+                        {selectedCategory !== 'All' && (
+                            <span className="inline-flex items-center gap-1.5 bg-[#304037]/10 text-[#304037] px-3 py-0.5 rounded-full font-medium text-[11px] border border-[#304037]/20">
+                                <span>Category: <strong>{selectedCategory}</strong></span>
+                                <button
+                                    onClick={() => handleCategorySelect('All')}
+                                    className="hover:text-red-500 font-bold ml-0.5 cursor-pointer"
+                                    title="Clear category filter"
+                                >
+                                    ✕
+                                </button>
+                            </span>
+                        )}
+                        {searchQuery && (
+                            <span className="inline-flex items-center gap-1.5 bg-[#d4af37]/15 text-[#304037] px-3 py-0.5 rounded-full font-medium text-[11px] border border-[#d4af37]/30">
+                                <span>Search: "{searchQuery}"</span>
+                                <button
+                                    onClick={() => handleSearchChange('')}
+                                    className="hover:text-red-500 font-bold ml-0.5 cursor-pointer"
+                                    title="Clear search"
+                                >
+                                    ✕
+                                </button>
+                            </span>
+                        )}
+                    </div>
                     {(selectedCategory !== 'All' || selectedPurity !== 'All' || searchQuery) && (
                         <button
-                            onClick={() => {
-                                setSelectedCategory('All')
-                                setSelectedPurity('All')
-                                setSearchQuery('')
-                            }}
-                            className="text-[#304037] font-medium hover:underline cursor-pointer"
+                            onClick={handleResetFilters}
+                            className="text-[#304037] font-medium hover:underline cursor-pointer self-start sm:self-auto"
                         >
                             Reset All Filters
                         </button>
@@ -267,12 +447,8 @@ const Catalogue = () => {
                     <div className="py-20 text-center space-y-4">
                         <p className="text-lg font-playfair text-gray-600">No designs match your filter.</p>
                         <button
-                            onClick={() => {
-                                setSelectedCategory('All')
-                                setSelectedPurity('All')
-                                setSearchQuery('')
-                            }}
-                            className="px-6 py-2.5 rounded-full bg-[#304037] text-white text-xs font-roboto uppercase tracking-wider"
+                            onClick={handleResetFilters}
+                            className="px-6 py-2.5 rounded-full bg-[#304037] text-white text-xs font-roboto uppercase tracking-wider cursor-pointer hover:bg-[#233029] transition-colors"
                         >
                             View All Designs
                         </button>

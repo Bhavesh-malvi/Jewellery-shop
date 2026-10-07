@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { GoDotFill } from 'react-icons/go'
 import { RiArrowRightUpLine } from 'react-icons/ri'
 import { HiArrowRight } from 'react-icons/hi2'
@@ -42,16 +43,19 @@ const BestSeller = () => {
             tag: 'Trending Now',
             title: 'Brilliant Gold Ring Collection',
             img: 'https://html.awaikenthemes.com/cignet/images/top-offer-item-image-1.png',
+            category: 'Rings',
         },
         {
             tag: 'Special 15% Off',
             title: 'Golden Elegance Bracelet',
             img: 'https://html.awaikenthemes.com/cignet/images/top-offer-item-image-2.png',
+            category: 'Bracelets',
         },
         {
             tag: 'Bespoke Bridal',
             title: 'Chic Necklaces for Her',
             img: 'https://html.awaikenthemes.com/cignet/images/top-offer-item-image-3.png',
+            category: 'Necklaces',
         },
     ]
 
@@ -70,16 +74,23 @@ const BestSeller = () => {
                         </h2>
                     </div>
 
-                    <button className="group self-start md:self-end border border-[#304037] text-primary hover:bg-[#304037] hover:text-white px-7 py-3 rounded-full text-sm font-roboto font-medium transition-all duration-300 flex items-center gap-2 shadow-sm hover:shadow-md cursor-pointer">
+                    <Link
+                        to="/catalogue"
+                        className="group self-start md:self-end border border-[#304037] text-primary hover:bg-[#304037] hover:text-white px-7 py-3 rounded-full text-sm font-roboto font-medium transition-all duration-300 flex items-center gap-2 shadow-sm hover:shadow-md cursor-pointer"
+                    >
                         <span>View All Collections</span>
                         <HiArrowRight className="text-base transition-transform duration-300 group-hover:translate-x-1" />
-                    </button>
+                    </Link>
                 </div>
 
                 {/* 6 Circular Categories */}
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 sm:gap-8">
                     {category.map((item, index) => (
-                        <div key={index} className="group text-center flex flex-col items-center gap-3 cursor-pointer">
+                        <Link
+                            key={index}
+                            to={`/catalogue?category=${encodeURIComponent(item.name)}`}
+                            className="group text-center flex flex-col items-center gap-3 cursor-pointer"
+                        >
                             <div className="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-full p-1 border-2 border-transparent group-hover:border-[#d4af37] transition-all duration-500 shadow-md group-hover:shadow-xl bg-white">
                                 <div className="w-full h-full rounded-full overflow-hidden">
                                     <img
@@ -95,16 +106,17 @@ const BestSeller = () => {
                                 </h3>
                                 <p className="text-xs text-gray-400 font-roboto tracking-wider uppercase">{item.items}</p>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
 
                 {/* 3 Offer/Promo Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 pt-4">
                     {offerCards.map((offer, index) => (
-                        <div
+                        <Link
                             key={index}
-                            className="group relative flex items-center justify-between rounded-2xl bg-[#F8F7F4] hover:bg-[#F3EFEA] border border-[#E9E4DC] p-6 sm:p-7 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-500 overflow-hidden"
+                            to={`/catalogue?category=${encodeURIComponent(offer.category)}`}
+                            className="group relative flex items-center justify-between rounded-2xl bg-[#F8F7F4] hover:bg-[#F3EFEA] border border-[#E9E4DC] p-6 sm:p-7 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-500 overflow-hidden cursor-pointer"
                         >
                             <div className="w-[60%] flex flex-col justify-center gap-3 z-10">
                                 <span className="text-[11px] uppercase tracking-widest text-[#d4af37] font-semibold font-roboto">
@@ -114,8 +126,8 @@ const BestSeller = () => {
                                     {offer.title}
                                 </h3>
                                 <div className="pt-2">
-                                    <span className="text-sm font-roboto font-medium text-primary flex items-center gap-1.5 group-hover:text-[#d4af37] transition-colors cursor-pointer">
-                                        View Collection{' '}
+                                    <span className="text-sm font-roboto font-medium text-primary flex items-center gap-1.5 group-hover:text-[#d4af37] transition-colors">
+                                        View Catalogue{' '}
                                         <RiArrowRightUpLine className="text-lg transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
                                     </span>
                                 </div>
@@ -127,7 +139,7 @@ const BestSeller = () => {
                                     className="w-32 h-32 sm:w-36 sm:h-36 object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-500"
                                 />
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </div>

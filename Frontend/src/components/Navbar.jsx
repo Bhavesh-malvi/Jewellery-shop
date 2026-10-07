@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { BsBagHeart } from 'react-icons/bs'
 import { FaRegHeart } from 'react-icons/fa6'
 import { IoSearchOutline, IoCloseOutline } from 'react-icons/io5'
@@ -8,6 +8,7 @@ import Logo from '../../public/logo.png'
 import { useEnquiry } from '../context/EnquiryContext'
 
 const Navbar = () => {
+    const navigate = useNavigate()
     const { enquiryItems, setIsDrawerOpen } = useEnquiry()
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isSearchOpen, setIsSearchOpen] = useState(false)
@@ -65,7 +66,16 @@ const Navbar = () => {
                     {/* Search Bar / Icon */}
                     <div className="relative flex items-center">
                         {isSearchOpen ? (
-                            <div className="flex items-center bg-[#24312a] border border-[#d4af37]/40 rounded-full px-3 py-1.5 transition-all duration-300">
+                            <form
+                                onSubmit={(e) => {
+                                    e.preventDefault()
+                                    if (searchQuery.trim()) {
+                                        navigate(`/catalogue?search=${encodeURIComponent(searchQuery.trim())}`)
+                                        setIsSearchOpen(false)
+                                    }
+                                }}
+                                className="flex items-center bg-[#24312a] border border-[#d4af37]/40 rounded-full px-3 py-1.5 transition-all duration-300"
+                            >
                                 <IoSearchOutline className="text-[#d4af37] text-lg mr-2 shrink-0" />
                                 <input
                                     type="text"
@@ -76,6 +86,7 @@ const Navbar = () => {
                                     className="bg-transparent text-xs sm:text-sm text-white placeholder-gray-400 focus:outline-none w-32 sm:w-44 font-roboto"
                                 />
                                 <button
+                                    type="button"
                                     onClick={() => {
                                         setIsSearchOpen(false)
                                         setSearchQuery('')
@@ -84,7 +95,7 @@ const Navbar = () => {
                                 >
                                     <IoCloseOutline />
                                 </button>
-                            </div>
+                            </form>
                         ) : (
                             <button
                                 onClick={() => setIsSearchOpen(true)}

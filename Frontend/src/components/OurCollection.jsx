@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { GoDotFill } from 'react-icons/go'
 import { HiArrowRight } from 'react-icons/hi2'
 
@@ -75,10 +76,13 @@ const OurCollection = () => {
 
                                 {/* CTA Button */}
                                 <div className="pt-2">
-                                    <button className="group/btn inline-flex items-center gap-2 border border-[#304037] text-primary hover:bg-[#304037] hover:text-white px-7 py-3 rounded-full text-xs sm:text-sm font-roboto font-medium tracking-wide transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer">
+                                    <Link
+                                        to="/collections"
+                                        className="group/btn inline-flex items-center gap-2 border border-[#304037] text-primary hover:bg-[#304037] hover:text-white px-7 py-3 rounded-full text-xs sm:text-sm font-roboto font-medium tracking-wide transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer"
+                                    >
                                         <span>Explore Collection</span>
                                         <HiArrowRight className="text-base transition-transform duration-300 group-hover/btn:translate-x-1" />
-                                    </button>
+                                    </Link>
                                 </div>
                             </div>
 
