@@ -28,8 +28,14 @@ api.interceptors.response.use(
     (response) => response,
     (error) => {
         if (error.response && error.response.status === 401) {
-            // If unauthorized on admin endpoint, clear token
-            if (window.location.pathname.startsWith('/admin') && window.location.pathname !== '/admin/login') {
+            const requestUrl = error.config?.url || ''
+            // Avoid automatic hard reload on login or auth verification endpoints
+            if (
+                window.location.pathname.startsWith('/admin') &&
+                window.location.pathname !== '/admin/login' &&
+                !requestUrl.includes('/auth/login') &&
+                !requestUrl.includes('/auth/me')
+            ) {
                 localStorage.removeItem('rangoli_admin_token')
                 localStorage.removeItem('rangoli_admin_user')
                 window.location.href = '/admin/login'

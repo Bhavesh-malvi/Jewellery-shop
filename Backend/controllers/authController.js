@@ -66,7 +66,7 @@ export const login = async (req, res) => {
 
         if (normalizedEmail === defaultAdminEmail && password === defaultAdminPassword) {
             // Also attempt to persist this admin in DB if DB is accessible
-            let createdId = 'admin-default-01'
+            let createdId = '6ac738831a246fccd4c62685'
             try {
                 const newAdmin = await User.create({
                     name: 'Rangoli Admin',
