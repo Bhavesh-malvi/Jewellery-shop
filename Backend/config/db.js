@@ -5,7 +5,7 @@ let lastDbError = null
 
 // Fallback Atlas URI if environment variable is missing on Render / Cloud host
 const DEFAULT_ATLAS_URI =
-    'mongodb+srv://bhaveshmalviya335_db_user:JH8iX1npS0C31xeU@cluster0.fodiwas.mongodb.net/jewellery_shop?appName=Cluster0'
+    'mongodb+srv://bhaveshmalviya335_db_user:JH8iX1npS0C31xeU@cluster0.fodiwas.mongodb.net/jewellery_shop?retryWrites=true&w=majority&appName=Cluster0'
 
 export const connectDB = async () => {
     const uri = process.env.MONGO_URI || DEFAULT_ATLAS_URI
