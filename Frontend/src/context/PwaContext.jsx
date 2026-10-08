@@ -65,13 +65,19 @@ export const PwaProvider = ({ children }) => {
     }, [])
 
     const installApp = async () => {
+        // If already installed
+        if (isInstalled || (typeof window !== 'undefined' && window.matchMedia('(display-mode: standalone)').matches)) {
+            alert('Rangoli Jewellers App is already installed on this device!')
+            return
+        }
+
         // If on iOS Safari, show the iOS Add to Home Screen guide
         if (isIOS) {
             setIsIosModalOpen(true)
             return
         }
 
-        // If native prompt is available (Android Chrome, Edge, etc.)
+        // If native prompt is available (Android Chrome, Edge, desktop Chrome PWA)
         if (deferredPrompt) {
             try {
                 deferredPrompt.prompt()
@@ -83,13 +89,12 @@ export const PwaProvider = ({ children }) => {
                 setDeferredPrompt(null)
             } catch (err) {
                 console.error('Error prompting install:', err)
-                setIsQrModalOpen(true)
             }
             return
         }
 
-        // If on desktop or browser doesn't expose prompt, open QR Code modal
-        setIsQrModalOpen(true)
+        // Fallback for browsers when beforeinstallprompt has not fired yet or on desktop
+        alert('To install the app directly, tap the Install icon (⬇) in your browser address bar or select "Add to Home screen / Install app" from your browser menu.')
     }
 
     const dismissBanner = () => {

@@ -277,8 +277,8 @@ const Navbar = () => {
 
                     {/* Download / Install App Button */}
                     <button
-                        onClick={openQrModal}
-                        title="Download / Install Rangoli App (QR Code)"
+                        onClick={installApp}
+                        title="Install Rangoli Jewellers App"
                         className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 hover:bg-[#d4af37]/20 border border-[#d4af37]/40 text-xs font-roboto text-gray-200 hover:text-gold transition-all duration-200 cursor-pointer shadow-xs active:scale-95"
                     >
                         <FiSmartphone className="text-sm text-gold shrink-0" />
