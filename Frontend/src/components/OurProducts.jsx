@@ -47,17 +47,20 @@ const OurProducts = () => {
         )
     }
 
-    const filteredProducts =
+    const goldProducts = products.filter((p) => p.metal !== 'Silver')
+
+    const filteredProducts = (
         activeTab === 'All'
-            ? products
-            : products.filter(
+            ? goldProducts
+            : goldProducts.filter(
                   (p) =>
-                      p.category.toLowerCase() === activeTab.toLowerCase() ||
-                      p.category.toLowerCase().replace(/s$/, '') ===
+                      p.category?.toLowerCase() === activeTab.toLowerCase() ||
+                      p.category?.toLowerCase().replace(/s$/, '') ===
                           activeTab.toLowerCase().replace(/s$/, '')
               )
+    ).slice(0, 6)
 
-    if (!loading && products.length === 0) {
+    if (!loading && goldProducts.length === 0) {
         return null
     }
 
@@ -119,7 +122,7 @@ const OurProducts = () => {
                     </div>
                 ) : (
                     /* Product Grid */
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-7">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
                         {filteredProducts.map((item) => {
                             const pId = item._id || item.customId || item.id
                             const isWishlisted = wishlist.includes(pId)

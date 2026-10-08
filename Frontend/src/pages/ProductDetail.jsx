@@ -567,7 +567,7 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                 <div className="w-8 h-8 rounded-full bg-[#F5EFE6] flex items-center justify-center text-[#304037] shrink-0">
                                     <HiOutlineTruck className="text-base" />
                                 </div>
-                                <span>Free Shipping & Showroom Exchanges</span>
+                                <span>Free Shipping & Showroom Trial</span>
                             </div>
 
                             <div className="flex items-center gap-3 text-xs text-gray-600">

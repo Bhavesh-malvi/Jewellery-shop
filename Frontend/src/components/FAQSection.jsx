@@ -27,9 +27,9 @@ const FAQSection = () => {
                 'Our jewellery consultants are available to guide you based on your occasion, style preference, and budget, ensuring you find the perfect matching piece.',
         },
         {
-            question: 'What is your return, exchange, and refund policy?',
+            question: 'Can I visit the showroom to inspect and try jewellery?',
             answer:
-                'We provide a 100% Lifetime Exchange Policy on gold value and certified diamonds, along with a transparent buyback and inspection service.',
+                'Yes, you are warmly welcome to visit our Narol, Ahmedabad showroom open all 7 days a week (10:30 AM to 8:30 PM). Our consultants will be delighted to show you the entire collection.',
         },
     ]
 

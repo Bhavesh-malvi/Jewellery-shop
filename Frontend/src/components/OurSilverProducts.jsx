@@ -7,50 +7,6 @@ import { HiArrowRight } from 'react-icons/hi2'
 import { useEnquiry } from '../context/EnquiryContext'
 import api from '../services/api'
 
-// Curated showroom samples displayed if showroom has not added any silver pieces to Atlas yet
-const fallbackSilverPieces = [
-    {
-        _id: 'sample-slv-1',
-        name: 'Royal Bridal Chandi Payal with Ghunghroo',
-        category: 'Payal',
-        karat: '925',
-        purity: '925 BIS Hallmarked Silver',
-        specs: 'Handcrafted Antique Finish with Sounding Ghunghroo Bells',
-        tag: 'Bridal Heritage',
-        img: 'https://images.unsplash.com/photo-1611591475155-4284ec28d351?w=800&auto=format&fit=crop&q=80',
-    },
-    {
-        _id: 'sample-slv-2',
-        name: 'Pure 999 Silver Laxmi-Ganesh Murti for Diwali Pooja',
-        category: 'Pooja & Idols',
-        karat: '999',
-        purity: '999 Fine Pure Silver',
-        specs: 'Solid Pure Cast Idols with Laser Hallmarking',
-        tag: 'Sacred Pooja',
-        img: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80',
-    },
-    {
-        _id: 'sample-slv-3',
-        name: 'Men’s Heavy Handcrafted 925 Silver Kada',
-        category: 'Bracelets',
-        karat: '925',
-        purity: '925 Sterling Silver',
-        specs: 'Solid 45 gm Pure Silver with Matte & Gloss Finish',
-        tag: 'Men’s Heritage',
-        img: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&auto=format&fit=crop&q=80',
-    },
-    {
-        _id: 'sample-slv-4',
-        name: 'Traditional Rajasthani Carved Bichhiya Pair (Toe Rings)',
-        category: 'Bichhiya',
-        karat: '925',
-        purity: '925 Sterling Silver',
-        specs: 'Adjustable Indian Size with Mina Work Accents',
-        tag: 'Daily Wear',
-        img: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80',
-    },
-]
-
 const OurSilverProducts = () => {
     const {
         addToEnquiry,
@@ -80,15 +36,14 @@ const OurSilverProducts = () => {
             try {
                 setLoading(true)
                 const res = await api.get('/products', { params: { metal: 'Silver' } })
-                if (res.data?.success && Array.isArray(res.data.data) && res.data.data.length > 0) {
+                if (res.data?.success && Array.isArray(res.data.data)) {
                     setProducts(res.data.data)
                 } else {
-                    // Use beautiful curated silver samples if none uploaded yet
-                    setProducts(fallbackSilverPieces)
+                    setProducts([])
                 }
             } catch (err) {
                 console.error('Failed to load silver products:', err)
-                setProducts(fallbackSilverPieces)
+                setProducts([])
             } finally {
                 setLoading(false)
             }
@@ -102,15 +57,20 @@ const OurSilverProducts = () => {
         )
     }
 
-    const filteredProducts =
+    const filteredProducts = (
         activeTab === 'All'
             ? products
             : products.filter(
                   (p) =>
-                      p.category.toLowerCase() === activeTab.toLowerCase() ||
-                      p.category.toLowerCase().replace(/s$/, '') ===
+                      p.category?.toLowerCase() === activeTab.toLowerCase() ||
+                      p.category?.toLowerCase().replace(/s$/, '') ===
                           activeTab.toLowerCase().replace(/s$/, '')
               )
+    ).slice(0, 6)
+
+    if (!loading && products.length === 0) {
+        return null
+    }
 
     return (
         <section className="w-full py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#F2F4F7] to-[#FAF7F2] border-t border-b border-gray-200 relative overflow-hidden">
@@ -173,7 +133,7 @@ const OurSilverProducts = () => {
                     </div>
                 ) : (
                     /* Product Grid */
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-7">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
                         {filteredProducts.map((item) => {
                             const pId = item._id || item.customId || item.id
                             const isWishlisted = wishlist.includes(pId)

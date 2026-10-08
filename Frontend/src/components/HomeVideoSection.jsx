@@ -4,8 +4,8 @@ const HomeVideoSection = () => {
     const pillars = [
         {
             icon: 'https://html.awaikenthemes.com/cignet/images/icon-intro-video-item-1.svg',
-            title: 'Jewellery Exchanges',
-            desc: '100% Exchange Value on Gold',
+            title: 'Bespoke Craftsmanship',
+            desc: 'Custom Handcrafted In-House',
         },
         {
             icon: 'https://html.awaikenthemes.com/cignet/images/icon-intro-video-item-2.svg',

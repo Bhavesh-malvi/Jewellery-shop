@@ -124,7 +124,7 @@ const Footer = () => {
                             {[
                                 'BIS 916 Hallmarked Gold',
                                 'IGI / SGL Certified Diamonds',
-                                '100% Lifetime Exchange Policy',
+                                'Transparent Live Market Pricing',
                                 'Safe Insured Transit & Delivery',
                                 'Custom Jewellery Design Studio',
                                 'Jewellery Care & Cleaning Guide',
@@ -184,9 +184,9 @@ const Footer = () => {
                             <div className="flex items-start gap-3">
                                 <IoTimeOutline className="text-lg text-[#d4af37] shrink-0 mt-0.5" />
                                 <p className="text-xs leading-relaxed text-gray-400">
-                                    Mon - Sat: 10:30 AM - 8:30 PM
+                                    Mon - Sun: 10:30 AM - 8:30 PM
                                     <br />
-                                    Sunday: By Prior Appointment
+                                    <span className="text-emerald-400 font-medium">Open All 7 Days (Including Sunday)</span>
                                 </p>
                             </div>
                         </div>

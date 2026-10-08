@@ -128,10 +128,13 @@ Please confirm the appointment slot. Thank you!`
                                     <h3 className="text-sm font-roboto font-semibold text-gray-900 uppercase tracking-wide">
                                         Showroom Timings
                                     </h3>
-                                    <p className="text-xs sm:text-sm font-roboto text-gray-600">
-                                        Monday – Saturday: 10:30 AM – 8:30 PM
+                                    <p className="text-xs sm:text-sm font-roboto text-gray-800 font-medium">
+                                        Monday – Sunday: 10:30 AM – 8:30 PM
                                     </p>
-                                    <p className="text-xs text-gray-400 font-roboto">Sunday: By Prior Appointment</p>
+                                    <p className="text-xs text-emerald-700 font-roboto font-semibold flex items-center gap-1.5">
+                                        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                                        <span>Open All 7 Days a Week (Including Sunday)</span>
+                                    </p>
                                 </div>
                             </div>
                         </div>

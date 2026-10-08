@@ -26,7 +26,13 @@ const getAllProducts = async (req, res) => {
         const query = {}
 
         if (metal && metal !== 'All') {
-            query.metal = metal
+            if (metal.toLowerCase() === 'silver') {
+                query.metal = 'Silver'
+            } else if (metal.toLowerCase() === 'gold') {
+                query.metal = { $ne: 'Silver' }
+            } else {
+                query.metal = metal
+            }
         }
 
         if (category && category !== 'All') {

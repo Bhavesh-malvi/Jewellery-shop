@@ -454,7 +454,7 @@ export const allProducts = [
         highlights: [
             'Superior metal hardness compared to 22K — perfect for daily wear without fear of bending.',
             'Authentic hand-carved Rajasthani & Gujarati floral relief work.',
-            'Guaranteed buyback & exchange value based on certified gold content.',
+            '100% Certified pure gold content with verifiable laser hallmark.',
         ],
         images: [
             'https://html.awaikenthemes.com/cignet/images/top-selling-item-image-4.jpg',
