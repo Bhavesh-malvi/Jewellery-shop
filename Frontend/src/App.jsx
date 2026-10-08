@@ -1,10 +1,9 @@
 import React from 'react'
-import { BrowserRouter, Route, Routes, Outlet } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, Outlet, Navigate } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import Catalogue from './pages/Catalogue'
 import Collections from './pages/Collections'
-import OurStory from './pages/OurStory'
 import VisitShowroom from './pages/VisitShowroom'
 import ProductDetail from './pages/ProductDetail'
 import { EnquiryProvider } from './context/EnquiryContext'
@@ -45,7 +44,7 @@ const App = () => {
                             <Route path="/" element={<Home />} />
                             <Route path="/catalogue" element={<Catalogue />} />
                             <Route path="/collections" element={<Collections />} />
-                            <Route path="/about" element={<OurStory />} />
+                            <Route path="/about" element={<Navigate to="/" replace />} />
                             <Route path="/contact" element={<VisitShowroom />} />
                             <Route path="/product/:id" element={<ProductDetail />} />
                         </Route>

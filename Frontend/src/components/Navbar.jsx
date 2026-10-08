@@ -215,18 +215,6 @@ const Navbar = () => {
                     </NavLink>
 
                     <NavLink
-                        to="/about"
-                        className={({ isActive }) =>
-                            `relative py-2 text-sm uppercase tracking-wider font-roboto font-medium transition-colors duration-200 group ${
-                                isActive ? 'text-gold' : 'text-gray-200 hover:text-gold'
-                            }`
-                        }
-                    >
-                        Our Story
-                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold transition-all duration-300 group-hover:w-full rounded-full" />
-                    </NavLink>
-
-                    <NavLink
                         to="/contact"
                         className={({ isActive }) =>
                             `relative py-2 text-sm uppercase tracking-wider font-roboto font-medium transition-colors duration-200 group ${
@@ -403,19 +391,6 @@ const Navbar = () => {
                                 <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/15 text-slate-100 border border-white/30">
                                     Hallmarked
                                 </span>
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                to="/about"
-                                onClick={() => setIsMenuOpen(false)}
-                                className={({ isActive }) =>
-                                    `block py-2 text-base uppercase tracking-wider font-roboto font-medium transition-colors ${
-                                        isActive ? 'text-gold' : 'text-gray-200 hover:text-gold'
-                                    }`
-                                }
-                            >
-                                Our Story
                             </NavLink>
                         </li>
                         <li>

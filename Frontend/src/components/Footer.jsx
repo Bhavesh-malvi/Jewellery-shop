@@ -97,7 +97,7 @@ const Footer = () => {
                                 { name: '20K Gold (833)', path: '/catalogue?karat=20k' },
                                 { name: '18K Diamond (750)', path: '/catalogue?karat=18k' },
                                 { name: 'Collections', path: '/collections' },
-                                { name: 'Our Story', path: '/about' },
+                                { name: '925 Silver Collection', path: '/catalogue?metal=silver' },
                                 { name: 'Visit Showroom', path: '/contact' },
                             ].map((item, idx) => (
                                 <li key={idx}>
