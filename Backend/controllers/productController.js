@@ -1,11 +1,27 @@
 import Product from '../models/Product.js'
-import { checkDbStatus } from '../config/db.js'
+import { checkDbStatus, connectDB } from '../config/db.js'
+
+const ensureDbConnection = async () => {
+    if (!checkDbStatus()) {
+        await connectDB()
+    }
+    return checkDbStatus()
+}
 
 // @desc    Get all products from database (with search, category, karat filters)
 // @route   GET /api/products
 // @access  Public
 const getAllProducts = async (req, res) => {
     try {
+        const isConnected = await ensureDbConnection()
+        if (!isConnected) {
+            return res.json({
+                success: true,
+                count: 0,
+                data: [],
+                notice: 'Database is connecting. Please check MongoDB Atlas IP Whitelist (0.0.0.0/0).',
+            })
+        }
         const { search, category, karat, isFeatured, inStock } = req.query
         const query = {}
 
@@ -58,6 +74,7 @@ const getAllProducts = async (req, res) => {
 // @access  Public
 const getProductById = async (req, res) => {
     try {
+        await ensureDbConnection()
         const paramId = req.params.id
         let product = null
 
@@ -94,6 +111,15 @@ const getProductById = async (req, res) => {
 // @access  Private / Admin
 const createProduct = async (req, res) => {
     try {
+        const isConnected = await ensureDbConnection()
+        if (!isConnected) {
+            return res.status(503).json({
+                success: false,
+                message:
+                    'Database is not connected. Please check MongoDB Atlas IP Whitelist (0.0.0.0/0) and MONGO_URI in Render.',
+            })
+        }
+
         const {
             code,
             name,
@@ -188,6 +214,7 @@ const createProduct = async (req, res) => {
 // @access  Private / Admin
 const updateProduct = async (req, res) => {
     try {
+        await ensureDbConnection()
         const paramId = req.params.id
         const updateData = { ...req.body }
 
@@ -246,6 +273,7 @@ const updateProduct = async (req, res) => {
 // @access  Private / Admin
 const deleteProduct = async (req, res) => {
     try {
+        await ensureDbConnection()
         const paramId = req.params.id
 
         let filter = {}
@@ -284,6 +312,20 @@ const deleteProduct = async (req, res) => {
 // @access  Private / Admin
 const getStats = async (req, res) => {
     try {
+        const isConnected = await ensureDbConnection()
+        if (!isConnected) {
+            return res.json({
+                success: true,
+                data: {
+                    totalProducts: 0,
+                    categoryCounts: {},
+                    karatCounts: { '22K': 0, '20K': 0, '18K': 0, '14K': 0 },
+                    featuredCount: 0,
+                    inStockCount: 0,
+                    recentProducts: [],
+                },
+            })
+        }
         const items = await Product.find({})
         const totalProducts = items.length
 

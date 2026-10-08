@@ -3,7 +3,7 @@ import express from 'express'
 import cors from 'cors'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { connectDB, checkDbStatus } from './config/db.js'
+import { connectDB, checkDbStatus, getDbDiagnostics } from './config/db.js'
 
 // Route files
 import authRoutes from './routes/authRoutes.js'
@@ -44,6 +44,7 @@ app.get('/api/health', (req, res) => {
         message: 'Rangoli Jewellers Backend API is running smoothly',
         timestamp: new Date().toISOString(),
         databaseConnected: checkDbStatus(),
+        database: getDbDiagnostics(),
         environment: process.env.NODE_ENV || 'development',
     })
 })
