@@ -76,30 +76,6 @@ const Footer = () => {
                             </button>
                         </div>
 
-                        {/* Social Media Links */}
-                        <div className="flex items-center gap-3 pt-1">
-                            {[
-                                { icon: <FaInstagram />, href: '#', label: 'Instagram' },
-                                { icon: <FaFacebookF />, href: '#', label: 'Facebook' },
-                                { icon: <FaPinterestP />, href: '#', label: 'Pinterest' },
-                                {
-                                    icon: <FaWhatsapp />,
-                                    href: `https://wa.me/${whatsappNumber}`,
-                                    label: 'WhatsApp',
-                                },
-                            ].map((social, idx) => (
-                                <a
-                                    key={idx}
-                                    href={social.href}
-                                    aria-label={social.label}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="w-9 h-9 rounded-full bg-[#24312a] border border-[#3e5247] hover:border-[#d4af37] text-gray-300 hover:text-[#d4af37] hover:bg-[#304037] flex items-center justify-center text-sm transition-all duration-300 shadow-sm"
-                                >
-                                    {social.icon}
-                                </a>
-                            ))}
-                        </div>
                     </div>
 
                     {/* Column 2: Quick Links (lg:col-span-2) */}
