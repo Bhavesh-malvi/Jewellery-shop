@@ -56,6 +56,7 @@ const Navbar = () => {
     useEffect(() => {
         setIsKaratDropdownOpen(false)
         setIsMenuOpen(false)
+        setIsSearchOpen(false)
     }, [location])
 
     return (
@@ -230,9 +231,9 @@ const Navbar = () => {
                 </div>
 
                 {/* Right Action Icons */}
-                <div className="flex items-center gap-2 sm:gap-4 text-white">
-                    {/* Search Bar / Icon */}
-                    <div className="relative flex items-center">
+                <div className="flex items-center gap-2 sm:gap-4 text-white shrink-0">
+                    {/* Desktop Search Bar / Icon (Inline) */}
+                    <div className="hidden sm:flex relative items-center">
                         {isSearchOpen ? (
                             <form
                                 onSubmit={(e) => {
@@ -251,7 +252,7 @@ const Navbar = () => {
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                     autoFocus
-                                    className="bg-transparent text-xs sm:text-sm text-white placeholder-gray-400 focus:outline-none w-32 sm:w-44 font-roboto"
+                                    className="bg-transparent text-xs sm:text-sm text-white placeholder-gray-400 focus:outline-none w-36 md:w-48 font-roboto"
                                 />
                                 <button
                                     type="button"
@@ -275,6 +276,22 @@ const Navbar = () => {
                         )}
                     </div>
 
+                    {/* Mobile Search Toggle Button (Fixed size - Never pushes adjacent icons) */}
+                    <button
+                        onClick={() => {
+                            setIsSearchOpen((prev) => !prev)
+                            if (isMenuOpen) setIsMenuOpen(false)
+                        }}
+                        aria-label="Search"
+                        className={`sm:hidden w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 cursor-pointer ${
+                            isSearchOpen
+                                ? 'bg-gold/20 text-gold ring-1 ring-gold/50'
+                                : 'hover:bg-white/10 text-gray-200 hover:text-gold'
+                        }`}
+                    >
+                        {isSearchOpen ? <IoCloseOutline className="text-2xl" /> : <IoSearchOutline className="text-xl" />}
+                    </button>
+
                     {/* Download / Install App Button */}
                     <button
                         onClick={installApp}
@@ -290,7 +307,7 @@ const Navbar = () => {
                         onClick={() => setIsDrawerOpen(true)}
                         aria-label="Enquiry Bag"
                         title="Open Enquiry Bag"
-                        className="relative w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/10 text-gray-200 hover:text-gold transition-all duration-200 cursor-pointer group"
+                        className="relative w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/10 text-gray-200 hover:text-gold transition-all duration-200 cursor-pointer group shrink-0"
                     >
                         <BsBagHeart className="text-xl transition-transform duration-200 group-hover:scale-110" />
                         <span
@@ -306,14 +323,59 @@ const Navbar = () => {
 
                     {/* Mobile Menu Toggle Button */}
                     <button
-                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        onClick={() => {
+                            setIsMenuOpen(!isMenuOpen)
+                            if (isSearchOpen) setIsSearchOpen(false)
+                        }}
                         aria-label="Toggle Menu"
-                        className="md:hidden w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/10 text-gray-200 hover:text-gold transition-all duration-200 ml-1 cursor-pointer"
+                        className="md:hidden w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/10 text-gray-200 hover:text-gold transition-all duration-200 ml-1 cursor-pointer shrink-0"
                     >
                         {isMenuOpen ? <HiXMark className="text-2xl" /> : <HiOutlineBars3 className="text-2xl" />}
                     </button>
                 </div>
             </nav>
+
+            {/* Mobile Full-Width Search Dropdown Bar (Zero Horizontal Push / Perfect Fit) */}
+            {isSearchOpen && (
+                <div className="sm:hidden w-full bg-[#24312a] border-t border-[#3e5247] px-4 py-3 shadow-xl animate-fadeIn">
+                    <form
+                        onSubmit={(e) => {
+                            e.preventDefault()
+                            if (searchQuery.trim()) {
+                                navigate(`/catalogue?search=${encodeURIComponent(searchQuery.trim())}`)
+                                setIsSearchOpen(false)
+                            }
+                        }}
+                        className="flex items-center bg-[#1b2520] border border-gold/50 rounded-xl px-3 py-2 shadow-inner gap-2"
+                    >
+                        <IoSearchOutline className="text-gold text-lg shrink-0" />
+                        <input
+                            type="text"
+                            placeholder="Search 22K gold, rings, necklaces, 925 silver..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            autoFocus
+                            className="bg-transparent text-sm text-white placeholder-gray-400 focus:outline-none flex-1 font-roboto min-w-0"
+                        />
+                        {searchQuery && (
+                            <button
+                                type="button"
+                                onClick={() => setSearchQuery('')}
+                                className="text-gray-400 hover:text-white text-lg p-1 cursor-pointer shrink-0"
+                                aria-label="Clear search input"
+                            >
+                                <IoCloseOutline />
+                            </button>
+                        )}
+                        <button
+                            type="submit"
+                            className="px-3.5 py-1.5 bg-gold hover:bg-gold-light text-[#1F2B24] rounded-lg text-xs font-bold font-roboto uppercase tracking-wider shrink-0 transition-all shadow-xs cursor-pointer active:scale-95"
+                        >
+                            Search
+                        </button>
+                    </form>
+                </div>
+            )}
 
             {/* Mobile Navigation Drawer */}
             {isMenuOpen && (
