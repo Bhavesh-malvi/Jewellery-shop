@@ -135,8 +135,12 @@ const OurProducts = () => {
                                         className="relative h-64 sm:h-72 w-full overflow-hidden bg-[#F9F7F3] flex items-center justify-center p-6 block cursor-pointer"
                                     >
                                         <img
-                                            src={item.img}
+                                            src={item.img || item.images?.[0] || 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&auto=format&fit=crop&q=80'}
                                             alt={item.name}
+                                            onError={(e) => {
+                                                e.currentTarget.onerror = null
+                                                e.currentTarget.src = 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&auto=format&fit=crop&q=80'
+                                            }}
                                             className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110 drop-shadow-sm"
                                         />
 

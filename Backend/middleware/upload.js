@@ -69,7 +69,7 @@ export const saveBufferLocally = (file, req) => {
     }
 }
 
-// High-level robust uploader: Cloudinary first, local fallback
+// High-level robust uploader: Cloudinary first, permanent Base64 Data URI fallback
 export const processUpload = async (file, req) => {
     try {
         const cloudResult = await uploadBufferToCloudinary(
@@ -87,16 +87,29 @@ export const processUpload = async (file, req) => {
         }
     } catch (cloudErr) {
         console.warn(
-            `⚠️ Cloudinary Upload Notice (${cloudErr.message}). Using local uploads storage fallback.`
+            `⚠️ Cloudinary Upload Notice (${cloudErr.message}). Using permanent Base64 Data URI fallback stored in MongoDB.`
         )
-        const localResult = saveBufferLocally(file, req)
+
+        // Save locally for optional server reference
+        let localInfo = null
+        try {
+            localInfo = saveBufferLocally(file, req)
+        } catch (e) {
+            // Non-fatal if local disk is read-only
+        }
+
+        // Return Data URI so the image is stored permanently in MongoDB Atlas
+        // This guarantees the image NEVER 404s when Render restarts its ephemeral container
+        const mimeType = file.mimetype || 'image/jpeg'
+        const base64Data = `data:${mimeType};base64,${file.buffer.toString('base64')}`
+
         return {
             success: true,
-            url: localResult.url,
-            public_id: localResult.public_id,
-            source: 'local_storage',
+            url: base64Data,
+            public_id: localInfo?.public_id || `b64_${Date.now()}`,
+            source: 'base64_mongodb',
             notice:
-                'Uploaded locally. To store directly on Cloudinary, grant "create" action to your API Key in Cloudinary Dashboard -> Access Keys.',
+                'Image saved directly in MongoDB cloud database. To use Cloudinary CDN instead, ensure your Cloudinary API key has Upload permissions in Cloudinary Settings.',
         }
     }
 }

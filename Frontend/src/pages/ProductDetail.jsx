@@ -282,8 +282,12 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                         }`}
                                     >
                                         <img
-                                            src={imgUrl}
+                                            src={imgUrl || product.img || product.images?.[0] || 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&auto=format&fit=crop&q=80'}
                                             alt={`${product.name} thumbnail ${index + 1}`}
+                                            onError={(e) => {
+                                                e.currentTarget.onerror = null
+                                                e.currentTarget.src = 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&auto=format&fit=crop&q=80'
+                                            }}
                                             className="w-full h-full object-contain"
                                         />
                                     </button>
@@ -294,8 +298,12 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                         {/* Large Main Interactive Image Card */}
                         <div className="flex-1 bg-[#F9F7F3] rounded-2xl border border-[#EDE8E0] p-6 sm:p-10 flex items-center justify-center relative min-h-[380px] sm:min-h-[480px] md:min-h-[520px] overflow-hidden group shadow-sm">
                             <img
-                                src={galleryImages[selectedImageIndex] || product.img}
+                                src={galleryImages[selectedImageIndex] || product.img || product.images?.[0] || 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80'}
                                 alt={product.name}
+                                onError={(e) => {
+                                    e.currentTarget.onerror = null
+                                    e.currentTarget.src = 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80'
+                                }}
                                 className="w-full h-full max-h-[440px] object-contain transition-transform duration-700 group-hover:scale-108 drop-shadow-md select-none"
                             />
 
@@ -706,8 +714,12 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                             className="relative h-60 sm:h-64 w-full overflow-hidden bg-[#F9F7F3] flex items-center justify-center p-6 block"
                                         >
                                             <img
-                                                src={item.img}
+                                                src={item.img || item.images?.[0] || 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&auto=format&fit=crop&q=80'}
                                                 alt={item.name}
+                                                onError={(e) => {
+                                                    e.currentTarget.onerror = null
+                                                    e.currentTarget.src = 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&auto=format&fit=crop&q=80'
+                                                }}
                                                 className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110 drop-shadow-sm"
                                             />
                                             <span className="absolute bottom-3 left-3 bg-white/95 text-primary text-[10px] font-bold font-mono px-2 py-0.5 rounded border border-[#d4af37]/40 shadow-xs">

@@ -248,8 +248,12 @@ const AdminProductList = () => {
                                                 <div className="flex items-center gap-3">
                                                     <div className="w-12 h-12 rounded-xl bg-[#FAF7F2] border border-gray-200 p-1 shrink-0 flex items-center justify-center overflow-hidden">
                                                         <img
-                                                            src={item.img}
+                                                            src={item.img || item.images?.[0] || 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&auto=format&fit=crop&q=80'}
                                                             alt={item.name}
+                                                            onError={(e) => {
+                                                                e.currentTarget.onerror = null
+                                                                e.currentTarget.src = 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&auto=format&fit=crop&q=80'
+                                                            }}
                                                             className="w-full h-full object-contain"
                                                         />
                                                     </div>
