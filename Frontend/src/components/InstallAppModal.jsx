@@ -4,7 +4,7 @@ import { FiDownload, FiSmartphone } from 'react-icons/fi'
 import { BsPatchCheckFill } from 'react-icons/bs'
 import { QRCodeSVG } from 'qrcode.react'
 import { usePwa } from '../context/PwaContext'
-import AppIcon from '../../public/favicon.png'
+import AppIcon from '../../public/app-icon.png'
 
 const InstallAppModal = () => {
     const {
@@ -46,8 +46,8 @@ const InstallAppModal = () => {
                     </button>
 
                     <div className="flex flex-col items-center space-y-3">
-                        <div className="w-16 h-16 rounded-2xl bg-white p-2 flex items-center justify-center shadow-lg border border-[#d4af37]/40 overflow-hidden">
-                            <img src={AppIcon} alt="Rangoli Jewellers App" className="w-full h-full object-contain" />
+                        <div className="w-18 h-18 rounded-2xl bg-[#24312A] shadow-xl border border-[#d4af37]/50 overflow-hidden flex items-center justify-center">
+                            <img src={AppIcon} alt="Rangoli Jewellers App" className="w-full h-full object-cover" />
                         </div>
                         <h3 className="text-xl font-playfair font-semibold text-[#1F2B24]">
                             Install on iPhone / iPad

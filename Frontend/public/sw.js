@@ -1,5 +1,5 @@
 // Rangoli Jewellers Service Worker for PWA installation
-const CACHE_NAME = 'rangoli-pwa-v2'
+const CACHE_NAME = 'rangoli-pwa-v4'
 
 self.addEventListener('install', (event) => {
     // Activate worker immediately

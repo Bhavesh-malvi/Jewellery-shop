@@ -2,7 +2,7 @@ import React from 'react'
 import { IoCloseOutline } from 'react-icons/io5'
 import { FiDownload } from 'react-icons/fi'
 import { usePwa } from '../context/PwaContext'
-import AppIcon from '../../public/favicon.png'
+import AppIcon from '../../public/app-icon.png'
 
 const InstallAppBanner = () => {
     const { isInstalled, isBannerDismissed, dismissBanner, installApp } = usePwa()
@@ -17,8 +17,8 @@ const InstallAppBanner = () => {
         >
             {/* Logo & Text */}
             <div className="flex items-center gap-3 min-w-0">
-                <div className="w-11 h-11 rounded-xl bg-white/10 p-1 shrink-0 border border-[#d4af37]/50 flex items-center justify-center overflow-hidden">
-                    <img src={AppIcon} alt="Rangoli App Icon" className="w-full h-full object-contain" />
+                <div className="w-12 h-12 rounded-2xl shrink-0 shadow-md border border-[#d4af37]/40 overflow-hidden flex items-center justify-center bg-[#24312A]">
+                    <img src={AppIcon} alt="Rangoli App Icon" className="w-full h-full object-cover" />
                 </div>
                 <div className="min-w-0">
                     <h4 className="text-xs sm:text-sm font-playfair font-semibold text-white truncate">
