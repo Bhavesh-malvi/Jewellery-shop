@@ -56,6 +56,12 @@ const productSchema = new mongoose.Schema(
             required: [true, 'Please provide product name'],
             trim: true,
         },
+        metal: {
+            type: String,
+            enum: ['Gold', 'Silver'],
+            default: 'Gold',
+            index: true,
+        },
         category: {
             type: String,
             required: [true, 'Please select a category'],
@@ -67,25 +73,23 @@ const productSchema = new mongoose.Schema(
                 'Bangles',
                 'Pendants',
                 'Chains',
+                'Payal',
+                'Bichhiya',
+                'Pooja & Idols',
+                'Utensils & Coins',
+                'Kadas',
             ],
             trim: true,
         },
         karat: {
             type: String,
-            required: [true, 'Please select primary gold karat'],
-            enum: ['22K', '20K', '18K', '14K'],
+            required: [true, 'Please select purity / karat'],
+            enum: ['22K', '20K', '18K', '14K', '925', '999', 'Traditional', 'N/A'],
             default: '22K',
         },
         availableKarats: {
             type: [String],
             default: ['18KT', '20KT', '22KT'],
-            validate: {
-                validator: function (val) {
-                    const valid = ['14KT', '18KT', '20KT', '22KT']
-                    return val.every((k) => valid.includes(k))
-                },
-                message: 'Available karats can only be 14KT, 18KT, 20KT, or 22KT',
-            },
         },
         purity: {
             type: String,

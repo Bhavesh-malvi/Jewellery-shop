@@ -22,8 +22,12 @@ const getAllProducts = async (req, res) => {
                 notice: 'Database is connecting. Please check MongoDB Atlas IP Whitelist (0.0.0.0/0).',
             })
         }
-        const { search, category, karat, isFeatured, inStock } = req.query
+        const { search, category, karat, metal, isFeatured, inStock } = req.query
         const query = {}
+
+        if (metal && metal !== 'All') {
+            query.metal = metal
+        }
 
         if (category && category !== 'All') {
             query.category = category
@@ -123,6 +127,7 @@ const createProduct = async (req, res) => {
         const {
             code,
             name,
+            metal,
             category,
             karat,
             availableKarats,
@@ -143,10 +148,12 @@ const createProduct = async (req, res) => {
             return res.status(400).json({
                 success: false,
                 message:
-                    'Please fill in all required fields: Code, Name, Category, Karat, Description, and Primary Image',
+                    'Please fill in all required fields: Code, Name, Category, Purity/Karat, Description, and Primary Image',
             })
         }
 
+        const isSilver = metal === 'Silver'
+        const cleanMetal = isSilver ? 'Silver' : 'Gold'
         const formattedCode = code.toUpperCase().trim()
 
         // Check for duplicate code
@@ -158,11 +165,19 @@ const createProduct = async (req, res) => {
             })
         }
 
-        // Normalize available karats (ensure no 24KT)
-        const validKarats = ['14KT', '18KT', '20KT', '22KT']
-        const cleanKarats = Array.isArray(availableKarats)
-            ? availableKarats.filter((k) => validKarats.includes(k))
-            : ['18KT', '20KT', '22KT']
+        // Normalize available karats/purities
+        let cleanKarats = []
+        if (isSilver) {
+            cleanKarats =
+                Array.isArray(availableKarats) && availableKarats.length > 0
+                    ? availableKarats
+                    : ['925 Sterling', '999 Fine Pure']
+        } else {
+            const validKarats = ['14KT', '18KT', '20KT', '22KT']
+            cleanKarats = Array.isArray(availableKarats)
+                ? availableKarats.filter((k) => validKarats.includes(k))
+                : ['18KT', '20KT', '22KT']
+        }
 
         // Normalize gallery images
         let finalImages = Array.isArray(images) && images.length > 0 ? images : [img]
@@ -174,19 +189,30 @@ const createProduct = async (req, res) => {
             customId: Date.now(),
             code: formattedCode,
             name: name.trim(),
+            metal: cleanMetal,
             category,
-            karat: karat.replace('T', ''),
+            karat: isSilver ? karat : karat.replace('T', ''),
             availableKarats: cleanKarats,
-            purity: purity || `${karat} Hallmarked Gold`,
+            purity:
+                purity ||
+                (isSilver ? `${karat} BIS Hallmarked Silver` : `${karat} Hallmarked Gold`),
             tag: tag || 'New Design',
             shortDescription: shortDescription || description.slice(0, 160) + '...',
             description,
-            specs: specs || `${karat} BIS Hallmarked Gold`,
+            specs:
+                specs ||
+                (isSilver
+                    ? `${karat} BIS Hallmarked Sterling Silver`
+                    : `${karat} BIS Hallmarked Gold`),
             specifications: specifications || {},
             highlights:
                 Array.isArray(highlights) && highlights.length > 0
                     ? highlights
-                    : ['100% BIS Hallmarked gold with verified laser HUID.'],
+                    : [
+                          isSilver
+                              ? '100% Certified 925 Sterling Silver with verifiable hallmark.'
+                              : '100% BIS Hallmarked gold with verified laser HUID.',
+                      ],
             img: img.trim(),
             images: finalImages,
             isFeatured: Boolean(isFeatured),
@@ -222,15 +248,17 @@ const updateProduct = async (req, res) => {
             updateData.code = updateData.code.toUpperCase().trim()
         }
 
-        if (updateData.karat) {
+        if (updateData.karat && updateData.metal !== 'Silver') {
             updateData.karat = updateData.karat.replace('T', '')
         }
 
         if (Array.isArray(updateData.availableKarats)) {
-            const valid = ['14KT', '18KT', '20KT', '22KT']
-            updateData.availableKarats = updateData.availableKarats.filter((k) =>
-                valid.includes(k)
-            )
+            if (updateData.metal !== 'Silver') {
+                const valid = ['14KT', '18KT', '20KT', '22KT']
+                updateData.availableKarats = updateData.availableKarats.filter((k) =>
+                    valid.includes(k)
+                )
+            }
         }
 
         let filter = {}

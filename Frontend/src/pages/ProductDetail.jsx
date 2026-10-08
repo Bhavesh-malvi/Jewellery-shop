@@ -63,6 +63,45 @@ const KARAT_PURITY_MAP = {
     },
 }
 
+const SILVER_PURITY_MAP = {
+    '925': {
+        karat: '925',
+        purityPercentage: '92.5%',
+        hallmarkStandard: 'BIS 925 Hallmark Sterling Silver',
+        fineness: '925 / 1000 Fineness',
+        composition: '92.5% Pure Solid Silver • 7.5% Strengthened Copper Alloys',
+        description:
+            'The international and Indian benchmark for fine sterling silver jewellery, anti-tarnish payals, rings, and designer silver chains.',
+        suitableFor: 'Payal, Bichhiya, Designer Chains, Bracelets & Rings',
+        hardness: 'Tough & Tarnish Resistant Sterling Alloy',
+        durability: 'Engineered for enduring shine and daily comfort',
+    },
+    '999': {
+        karat: '999',
+        purityPercentage: '99.9%',
+        hallmarkStandard: 'BIS 999 Fine Pure Silver',
+        fineness: '999 / 1000 Fineness',
+        composition: '99.9% Pure Solid Sacred Silver',
+        description:
+            'Highest purity devotional silver, revered for auspicious Laxmi-Ganesh coins, pooja thalis, temple idols, and divine utensils.',
+        suitableFor: 'Pooja Idols, Silver Coins, Kalash, Devotional Utensils & Gifts',
+        hardness: 'Ultra-Pure Soft Devotional Luster',
+        durability: 'Sacred heirloom purity with divine white radiance',
+    },
+    'Traditional': {
+        karat: 'Traditional',
+        purityPercentage: '80.0%+',
+        hallmarkStandard: 'Traditional Heritage Silver Craft',
+        fineness: '800+ / 1000 Fineness',
+        composition: 'Traditional Silver Craftsmanship with Artisan Patina',
+        description:
+            'Heirloom tribal, antique, and traditional Rajasthani/Gujarati handcrafted silver ornaments.',
+        suitableFor: 'Traditional Payal, Heavy Kadas, Tribal Ornaments',
+        hardness: 'Robust Traditional Craft Weight',
+        durability: 'Time-tested artisan resilience',
+    },
+}
+
 const ProductDetail = () => {
     const { id } = useParams()
     const navigate = useNavigate()
@@ -120,21 +159,32 @@ const ProductDetail = () => {
     // State for gallery images
     const [selectedImageIndex, setSelectedImageIndex] = useState(0)
 
-    // State for Karat selection (Only 14KT, 18KT, 20KT, 22KT - 24KT excluded as jewellery is not made in 24KT)
+    const isSilver = product?.metal === 'Silver'
+
+    // State for Karat / Purity selection
+    const defaultSilverKarats = ['925', '999', 'Traditional']
+    const defaultGoldKarats = ['14KT', '18KT', '20KT', '22KT']
+
     const rawKarats =
         product?.availableKarats && product.availableKarats.length > 0
             ? product.availableKarats
-            : ['14KT', '18KT', '20KT', '22KT']
+            : (isSilver ? defaultSilverKarats : defaultGoldKarats)
 
-    const availableKarats = rawKarats.filter(
-        (kt) => kt !== '24KT' && kt !== '24K'
-    )
+    const availableKarats = isSilver
+        ? rawKarats
+        : rawKarats.filter((kt) => kt !== '24KT' && kt !== '24K')
 
-    const initialKarat = product && availableKarats.includes(`${product.karat}T`)
-        ? `${product.karat}T`
-        : availableKarats[0] || '22KT'
+    const getInitialKarat = () => {
+        if (!product) return isSilver ? '925' : '22KT'
+        if (isSilver) {
+            return product.karat || '925'
+        }
+        return availableKarats.includes(`${product.karat}T`)
+            ? `${product.karat}T`
+            : availableKarats[0] || '22KT'
+    }
 
-    const [selectedKarat, setSelectedKarat] = useState(initialKarat)
+    const [selectedKarat, setSelectedKarat] = useState(getInitialKarat)
 
     // Active bottom tab
     const [activeTab, setActiveTab] = useState('description')
@@ -144,10 +194,14 @@ const ProductDetail = () => {
         window.scrollTo(0, 0)
         setSelectedImageIndex(0)
         if (product) {
-            const defKarat = availableKarats.includes(`${product.karat}T`)
-                ? `${product.karat}T`
-                : availableKarats[0] || '22KT'
-            setSelectedKarat(defKarat)
+            if (product.metal === 'Silver') {
+                setSelectedKarat(product.karat || '925')
+            } else {
+                const defKarat = availableKarats.includes(`${product.karat}T`)
+                    ? `${product.karat}T`
+                    : availableKarats[0] || '22KT'
+                setSelectedKarat(defKarat)
+            }
         }
         setActiveTab('description')
     }, [id, product])
@@ -193,18 +247,24 @@ const ProductDetail = () => {
         )
     }
 
-    // Direct WhatsApp enquiry handler with selected karat
+    // Active purity / karat details
+    const activeKaratDetails = isSilver
+        ? (SILVER_PURITY_MAP[selectedKarat] || SILVER_PURITY_MAP[product?.karat] || SILVER_PURITY_MAP['925'])
+        : (KARAT_PURITY_MAP[selectedKarat] || KARAT_PURITY_MAP['22KT'])
+
+    // Direct WhatsApp enquiry handler with selected karat / purity
     const handleWhatsAppEnquiry = () => {
-        const karatInfo = KARAT_PURITY_MAP[selectedKarat] || KARAT_PURITY_MAP['22KT']
+        const karatInfo = activeKaratDetails
         const message = `*Rangoli Jewellers - Product Enquiry*
 
 Namaste! I am interested in inquiring about this design from your showroom:
 
 • *Design:* ${product.name}
 • *Product Code:* ${product.code}
+• *Precious Metal:* ${isSilver ? 'Silver Collection (925 / 999)' : 'Gold Collection (BIS Hallmarked)'}
 • *Category:* ${product.category}
-• *Selected Gold Karat:* ${selectedKarat} (${karatInfo.purityPercentage} Pure Gold • ${karatInfo.hallmarkStandard})
-• *Net Gold Weight:* ${product.specifications?.netGoldWeight || 'Standard'}
+• *Selected ${isSilver ? 'Silver Purity' : 'Gold Karat'}:* ${selectedKarat} (${karatInfo.purityPercentage} Pure • ${karatInfo.hallmarkStandard})
+• *Net ${isSilver ? 'Silver' : 'Gold'} Weight:* ${product.specifications?.netSilverWeight || product.specifications?.netGoldWeight || product.specs || 'Standard'}
 • *Gross Weight:* ${product.specifications?.grossWeight || 'Approximate'}
 
 Kindly share today's live rate quote, custom sizing options, and showroom availability. Thank you!`
@@ -212,10 +272,6 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
         const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
         window.open(url, '_blank')
     }
-
-    // Active karat details
-    const activeKaratDetails =
-        KARAT_PURITY_MAP[selectedKarat] || KARAT_PURITY_MAP['22KT']
 
     const productId = product._id || product.customId || product.id
     const inBag = isInEnquiry(productId)
@@ -243,14 +299,14 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                     </Link>
                     <span className="text-gray-300">→</span>
                     <Link
-                        to="/catalogue"
+                        to={isSilver ? '/catalogue?metal=silver' : '/catalogue?metal=gold'}
                         className="hover:text-[#304037] transition-colors"
                     >
-                        Jewellery
+                        {isSilver ? 'Silver Collection' : 'Jewellery'}
                     </Link>
                     <span className="text-gray-300">→</span>
                     <Link
-                        to={`/catalogue?category=${product.category}`}
+                        to={isSilver ? `/catalogue?metal=silver&category=${encodeURIComponent(product.category)}` : `/catalogue?category=${encodeURIComponent(product.category)}`}
                         className="hover:text-[#304037] transition-colors"
                     >
                         {product.category}
@@ -277,7 +333,9 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                         aria-label={`View photo ${index + 1}`}
                                         className={`w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-xl overflow-hidden bg-[#F7F4EE] p-2 flex items-center justify-center border-2 transition-all duration-300 cursor-pointer ${
                                             isSelected
-                                                ? 'border-[#304037] shadow-md scale-102 ring-1 ring-[#304037]/20'
+                                                ? isSilver
+                                                    ? 'border-slate-700 shadow-md scale-102 ring-1 ring-slate-400'
+                                                    : 'border-[#304037] shadow-md scale-102 ring-1 ring-[#304037]/20'
                                                 : 'border-transparent hover:border-gray-300 opacity-75 hover:opacity-100'
                                         }`}
                                     >
@@ -309,9 +367,9 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
 
                             {/* Hallmark Overlay Tag */}
                             <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-full border border-[#d4af37]/40 shadow-sm flex items-center gap-1.5">
-                                <BsPatchCheckFill className="text-[#d4af37] text-xs" />
+                                <BsPatchCheckFill className={isSilver ? "text-slate-600 text-xs" : "text-[#d4af37] text-xs"} />
                                 <span className="text-[11px] font-roboto font-semibold text-[#304037] tracking-wider uppercase">
-                                    BIS Hallmarked
+                                    {isSilver ? `${selectedKarat || '925'} BIS Hallmarked Silver` : 'BIS Hallmarked'}
                                 </span>
                             </div>
 
@@ -324,7 +382,7 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
 
                             {/* Subtle zoom indicator on hover */}
                             <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur text-gray-500 text-[11px] px-2.5 py-1 rounded-lg border border-gray-200 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                100% Solid Gold Details
+                                {isSilver ? '100% Solid Sterling Silver' : '100% Solid Gold Details'}
                             </div>
                         </div>
                     </div>
@@ -337,7 +395,7 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                 {product.name}
                             </h1>
                             <div className="flex items-center gap-2 mt-2">
-                                <span className="text-xs uppercase tracking-widest text-[#d4af37] font-semibold">
+                                <span className={`text-xs uppercase tracking-widest font-semibold ${isSilver ? 'text-slate-600' : 'text-[#d4af37]'}`}>
                                     {product.category}
                                 </span>
                                 <span className="text-gray-300">•</span>
@@ -352,14 +410,14 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                             {product.shortDescription || product.description}
                         </p>
 
-                        {/* Hallmark & Live Gold Quotation Badge (Replaces price) */}
+                        {/* Hallmark & Live Gold/Silver Quotation Badge (Replaces price) */}
                         <div className="bg-[#FAF7F2] border border-[#d4af37]/35 rounded-xl p-4 flex items-center justify-between">
                             <div>
-                                <span className="text-[11px] uppercase tracking-wider text-[#d4af37] font-bold font-roboto">
-                                    Live Gold Rate Valuation
+                                <span className={`text-[11px] uppercase tracking-wider font-bold font-roboto ${isSilver ? 'text-slate-700' : 'text-[#d4af37]'}`}>
+                                    {isSilver ? 'Live Silver Rate Valuation' : 'Live Gold Rate Valuation'}
                                 </span>
                                 <p className="text-sm font-playfair text-[#304037] font-medium mt-0.5">
-                                    Custom Quote on Live Market Gold Rate
+                                    {isSilver ? 'Custom Quote on Live Market Silver Rate' : 'Custom Quote on Live Market Gold Rate'}
                                 </p>
                                 <p className="text-[11px] text-gray-500 font-roboto mt-0.5">
                                     Inclusive of standard hallmarking • 100% transparent billing
@@ -367,23 +425,23 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                             </div>
                             <div className="text-right shrink-0 ml-3">
                                 <span className="inline-block bg-[#304037] text-[#d4af37] text-[11px] font-mono font-bold px-3 py-1.5 rounded-lg shadow-sm">
-                                    BIS 916 / 750
+                                    {isSilver ? 'BIS 925 / 999' : 'BIS 916 / 750'}
                                 </span>
                             </div>
                         </div>
 
-                        {/* CARAT SELECTOR SECTION */}
+                        {/* CARAT / PURITY SELECTOR SECTION */}
                         <div className="space-y-3 pt-2">
                             <div className="flex items-center justify-between">
                                 <label className="text-sm font-medium text-gray-800 font-roboto">
-                                    Carat
+                                    {isSilver ? 'Silver Purity Standard' : 'Carat'}
                                 </label>
-                                <span className="text-xs text-[#d4af37] font-medium font-roboto">
-                                    Selected: {selectedKarat} ({activeKaratDetails.purityPercentage} Gold)
+                                <span className={`text-xs font-medium font-roboto ${isSilver ? 'text-slate-700' : 'text-[#d4af37]'}`}>
+                                    Selected: {selectedKarat} ({activeKaratDetails.purityPercentage} {isSilver ? 'Silver' : 'Gold'})
                                 </span>
                             </div>
 
-                            {/* Karat Button Pills */}
+                            {/* Karat / Purity Button Pills */}
                             <div className="flex flex-wrap items-center gap-2.5">
                                 {availableKarats.map((kt) => {
                                     const isSelected = selectedKarat === kt
@@ -394,7 +452,9 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                             onClick={() => setSelectedKarat(kt)}
                                             className={`px-4 py-2 rounded-lg text-xs font-semibold font-mono tracking-wider transition-all duration-200 cursor-pointer ${
                                                 isSelected
-                                                    ? 'bg-[#304037] text-white shadow-sm border border-[#304037]'
+                                                    ? isSilver
+                                                        ? 'bg-slate-800 text-white shadow-sm border border-slate-700'
+                                                        : 'bg-[#304037] text-white shadow-sm border border-[#304037]'
                                                     : 'bg-white text-gray-700 border border-gray-200 hover:border-[#304037] hover:text-[#304037]'
                                             }`}
                                         >
@@ -404,13 +464,13 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                 })}
                             </div>
 
-                            {/* DYNAMIC GOLD PURITY & SPECIFICATIONS CARD FOR SELECTED CARAT */}
+                            {/* DYNAMIC PURITY & SPECIFICATIONS CARD FOR SELECTED CARAT / STANDARD */}
                             <div className="mt-3 bg-gradient-to-br from-[#FDFBF7] to-[#F5EFE6] border border-[#d4af37]/30 rounded-xl p-4 space-y-2.5 shadow-xs">
                                 <div className="flex items-center justify-between border-b border-[#EDE3D0] pb-2">
                                     <div className="flex items-center gap-2">
-                                        <span className="w-2 h-2 rounded-full bg-[#d4af37] animate-pulse"></span>
+                                        <span className={`w-2 h-2 rounded-full animate-pulse ${isSilver ? 'bg-slate-600' : 'bg-[#d4af37]'}`}></span>
                                         <span className="text-xs font-bold text-[#304037] uppercase tracking-wide">
-                                            {selectedKarat} Gold Purity Details
+                                            {selectedKarat} {isSilver ? 'Silver' : 'Gold'} Purity Details
                                         </span>
                                     </div>
                                     <span className="text-xs font-mono font-bold text-[#304037] bg-white px-2 py-0.5 rounded border border-[#d4af37]/30">
@@ -437,10 +497,10 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                     </div>
                                     <div>
                                         <span className="text-gray-500 text-[11px] block">
-                                            Net Gold Weight:
+                                            {isSilver ? 'Net Silver Weight:' : 'Net Gold Weight:'}
                                         </span>
                                         <span className="font-medium text-gray-800">
-                                            {product.specifications?.netGoldWeight || '4.550 gm solid gold'}
+                                            {product.specifications?.netSilverWeight || product.specifications?.netGoldWeight || product.specs || 'Standard Weight'}
                                         </span>
                                     </div>
                                     <div>
@@ -448,7 +508,7 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                             Approx. Gross Weight:
                                         </span>
                                         <span className="font-medium text-gray-800">
-                                            {product.specifications?.grossWeight || '4.850 gm'}
+                                            {product.specifications?.grossWeight || 'Standard'}
                                         </span>
                                     </div>
                                 </div>
@@ -497,7 +557,7 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                 className="w-full py-3.5 px-5 rounded-xl bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#20bd5a] hover:to-[#0f7a6e] text-white text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2.5 shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer"
                             >
                                 <FaWhatsapp className="text-lg" />
-                                <span>Enquire on WhatsApp ({selectedKarat} Gold)</span>
+                                <span>Enquire on WhatsApp ({selectedKarat} {isSilver ? 'Silver' : 'Gold'})</span>
                             </button>
                         </div>
 
@@ -588,7 +648,9 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                 <li className="flex items-start gap-2.5">
                                     <span className="text-[#304037] text-lg leading-none mt-0.5">•</span>
                                     <span>
-                                        Govt. Approved BIS Hallmarked with unique verifiable Laser HUID stamp assuring 100% genuine gold purity.
+                                        {isSilver
+                                            ? 'Govt. Approved BIS Hallmarked Silver with official 925 / 999 stamp assuring genuine sterling purity.'
+                                            : 'Govt. Approved BIS Hallmarked with unique verifiable Laser HUID stamp assuring 100% genuine gold purity.'}
                                     </span>
                                 </li>
                             </ul>
@@ -609,10 +671,10 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                     <tbody className="divide-y divide-gray-100">
                                         <tr className="bg-[#FAF7F2]">
                                             <td className="py-3.5 px-5 font-semibold text-[#304037] w-1/3">
-                                                Selected Gold Karat
+                                                Selected {isSilver ? 'Silver Purity' : 'Gold Karat'}
                                             </td>
                                             <td className="py-3.5 px-5 text-gray-700 font-mono font-bold">
-                                                {selectedKarat} ({activeKaratDetails.purityPercentage} Gold)
+                                                {selectedKarat} ({activeKaratDetails.purityPercentage} {isSilver ? 'Silver' : 'Gold'})
                                             </td>
                                         </tr>
                                         <tr>
@@ -626,10 +688,10 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                         </tr>
                                         <tr className="bg-[#FAF7F2]">
                                             <td className="py-3.5 px-5 font-semibold text-[#304037]">
-                                                Net Gold Weight
+                                                {isSilver ? 'Net Silver Weight' : 'Net Gold Weight'}
                                             </td>
                                             <td className="py-3.5 px-5 text-gray-700 font-mono">
-                                                {product.specifications?.netGoldWeight || '4.550 gm'}
+                                                {product.specifications?.netSilverWeight || product.specifications?.netGoldWeight || product.specs || 'Standard Weight'}
                                             </td>
                                         </tr>
                                         <tr>
@@ -637,7 +699,7 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                                 Approx. Gross Weight
                                             </td>
                                             <td className="py-3.5 px-5 text-gray-700 font-mono">
-                                                {product.specifications?.grossWeight || '4.850 gm'}
+                                                {product.specifications?.grossWeight || 'Standard'}
                                             </td>
                                         </tr>
                                         <tr className="bg-[#FAF7F2]">

@@ -7,14 +7,16 @@ import { IoCloseOutline } from 'react-icons/io5'
 import { useEnquiry } from '../context/EnquiryContext'
 import api from '../services/api'
 
-const categories = ['All', 'Rings', 'Earrings', 'Necklaces', 'Bracelets', 'Bangles', 'Pendants', 'Chains']
+const goldCategories = ['All', 'Rings', 'Earrings', 'Necklaces', 'Bracelets', 'Bangles', 'Pendants', 'Chains', 'Kadas']
+const silverCategories = ['All', 'Payal', 'Bichhiya', 'Silver Chains', 'Bracelets', 'Rings', 'Pooja & Idols', 'Utensils & Coins', 'Kadas']
+const allCategories = ['All', 'Rings', 'Earrings', 'Necklaces', 'Bracelets', 'Bangles', 'Pendants', 'Chains', 'Payal', 'Bichhiya', 'Pooja & Idols', 'Utensils & Coins', 'Kadas']
 
-const karats = [
+const goldKarats = [
     {
         id: 'All',
-        label: 'All Karats',
+        label: 'All Gold Karats',
         hallmark: 'All Purity',
-        desc: 'Browse entire collection',
+        desc: 'Browse entire gold collection',
     },
     {
         id: '22K',
@@ -36,12 +38,44 @@ const karats = [
     },
 ]
 
+const silverKarats = [
+    {
+        id: 'All',
+        label: 'All Silver Purities',
+        hallmark: 'All Purity',
+        desc: 'Browse entire silver collection',
+    },
+    {
+        id: '925',
+        label: '925 Sterling',
+        hallmark: 'BIS 925',
+        desc: '92.5% Pure Silver • Certified Jewellery & Payal',
+    },
+    {
+        id: '999',
+        label: '999 Fine Pure',
+        hallmark: '99.9% Pure',
+        desc: 'Pooja Idols, Coins & Auspicious Gifts',
+    },
+]
+
+const allKarats = [
+    {
+        id: 'All',
+        label: 'All Purities',
+        hallmark: 'All',
+        desc: 'Browse all gold & silver purities',
+    },
+    ...goldKarats.filter((k) => k.id !== 'All'),
+    ...silverKarats.filter((k) => k.id !== 'All'),
+]
+
 const normalizeCategory = (catName) => {
     if (!catName) return 'All'
     const clean = catName.trim().toLowerCase()
     if (clean === 'all') return 'All'
 
-    const matched = categories.find((c) => {
+    const matched = allCategories.find((c) => {
         if (c === 'All') return false
         const cLower = c.toLowerCase()
         return (
@@ -61,6 +95,8 @@ const normalizeKarat = (karatVal) => {
     if (clean.includes('22')) return '22K'
     if (clean.includes('20')) return '20K'
     if (clean.includes('18')) return '18K'
+    if (clean.includes('925')) return '925'
+    if (clean.includes('999')) return '999'
     return 'All'
 }
 
@@ -74,14 +110,29 @@ const Catalogue = () => {
     } = useEnquiry()
 
     const [searchParams, setSearchParams] = useSearchParams()
+    const metalParam = searchParams.get('metal')
     const categoryParam = searchParams.get('category')
     const searchParam = searchParams.get('search')
     const karatParam = searchParams.get('karat') || searchParams.get('purity')
 
+    const [selectedMetal, setSelectedMetal] = useState(() => {
+        if (!metalParam) return 'All'
+        if (metalParam.toLowerCase() === 'silver') return 'Silver'
+        if (metalParam.toLowerCase() === 'gold') return 'Gold'
+        return 'All'
+    })
     const [selectedCategory, setSelectedCategory] = useState(() => normalizeCategory(categoryParam))
     const [selectedKarat, setSelectedKarat] = useState(() => normalizeKarat(karatParam))
     const [searchQuery, setSearchQuery] = useState(() => searchParam || '')
     const [wishlist, setWishlist] = useState([])
+
+    useEffect(() => {
+        if (metalParam) {
+            setSelectedMetal(metalParam.toLowerCase() === 'silver' ? 'Silver' : 'Gold')
+        } else {
+            setSelectedMetal('All')
+        }
+    }, [metalParam])
 
     useEffect(() => {
         if (categoryParam) {
@@ -111,6 +162,21 @@ const Catalogue = () => {
         )
     }
 
+    const handleMetalSelect = (m) => {
+        setSelectedMetal(m)
+        setSelectedCategory('All')
+        setSelectedKarat('All')
+        const nextParams = new URLSearchParams(searchParams)
+        if (m === 'All') {
+            nextParams.delete('metal')
+        } else {
+            nextParams.set('metal', m.toLowerCase())
+        }
+        nextParams.delete('category')
+        nextParams.delete('karat')
+        setSearchParams(nextParams, { replace: true })
+    }
+
     const handleCategorySelect = (cat) => {
         setSelectedCategory(cat)
         const nextParams = new URLSearchParams(searchParams)
@@ -136,10 +202,12 @@ const Catalogue = () => {
     }
 
     const handleResetFilters = () => {
+        setSelectedMetal('All')
         setSelectedCategory('All')
         setSelectedKarat('All')
         setSearchQuery('')
         const nextParams = new URLSearchParams(searchParams)
+        nextParams.delete('metal')
         nextParams.delete('category')
         nextParams.delete('karat')
         nextParams.delete('purity')
@@ -180,7 +248,25 @@ const Catalogue = () => {
 
     const currentCatalog = dbProducts
 
+    const activeCategories =
+        selectedMetal === 'Silver'
+            ? silverCategories
+            : selectedMetal === 'Gold'
+            ? goldCategories
+            : allCategories
+
+    const activeKarats =
+        selectedMetal === 'Silver'
+            ? silverKarats
+            : selectedMetal === 'Gold'
+            ? goldKarats
+            : allKarats
+
     const filteredDesigns = currentCatalog.filter((item) => {
+        const matchesMetal =
+            selectedMetal === 'All' ||
+            (selectedMetal === 'Silver' ? item.metal === 'Silver' : item.metal !== 'Silver')
+
         const matchesCategory =
             selectedCategory === 'All' ||
             item.category.toLowerCase() === selectedCategory.toLowerCase() ||
@@ -201,7 +287,7 @@ const Catalogue = () => {
             item.category.toLowerCase().includes(searchLower) ||
             (item.karat && item.karat.toLowerCase().includes(searchLower))
 
-        return matchesCategory && matchesKarat && matchesSearch
+        return matchesMetal && matchesCategory && matchesKarat && matchesSearch
     })
 
     return (
@@ -249,18 +335,79 @@ const Catalogue = () => {
 
             {/* Filter Section */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
-                {/* Shop by Gold Karat Selector */}
+                {/* Precious Metal Collection Switcher */}
+                <div className="bg-white rounded-2xl p-4 sm:p-5 border border-[#EDE8E0] shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <div className="flex items-center gap-2">
+                            <span className={selectedMetal === 'Silver' ? 'text-slate-500 text-sm' : 'text-[#d4af37] text-sm'}>✦</span>
+                            <span className="text-sm font-semibold uppercase tracking-wider text-primary font-roboto">
+                                Select Precious Metal Collection
+                            </span>
+                        </div>
+                        <p className="text-xs text-gray-500 font-roboto mt-0.5">
+                            Switch between BIS 916 Gold jewellery and 925 Hallmark Certified Silver articles
+                        </p>
+                    </div>
+
+                    <div className="inline-flex p-1 bg-[#FAF7F2] rounded-xl border border-[#EDE8E0] gap-1 self-start md:self-auto">
+                        <button
+                            type="button"
+                            onClick={() => handleMetalSelect('All')}
+                            className={`px-4 py-2 rounded-lg text-xs font-roboto font-semibold tracking-wide transition-all cursor-pointer ${
+                                selectedMetal === 'All'
+                                    ? 'bg-[#304037] text-white shadow-sm'
+                                    : 'text-gray-600 hover:text-gray-900 hover:bg-white/60'
+                            }`}
+                        >
+                            All Collections
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => handleMetalSelect('Gold')}
+                            className={`px-4 py-2 rounded-lg text-xs font-roboto font-semibold tracking-wide transition-all flex items-center gap-1.5 cursor-pointer ${
+                                selectedMetal === 'Gold'
+                                    ? 'bg-[#d4af37] text-[#1c2922] shadow-sm font-bold'
+                                    : 'text-amber-800 hover:text-amber-900 hover:bg-white/60'
+                            }`}
+                        >
+                            <span>🟡</span>
+                            <span>Gold Jewellery (BIS 916)</span>
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => handleMetalSelect('Silver')}
+                            className={`px-4 py-2 rounded-lg text-xs font-roboto font-semibold tracking-wide transition-all flex items-center gap-1.5 cursor-pointer ${
+                                selectedMetal === 'Silver'
+                                    ? 'bg-slate-800 text-white shadow-sm font-bold ring-1 ring-slate-400'
+                                    : 'text-slate-700 hover:text-slate-900 hover:bg-white/60'
+                            }`}
+                        >
+                            <span>⚪</span>
+                            <span>Silver Collection (925)</span>
+                        </button>
+                    </div>
+                </div>
+
+                {/* Shop by Purity / Karat Selector */}
                 <div className="bg-white rounded-2xl p-4 sm:p-6 border border-[#EDE8E0] shadow-sm space-y-3.5">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-100 pb-3">
                         <div className="space-y-0.5">
                             <div className="flex items-center gap-2">
-                                <span className="text-[#d4af37] text-sm">✦</span>
+                                <span className={selectedMetal === 'Silver' ? 'text-slate-500 text-sm' : 'text-[#d4af37] text-sm'}>✦</span>
                                 <h2 className="text-base sm:text-lg font-playfair font-medium text-primary">
-                                    Shop by Gold Karat (Purity)
+                                    {selectedMetal === 'Silver'
+                                        ? 'Shop by Silver Purity'
+                                        : selectedMetal === 'Gold'
+                                        ? 'Shop by Gold Karat (Purity)'
+                                        : 'Shop by Karat & Purity'}
                                 </h2>
                             </div>
                             <p className="text-xs text-gray-500 font-roboto">
-                                Select purity grade: 22K (916 BIS Hallmark), 20K (833 BIS Traditional), or 18K (750 Fine Diamonds)
+                                {selectedMetal === 'Silver'
+                                    ? 'Select silver purity: 925 BIS Hallmarked Sterling Silver or 999 Fine Pure (Pooja/Idols/Coins)'
+                                    : selectedMetal === 'Gold'
+                                    ? 'Select purity grade: 22K (916 BIS Hallmark), 20K (833 BIS Traditional), or 18K (750 Fine Diamonds)'
+                                    : 'Filter by standard hallmarked gold karats or sterling silver purities'}
                             </p>
                         </div>
                         {selectedKarat !== 'All' && (
@@ -268,13 +415,13 @@ const Catalogue = () => {
                                 onClick={() => handleKaratSelect('All')}
                                 className="text-xs text-[#d4af37] hover:underline font-roboto font-medium self-start sm:self-auto cursor-pointer"
                             >
-                                Show All Karats
+                                Show All Purity Grades
                             </button>
                         )}
                     </div>
 
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5">
-                        {karats.map((k) => {
+                        {activeKarats.map((k) => {
                             const isSelected = selectedKarat === k.id
                             return (
                                 <button
@@ -282,16 +429,22 @@ const Catalogue = () => {
                                     onClick={() => handleKaratSelect(k.id)}
                                     className={`relative p-3.5 rounded-xl border text-left transition-all duration-300 cursor-pointer group flex flex-col justify-between gap-1.5 ${
                                         isSelected
-                                            ? 'bg-[#304037] text-white border-[#d4af37] shadow-md ring-1 ring-[#d4af37]'
+                                            ? selectedMetal === 'Silver'
+                                                ? 'bg-slate-800 text-white border-slate-400 shadow-md ring-1 ring-slate-400'
+                                                : 'bg-[#304037] text-white border-[#d4af37] shadow-md ring-1 ring-[#d4af37]'
                                             : 'bg-[#FAFAF8] text-gray-700 border-gray-200 hover:border-[#d4af37]/50 hover:bg-white'
                                     }`}
                                 >
                                     <div className="flex items-center justify-between gap-2">
-                                        <span className={`font-roboto font-bold text-sm tracking-wide ${isSelected ? 'text-[#f3e5ab]' : 'text-primary'}`}>
+                                        <span className={`font-roboto font-bold text-sm tracking-wide ${isSelected ? (selectedMetal === 'Silver' ? 'text-white' : 'text-[#f3e5ab]') : 'text-primary'}`}>
                                             {k.label}
                                         </span>
                                         <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold shrink-0 ${
-                                            isSelected ? 'bg-[#d4af37] text-[#1c2922]' : 'bg-gray-200 text-gray-700'
+                                            isSelected
+                                                ? selectedMetal === 'Silver'
+                                                    ? 'bg-slate-200 text-slate-900'
+                                                    : 'bg-[#d4af37] text-[#1c2922]'
+                                                : 'bg-gray-200 text-gray-700'
                                         }`}>
                                             {k.hallmark}
                                         </span>
@@ -309,13 +462,15 @@ const Catalogue = () => {
                 <div className="flex flex-wrap items-center justify-between gap-4 border-b border-gray-200 pb-5">
                     <div className="flex items-center gap-2 flex-wrap">
                         <span className="text-xs text-gray-500 font-roboto font-medium mr-1 hidden sm:inline">Category:</span>
-                        {categories.map((cat) => (
+                        {activeCategories.map((cat) => (
                             <button
                                 key={cat}
                                 onClick={() => handleCategorySelect(cat)}
                                 className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-roboto tracking-wide transition-all cursor-pointer ${
                                     selectedCategory === cat
-                                        ? 'bg-[#304037] text-[#f3e5ab] font-medium shadow-sm ring-1 ring-[#d4af37]/40'
+                                        ? selectedMetal === 'Silver'
+                                            ? 'bg-slate-800 text-white font-medium shadow-sm ring-1 ring-slate-400'
+                                            : 'bg-[#304037] text-[#f3e5ab] font-medium shadow-sm ring-1 ring-[#d4af37]/40'
                                         : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
                                 }`}
                             >
@@ -331,9 +486,25 @@ const Catalogue = () => {
                         <span>
                             Showing <strong className="text-gray-800">{filteredDesigns.length}</strong> Designs
                         </span>
+                        {selectedMetal !== 'All' && (
+                            <span className={`inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full font-medium text-[11px] border ${
+                                selectedMetal === 'Silver'
+                                    ? 'bg-slate-100 text-slate-800 border-slate-300'
+                                    : 'bg-amber-50 text-amber-900 border-amber-300'
+                            }`}>
+                                <span>Metal: <strong>{selectedMetal}</strong></span>
+                                <button
+                                    onClick={() => handleMetalSelect('All')}
+                                    className="hover:text-red-500 font-bold ml-0.5 cursor-pointer"
+                                    title="Clear metal filter"
+                                >
+                                    ✕
+                                </button>
+                            </span>
+                        )}
                         {selectedKarat !== 'All' && (
                             <span className="inline-flex items-center gap-1.5 bg-[#d4af37]/15 text-[#304037] px-3 py-0.5 rounded-full font-medium text-[11px] border border-[#d4af37]/30">
-                                <span>Karat: <strong>{selectedKarat} Gold</strong></span>
+                                <span>Purity: <strong>{selectedKarat}</strong></span>
                                 <button
                                     onClick={() => handleKaratSelect('All')}
                                     className="hover:text-red-500 font-bold ml-0.5 cursor-pointer"
@@ -368,7 +539,7 @@ const Catalogue = () => {
                             </span>
                         )}
                     </div>
-                    {(selectedCategory !== 'All' || selectedKarat !== 'All' || searchQuery) && (
+                    {(selectedCategory !== 'All' || selectedKarat !== 'All' || selectedMetal !== 'All' || searchQuery) && (
                         <button
                             onClick={handleResetFilters}
                             className="text-[#304037] font-medium hover:underline cursor-pointer self-start sm:self-auto"
@@ -434,10 +605,14 @@ const Catalogue = () => {
                                             {item.tag || 'Exclusive'}
                                         </span>
 
-                                        {/* Karat Badge */}
-                                        <span className="absolute bottom-3 left-3 bg-white/95 backdrop-blur text-primary text-[10px] font-bold font-mono px-2 py-0.5 rounded border border-[#d4af37]/50 shadow-sm flex items-center gap-1">
-                                            <span className="text-[#d4af37]">✦</span>
-                                            <span>{item.karat} Gold</span>
+                                        {/* Karat / Purity Badge */}
+                                        <span className={`absolute bottom-3 left-3 bg-white/95 backdrop-blur text-[10px] font-bold font-mono px-2 py-0.5 rounded border shadow-sm flex items-center gap-1 ${
+                                            item.metal === 'Silver'
+                                                ? 'border-slate-300 text-slate-800'
+                                                : 'border-[#d4af37]/50 text-primary'
+                                        }`}>
+                                            <span className={item.metal === 'Silver' ? 'text-slate-500' : 'text-[#d4af37]'}>✦</span>
+                                            <span>{item.metal === 'Silver' ? `${item.karat || '925'} Silver` : `${item.karat || '22K'} Gold`}</span>
                                         </span>
 
                                         {/* Wishlist Button */}
@@ -464,11 +639,17 @@ const Catalogue = () => {
                                         <div className="space-y-1">
                                             <div className="flex items-center justify-between text-xs font-roboto">
                                                 <div className="flex items-center gap-2">
-                                                    <span className="uppercase tracking-widest text-[#d4af37] font-semibold text-[11px]">
+                                                    <span className={`uppercase tracking-widest font-semibold text-[11px] ${
+                                                        item.metal === 'Silver' ? 'text-slate-600' : 'text-[#d4af37]'
+                                                    }`}>
                                                         {item.category}
                                                     </span>
-                                                    <span className="bg-[#f4efe6] text-[#304037] text-[10px] font-bold font-mono px-1.5 py-0.2 rounded border border-[#d4af37]/30">
-                                                        {item.karat}
+                                                    <span className={`text-[10px] font-bold font-mono px-1.5 py-0.2 rounded border ${
+                                                        item.metal === 'Silver'
+                                                            ? 'bg-slate-100 text-slate-800 border-slate-300'
+                                                            : 'bg-[#f4efe6] text-[#304037] border-[#d4af37]/30'
+                                                    }`}>
+                                                        {item.metal === 'Silver' ? `${item.karat || '925'} Silver` : item.karat}
                                                     </span>
                                                 </div>
                                                 <span className="text-gray-400 font-mono text-[11px]">

@@ -20,6 +20,7 @@ const AdminProductList = () => {
         searchParams.get('category') || 'All'
     )
     const [selectedKarat, setSelectedKarat] = useState('All')
+    const [selectedMetal, setSelectedMetal] = useState('All')
     const [deleteModalProduct, setDeleteModalProduct] = useState(null)
     const [deleting, setDeleting] = useState(false)
     const [toastMessage, setToastMessage] = useState('')
@@ -33,9 +34,14 @@ const AdminProductList = () => {
         'Bangles',
         'Pendants',
         'Chains',
+        'Payal',
+        'Bichhiya',
+        'Pooja & Idols',
+        'Utensils & Coins',
+        'Kadas',
     ]
 
-    const karats = ['All', '22K', '20K', '18K', '14K']
+    const karats = ['All', '22K', '20K', '18K', '14K', '925', '999']
 
     const showToast = (msg) => {
         setToastMessage(msg)
@@ -46,6 +52,7 @@ const AdminProductList = () => {
         setLoading(true)
         try {
             const params = {}
+            if (selectedMetal !== 'All') params.metal = selectedMetal
             if (selectedCategory !== 'All') params.category = selectedCategory
             if (selectedKarat !== 'All') params.karat = selectedKarat
             if (searchQuery.trim()) params.search = searchQuery.trim()
@@ -64,7 +71,7 @@ const AdminProductList = () => {
 
     useEffect(() => {
         fetchProducts()
-    }, [selectedCategory, selectedKarat])
+    }, [selectedCategory, selectedKarat, selectedMetal])
 
     const handleSearchSubmit = (e) => {
         e.preventDefault()
@@ -125,7 +132,50 @@ const AdminProductList = () => {
             </div>
 
             {/* Filter and Search Bar Card */}
+            {/* Filter & Search Bar */}
             <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-xs space-y-4">
+                {/* Metal Tabs: All / Gold / Silver */}
+                <div className="flex flex-wrap items-center gap-2 border-b border-gray-100 pb-3">
+                    <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider mr-2">
+                        Metal Collection:
+                    </span>
+                    <button
+                        type="button"
+                        onClick={() => setSelectedMetal('All')}
+                        className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer ${
+                            selectedMetal === 'All'
+                                ? 'bg-[#304037] text-white shadow-xs'
+                                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                        }`}
+                    >
+                        All Metals
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => setSelectedMetal('Gold')}
+                        className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
+                            selectedMetal === 'Gold'
+                                ? 'bg-[#d4af37] text-[#1a251f] font-bold shadow-xs'
+                                : 'bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100'
+                        }`}
+                    >
+                        <span>✦</span>
+                        <span>Gold (BIS 916)</span>
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => setSelectedMetal('Silver')}
+                        className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
+                            selectedMetal === 'Silver'
+                                ? 'bg-slate-800 text-cyan-200 font-bold shadow-xs'
+                                : 'bg-slate-100 text-slate-700 border border-slate-200 hover:bg-slate-200'
+                        }`}
+                    >
+                        <span>✦</span>
+                        <span>Silver (925)</span>
+                    </button>
+                </div>
+
                 <form
                     onSubmit={handleSearchSubmit}
                     className="flex flex-col md:flex-row items-center gap-3"
@@ -155,7 +205,7 @@ const AdminProductList = () => {
                         ))}
                     </select>
 
-                    {/* Karat Select */}
+                    {/* Karat / Purity Select */}
                     <select
                         value={selectedKarat}
                         onChange={(e) => setSelectedKarat(e.target.value)}
@@ -163,7 +213,7 @@ const AdminProductList = () => {
                     >
                         {karats.map((k) => (
                             <option key={k} value={k}>
-                                {k === 'All' ? 'All Karats' : `${k} Gold`}
+                                {k === 'All' ? 'All Purities' : k === '925' || k === '999' ? `${k} Silver` : `${k} Gold`}
                             </option>
                         ))}
                     </select>
@@ -181,10 +231,11 @@ const AdminProductList = () => {
                     <span>
                         Showing <strong className="text-gray-800">{products.length}</strong> jewellery designs
                     </span>
-                    {(selectedCategory !== 'All' || selectedKarat !== 'All' || searchQuery) && (
+                    {(selectedCategory !== 'All' || selectedKarat !== 'All' || selectedMetal !== 'All' || searchQuery) && (
                         <button
                             type="button"
                             onClick={() => {
+                                setSelectedMetal('All')
                                 setSelectedCategory('All')
                                 setSelectedKarat('All')
                                 setSearchQuery('')
@@ -229,16 +280,18 @@ const AdminProductList = () => {
                                 <tr>
                                     <th className="py-3.5 px-5">Design</th>
                                     <th className="py-3.5 px-4">Code</th>
+                                    <th className="py-3.5 px-4">Metal</th>
                                     <th className="py-3.5 px-4">Category</th>
-                                    <th className="py-3.5 px-4">Primary Karat</th>
-                                    <th className="py-3.5 px-4">Available Karats</th>
-                                    <th className="py-3.5 px-4">Net Gold Weight</th>
+                                    <th className="py-3.5 px-4">Purity</th>
+                                    <th className="py-3.5 px-4">Net Weight</th>
                                     <th className="py-3.5 px-5 text-right">Actions</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-100">
                                 {products.map((item) => {
                                     const id = item._id || item.customId || item.id
+                                    const isItemSilver = item.metal === 'Silver'
+
                                     return (
                                         <tr
                                             key={id}
@@ -270,32 +323,33 @@ const AdminProductList = () => {
                                             <td className="py-3.5 px-4 font-mono font-semibold text-gray-700">
                                                 {item.code}
                                             </td>
+                                            <td className="py-3.5 px-4">
+                                                {isItemSilver ? (
+                                                    <span className="bg-slate-700 text-cyan-200 px-2.5 py-0.5 rounded-full text-[10px] font-bold font-mono tracking-wider">
+                                                        SILVER
+                                                    </span>
+                                                ) : (
+                                                    <span className="bg-[#FAF7F2] text-[#d4af37] border border-[#d4af37]/40 px-2.5 py-0.5 rounded-full text-[10px] font-bold font-mono tracking-wider">
+                                                        GOLD
+                                                    </span>
+                                                )}
+                                            </td>
                                             <td className="py-3.5 px-4 text-gray-600">
                                                 <span className="bg-gray-100 px-2 py-0.5 rounded text-[11px]">
                                                     {item.category}
                                                 </span>
                                             </td>
                                             <td className="py-3.5 px-4">
-                                                <span className="bg-[#304037] text-[#d4af37] px-2 py-0.5 rounded text-[11px] font-mono font-bold">
-                                                    {item.karat}
+                                                <span className={`px-2 py-0.5 rounded text-[11px] font-mono font-bold ${
+                                                    isItemSilver
+                                                        ? 'bg-slate-100 text-slate-800'
+                                                        : 'bg-[#304037] text-[#d4af37]'
+                                                }`}>
+                                                    {isItemSilver ? `${item.karat || '925'} Silver` : `${item.karat} Gold`}
                                                 </span>
                                             </td>
-                                            <td className="py-3.5 px-4">
-                                                <div className="flex gap-1 flex-wrap">
-                                                    {(item.availableKarats || ['18KT', '20KT', '22KT']).map(
-                                                        (kt) => (
-                                                            <span
-                                                                key={kt}
-                                                                className="bg-[#FAF7F2] border border-[#EDE8E0] text-gray-700 px-1.5 py-0.2 rounded text-[10px] font-mono"
-                                                            >
-                                                                {kt}
-                                                            </span>
-                                                        )
-                                                    )}
-                                                </div>
-                                            </td>
-                                            <td className="py-3.5 px-4 font-mono text-gray-600">
-                                                {item.specifications?.netGoldWeight || '4.550 gm'}
+                                            <td className="py-3.5 px-4 font-mono text-gray-600 text-[11px]">
+                                                {item.specifications?.netGoldWeight || item.specifications?.grossWeight || '-'}
                                             </td>
                                             <td className="py-3.5 px-5 text-right">
                                                 <div className="flex items-center justify-end gap-1.5">

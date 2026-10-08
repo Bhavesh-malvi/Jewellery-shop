@@ -196,6 +196,24 @@ const Navbar = () => {
                         <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold transition-all duration-300 group-hover:w-full rounded-full" />
                     </NavLink>
 
+                    {/* Dedicated 925 Silver Navigation Link */}
+                    <NavLink
+                        to="/catalogue?metal=silver"
+                        className={({ isActive }) =>
+                            `relative py-2 text-sm uppercase tracking-wider font-roboto font-medium transition-colors duration-200 group flex items-center gap-1.5 ${
+                                location.search.includes('metal=silver')
+                                    ? 'text-white'
+                                    : 'text-gray-200 hover:text-white'
+                            }`
+                        }
+                    >
+                        <span>925 Silver</span>
+                        <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-white/15 text-slate-100 border border-white/30 font-semibold">
+                            925
+                        </span>
+                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-slate-300 transition-all duration-300 group-hover:w-full rounded-full" />
+                    </NavLink>
+
                     <NavLink
                         to="/about"
                         className={({ isActive }) =>
@@ -373,6 +391,18 @@ const Navbar = () => {
                                 }
                             >
                                 Collections
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                to="/catalogue?metal=silver"
+                                onClick={() => setIsMenuOpen(false)}
+                                className="flex items-center justify-between py-2 text-base uppercase tracking-wider font-roboto font-medium text-slate-200 hover:text-white transition-colors"
+                            >
+                                <span>925 Silver Collection</span>
+                                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/15 text-slate-100 border border-white/30">
+                                    Hallmarked
+                                </span>
                             </NavLink>
                         </li>
                         <li>

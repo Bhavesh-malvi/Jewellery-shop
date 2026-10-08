@@ -43,6 +43,7 @@ const AdminProductForm = () => {
     const [formData, setFormData] = useState({
         name: '',
         code: '',
+        metal: 'Gold',
         category: 'Rings',
         karat: '22K',
         availableKarats: ['18KT', '20KT', '22KT'],
@@ -73,7 +74,7 @@ const AdminProductForm = () => {
         inStock: true,
     })
 
-    const categories = [
+    const goldCategories = [
         'Rings',
         'Earrings',
         'Necklaces',
@@ -81,10 +82,30 @@ const AdminProductForm = () => {
         'Bangles',
         'Pendants',
         'Chains',
+        'Kadas',
     ]
 
-    const karatOptions = ['22K', '20K', '18K', '14K']
-    const selectableKarats = ['14KT', '18KT', '20KT', '22KT'] // 24KT strictly excluded
+    const silverCategories = [
+        'Payal',
+        'Bichhiya',
+        'Silver Chains',
+        'Bracelets',
+        'Rings',
+        'Pooja & Idols',
+        'Utensils & Coins',
+        'Kadas',
+    ]
+
+    const goldKaratOptions = ['22K', '20K', '18K', '14K']
+    const goldSelectableKarats = ['14KT', '18KT', '20KT', '22KT']
+
+    const silverKaratOptions = ['925', '999', 'Traditional']
+    const silverSelectableKarats = ['925 Sterling', '999 Fine Pure', 'Antique / Oxidised']
+
+    const isSilver = formData.metal === 'Silver'
+    const categories = isSilver ? silverCategories : goldCategories
+    const karatOptions = isSilver ? silverKaratOptions : goldKaratOptions
+    const selectableKarats = isSilver ? silverSelectableKarats : goldSelectableKarats
 
     useEffect(() => {
         if (!isEditMode) return
@@ -94,15 +115,24 @@ const AdminProductForm = () => {
                 const res = await api.get(`/products/${id}`)
                 if (res.data?.success && res.data.data) {
                     const p = res.data.data
+                    const pMetal = p.metal || 'Gold'
                     setFormData({
                         name: p.name || '',
                         code: p.code || '',
-                        category: p.category || 'Rings',
-                        karat: p.karat || '22K',
-                        availableKarats: (p.availableKarats || ['18KT', '20KT', '22KT']).filter(
-                            (k) => k !== '24KT' && k !== '24K'
-                        ),
-                        purity: p.purity || `${p.karat || '22K'} Hallmarked Gold`,
+                        metal: pMetal,
+                        category: p.category || (pMetal === 'Silver' ? 'Payal' : 'Rings'),
+                        karat: p.karat || (pMetal === 'Silver' ? '925' : '22K'),
+                        availableKarats:
+                            p.availableKarats && p.availableKarats.length > 0
+                                ? p.availableKarats
+                                : pMetal === 'Silver'
+                                ? ['925 Sterling', '999 Fine Pure']
+                                : ['18KT', '20KT', '22KT'],
+                        purity:
+                            p.purity ||
+                            (pMetal === 'Silver'
+                                ? '925 BIS Hallmarked Silver'
+                                : `${p.karat || '22K'} Hallmarked Gold`),
                         tag: p.tag || '',
                         shortDescription: p.shortDescription || '',
                         description: p.description || '',
@@ -523,6 +553,84 @@ const AdminProductForm = () => {
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {/* Metal Type Selector (Gold vs Silver) */}
+                        <div className="sm:col-span-2 bg-[#FAF7F2] p-4 rounded-xl border border-[#d4af37]/30">
+                            <label className="block text-xs font-bold text-[#304037] uppercase tracking-wider mb-2.5">
+                                Select Jewellery Metal Type *
+                            </label>
+                            <div className="grid grid-cols-2 gap-3">
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        setFormData((prev) => ({
+                                            ...prev,
+                                            metal: 'Gold',
+                                            category: 'Rings',
+                                            karat: '22K',
+                                            availableKarats: ['18KT', '20KT', '22KT'],
+                                            purity: '22K Hallmarked Gold',
+                                            specs: '22K BIS Hallmarked Yellow Gold',
+                                            specifications: {
+                                                ...prev.specifications,
+                                                goldPurity: '22K (916 BIS Hallmark)',
+                                                hallmarkCertification:
+                                                    'BIS 916 Hallmark with Unique Laser HUID Stamp',
+                                                metalColor: 'Traditional Warm Yellow Gold',
+                                            },
+                                            highlights: [
+                                                'Crafted with high purity BIS hallmarked gold.',
+                                                'Comfort-fit finish suitable for daily & celebration wear.',
+                                                'Laser HUID stamped with verifiable purity certification.',
+                                            ],
+                                        }))
+                                    }}
+                                    className={`py-3 px-4 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 border-2 transition-all cursor-pointer ${
+                                        formData.metal === 'Gold'
+                                            ? 'bg-[#304037] text-[#f3e5ab] border-[#d4af37] shadow-md'
+                                            : 'bg-white text-gray-600 border-gray-200 hover:border-amber-300'
+                                    }`}
+                                >
+                                    <span className="text-base text-[#d4af37]">✦</span>
+                                    <span>Gold Jewellery (BIS 916)</span>
+                                </button>
+
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        setFormData((prev) => ({
+                                            ...prev,
+                                            metal: 'Silver',
+                                            category: 'Payal',
+                                            karat: '925',
+                                            availableKarats: ['925 Sterling', '999 Fine Pure'],
+                                            purity: '925 BIS Hallmarked Silver',
+                                            specs: '925 BIS Hallmarked Sterling Silver',
+                                            specifications: {
+                                                ...prev.specifications,
+                                                goldPurity: '925 Sterling Silver (92.5% Pure)',
+                                                hallmarkCertification:
+                                                    'BIS 925 Hallmark Certification',
+                                                metalColor: 'Bright White Polished Silver',
+                                            },
+                                            highlights: [
+                                                'Crafted with 100% genuine certified 925 Sterling Silver.',
+                                                'Traditional silver casting with anti-tarnish protective polish.',
+                                                'BIS hallmark stamped with guaranteed purity certification.',
+                                            ],
+                                        }))
+                                    }}
+                                    className={`py-3 px-4 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 border-2 transition-all cursor-pointer ${
+                                        formData.metal === 'Silver'
+                                            ? 'bg-slate-800 text-cyan-200 border-cyan-400 shadow-md'
+                                            : 'bg-white text-gray-600 border-gray-200 hover:border-slate-400'
+                                    }`}
+                                >
+                                    <span className="text-base text-cyan-300">✦</span>
+                                    <span>Silver Collection (925 Hallmark)</span>
+                                </button>
+                            </div>
+                        </div>
+
                         {/* Name */}
                         <div className="sm:col-span-2">
                             <label className="block text-xs font-medium text-gray-700 mb-1">
@@ -535,7 +643,11 @@ const AdminProductForm = () => {
                                 onChange={(e) =>
                                     setFormData({ ...formData, name: e.target.value })
                                 }
-                                placeholder="e.g. Royal Solitaire Diamond Ring"
+                                placeholder={
+                                    isSilver
+                                        ? 'e.g. Royal Bridal Chandi Payal with Ghunghroo'
+                                        : 'e.g. Royal Solitaire Diamond Ring'
+                                }
                                 className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:border-[#304037] focus:ring-1 focus:ring-[#304037] outline-none text-xs"
                             />
                         </div>
@@ -552,7 +664,7 @@ const AdminProductForm = () => {
                                 onChange={(e) =>
                                     setFormData({ ...formData, code: e.target.value })
                                 }
-                                placeholder="e.g. RJ-RNG-101"
+                                placeholder={isSilver ? 'e.g. RJ-SLV-101' : 'e.g. RJ-RNG-101'}
                                 className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:border-[#304037] focus:ring-1 focus:ring-[#304037] outline-none text-xs font-mono uppercase"
                             />
                         </div>
@@ -577,10 +689,10 @@ const AdminProductForm = () => {
                             </select>
                         </div>
 
-                        {/* Primary Karat */}
+                        {/* Primary Karat / Purity */}
                         <div>
                             <label className="block text-xs font-medium text-gray-700 mb-1">
-                                Primary Gold Karat *
+                                {isSilver ? 'Silver Purity Grade *' : 'Primary Gold Karat *'}
                             </label>
                             <select
                                 value={formData.karat}
@@ -588,14 +700,22 @@ const AdminProductForm = () => {
                                     setFormData({
                                         ...formData,
                                         karat: e.target.value,
-                                        purity: `${e.target.value} Hallmarked Gold`,
+                                        purity: isSilver
+                                            ? `${e.target.value} BIS Hallmarked Silver`
+                                            : `${e.target.value} Hallmarked Gold`,
                                     })
                                 }
                                 className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 bg-white text-xs outline-none focus:border-[#304037] font-mono font-semibold"
                             >
                                 {karatOptions.map((k) => (
                                     <option key={k} value={k}>
-                                        {k} Gold
+                                        {isSilver
+                                            ? k === '925'
+                                                ? '925 (Sterling Silver)'
+                                                : k === '999'
+                                                ? '999 (Pure Silver / Coins)'
+                                                : 'Traditional Silver'
+                                            : `${k} Gold`}
                                     </option>
                                 ))}
                             </select>
@@ -748,14 +868,16 @@ const AdminProductForm = () => {
                     <div className="flex items-center gap-2 border-b border-gray-100 pb-3">
                         <span className="w-2.5 h-2.5 rounded-full bg-[#d4af37]"></span>
                         <h2 className="text-sm font-bold uppercase tracking-wider text-[#304037]">
-                            3. Gold & Stone Specifications (Additional Information Tab)
+                            {isSilver
+                                ? '3. Silver & Stone Specifications (Additional Information Tab)'
+                                : '3. Gold & Stone Specifications (Additional Information Tab)'}
                         </h2>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label className="block text-xs font-medium text-gray-700 mb-1">
-                                Gold Purity Grade
+                                {isSilver ? 'Silver Purity Grade' : 'Gold Purity Grade'}
                             </label>
                             <input
                                 type="text"
@@ -769,14 +891,18 @@ const AdminProductForm = () => {
                                         },
                                     })
                                 }
-                                placeholder="e.g. 22K (916 BIS Hallmark)"
+                                placeholder={
+                                    isSilver
+                                        ? 'e.g. 925 (92.5% Sterling Silver)'
+                                        : 'e.g. 22K (916 BIS Hallmark)'
+                                }
                                 className="w-full px-3.5 py-2 rounded-xl border border-gray-300 focus:border-[#304037] outline-none text-xs"
                             />
                         </div>
 
                         <div>
                             <label className="block text-xs font-medium text-gray-700 mb-1">
-                                Hallmark Standard & Laser HUID
+                                Hallmark Standard & Certification
                             </label>
                             <input
                                 type="text"
@@ -790,14 +916,18 @@ const AdminProductForm = () => {
                                         },
                                     })
                                 }
-                                placeholder="e.g. BIS 916 Hallmark with Unique Laser HUID Stamp"
+                                placeholder={
+                                    isSilver
+                                        ? 'e.g. BIS 925 Hallmark Certification'
+                                        : 'e.g. BIS 916 Hallmark with Unique Laser HUID Stamp'
+                                }
                                 className="w-full px-3.5 py-2 rounded-xl border border-gray-300 focus:border-[#304037] outline-none text-xs"
                             />
                         </div>
 
                         <div>
                             <label className="block text-xs font-medium text-gray-700 mb-1">
-                                Net Gold Weight
+                                {isSilver ? 'Net Silver Weight' : 'Net Gold Weight'}
                             </label>
                             <input
                                 type="text"
@@ -811,7 +941,11 @@ const AdminProductForm = () => {
                                         },
                                     })
                                 }
-                                placeholder="e.g. 5.500 gm solid gold"
+                                placeholder={
+                                    isSilver
+                                        ? 'e.g. 15.500 gm pure silver'
+                                        : 'e.g. 5.500 gm solid gold'
+                                }
                                 className="w-full px-3.5 py-2 rounded-xl border border-gray-300 focus:border-[#304037] outline-none text-xs font-mono"
                             />
                         </div>
