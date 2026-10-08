@@ -155,6 +155,25 @@ const Catalogue = () => {
         }
     }, [searchParam])
 
+    // Dynamic SEO Catalogue Page Title
+    useEffect(() => {
+        const parts = []
+        if (selectedKarat && selectedKarat !== 'All') parts.push(selectedKarat)
+        if (selectedCategory && selectedCategory !== 'All') parts.push(selectedCategory)
+        if (selectedMetal && selectedMetal !== 'All') parts.push(selectedMetal)
+        if (searchQuery && searchQuery.trim()) parts.push(`"${searchQuery.trim()}"`)
+
+        if (parts.length > 0) {
+            document.title = `${parts.join(' ')} Jewellery Collection | Rangoli Jewellers Ahmedabad`
+        } else {
+            document.title = 'Gold & 925 Silver Jewellery Catalogue | Rangoli Jewellers Ahmedabad'
+        }
+
+        return () => {
+            document.title = 'Rangoli Jewellers | 22K Hallmark Gold & 925 Silver Showroom in Narol, Ahmedabad'
+        }
+    }, [selectedMetal, selectedCategory, selectedKarat, searchQuery])
+
     const handleMetalSelect = (m) => {
         setSelectedMetal(m)
         setSelectedCategory('All')

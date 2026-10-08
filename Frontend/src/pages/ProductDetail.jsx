@@ -138,6 +138,56 @@ const ProductDetail = () => {
         fetchProductFromApi()
     }, [id])
 
+    // Dynamic SEO Product Title & Google Product Schema (JSON-LD)
+    useEffect(() => {
+        if (product) {
+            const metalPurity = product.metal === 'Silver' ? (product.karat || '925 Silver') : (product.karat || '22K Gold')
+            document.title = `${product.name} (${metalPurity}) | Rangoli Jewellers Ahmedabad`
+
+            let schemaScript = document.getElementById('product-schema')
+            if (!schemaScript) {
+                schemaScript = document.createElement('script')
+                schemaScript.id = 'product-schema'
+                schemaScript.type = 'application/ld+json'
+                document.head.appendChild(schemaScript)
+            }
+            const productImages = Array.isArray(product.images) && product.images.length > 0 
+                ? product.images 
+                : (product.image ? [product.image] : [])
+
+            const productSchema = {
+                '@context': 'https://schema.org',
+                '@type': 'Product',
+                'name': product.name,
+                'image': productImages,
+                'description': product.description || `${product.name} mastercrafted in ${product.metal} by Rangoli Jewellers Narol, Ahmedabad.`,
+                'sku': product.customId || product._id || product.id,
+                'brand': {
+                    '@type': 'Brand',
+                    'name': 'Rangoli Jewellers',
+                },
+                'offers': {
+                    '@type': 'Offer',
+                    'url': typeof window !== 'undefined' ? window.location.href : '',
+                    'priceCurrency': 'INR',
+                    'price': product.price || 0,
+                    'availability': 'https://schema.org/InStock',
+                    'seller': {
+                        '@type': 'JewelryStore',
+                        'name': 'Rangoli Jewellers',
+                    },
+                },
+            }
+            schemaScript.textContent = JSON.stringify(productSchema)
+
+            return () => {
+                const s = document.getElementById('product-schema')
+                if (s) s.remove()
+                document.title = 'Rangoli Jewellers | 22K Hallmark Gold & 925 Silver Showroom in Narol, Ahmedabad'
+            }
+        }
+    }, [product])
+
     // Load related products from database
     useEffect(() => {
         const loadRelated = async () => {
