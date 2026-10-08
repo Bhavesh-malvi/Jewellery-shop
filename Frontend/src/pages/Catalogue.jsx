@@ -1,12 +1,40 @@
 import React, { useState, useEffect } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { GoDotFill } from 'react-icons/go'
 import { FaWhatsapp, FaRegHeart, FaHeart, FaMagnifyingGlass } from 'react-icons/fa6'
 import { BsBagPlus, BsBagCheck } from 'react-icons/bs'
 import { IoCloseOutline } from 'react-icons/io5'
 import { useEnquiry } from '../context/EnquiryContext'
+import api from '../services/api'
 
 const categories = ['All', 'Rings', 'Earrings', 'Necklaces', 'Bracelets', 'Bangles', 'Pendants', 'Chains']
+
+const karats = [
+    {
+        id: 'All',
+        label: 'All Karats',
+        hallmark: 'All Purity',
+        desc: 'Browse entire collection',
+    },
+    {
+        id: '22K',
+        label: '22K Gold',
+        hallmark: 'BIS 916',
+        desc: '91.6% Pure • Bridal & Royal Heritage',
+    },
+    {
+        id: '20K',
+        label: '20K Gold',
+        hallmark: 'BIS 833',
+        desc: '83.3% Pure • Traditional & Antique Art',
+    },
+    {
+        id: '18K',
+        label: '18K Gold',
+        hallmark: 'BIS 750',
+        desc: '75.0% Fine • Diamond Solitaires & Modern',
+    },
+]
 
 const normalizeCategory = (catName) => {
     if (!catName) return 'All'
@@ -26,6 +54,16 @@ const normalizeCategory = (catName) => {
     return matched || 'All'
 }
 
+const normalizeKarat = (karatVal) => {
+    if (!karatVal) return 'All'
+    const clean = karatVal.trim().toUpperCase()
+    if (clean === 'ALL') return 'All'
+    if (clean.includes('22')) return '22K'
+    if (clean.includes('20')) return '20K'
+    if (clean.includes('18')) return '18K'
+    return 'All'
+}
+
 const Catalogue = () => {
     const {
         addToEnquiry,
@@ -38,10 +76,11 @@ const Catalogue = () => {
     const [searchParams, setSearchParams] = useSearchParams()
     const categoryParam = searchParams.get('category')
     const searchParam = searchParams.get('search')
+    const karatParam = searchParams.get('karat') || searchParams.get('purity')
 
     const [selectedCategory, setSelectedCategory] = useState(() => normalizeCategory(categoryParam))
+    const [selectedKarat, setSelectedKarat] = useState(() => normalizeKarat(karatParam))
     const [searchQuery, setSearchQuery] = useState(() => searchParam || '')
-    const [selectedPurity, setSelectedPurity] = useState('All')
     const [wishlist, setWishlist] = useState([])
 
     useEffect(() => {
@@ -53,215 +92,18 @@ const Catalogue = () => {
     }, [categoryParam])
 
     useEffect(() => {
+        if (karatParam) {
+            setSelectedKarat(normalizeKarat(karatParam))
+        } else {
+            setSelectedKarat('All')
+        }
+    }, [karatParam])
+
+    useEffect(() => {
         if (searchParam !== null && searchParam !== undefined) {
             setSearchQuery(searchParam)
         }
     }, [searchParam])
-
-    const purities = ['All', '22K Hallmarked Gold', '18K Diamond']
-
-    const allDesigns = [
-        {
-            id: 1,
-            code: 'RJ-RNG-101',
-            category: 'Rings',
-            purity: '18K Diamond',
-            tag: 'Best Seller',
-            name: 'Royal Solitaire Diamond Ring',
-            specs: '18K Rose Gold • VVS-EF Solitaire Diamond',
-            img: 'https://html.awaikenthemes.com/cignet/images/product-image-1.png',
-        },
-        {
-            id: 2,
-            code: 'RJ-EAR-202',
-            category: 'Earrings',
-            purity: '22K Hallmarked Gold',
-            tag: 'New Design',
-            name: 'Golden Sparkle Drop Earrings',
-            specs: '22K BIS Hallmarked Yellow Gold • Handcrafted',
-            img: 'https://html.awaikenthemes.com/cignet/images/product-image-2.png',
-        },
-        {
-            id: 3,
-            code: 'RJ-NCK-303',
-            category: 'Necklaces',
-            purity: '18K Diamond',
-            tag: '18K Fine',
-            name: 'Diamond Celestial Halo Necklace',
-            specs: '18K White Gold • Certified Brilliant Diamond',
-            img: 'https://html.awaikenthemes.com/cignet/images/product-image-3.png',
-        },
-        {
-            id: 4,
-            code: 'RJ-RNG-104',
-            category: 'Rings',
-            purity: '18K Diamond',
-            tag: 'Bespoke',
-            name: 'Timeless Emerald Eternity Ring',
-            specs: '18K Yellow Gold • Natural Colombian Emerald',
-            img: 'https://html.awaikenthemes.com/cignet/images/product-image-4.png',
-        },
-        {
-            id: 5,
-            code: 'RJ-BRC-505',
-            category: 'Bracelets',
-            purity: '22K Hallmarked Gold',
-            tag: 'Signature',
-            name: 'Artisan Lustre Gold Bangle',
-            specs: '22K Hallmarked Gold • Antique Floral Filigree',
-            img: 'https://html.awaikenthemes.com/cignet/images/product-image-5.png',
-        },
-        {
-            id: 6,
-            code: 'RJ-RNG-106',
-            category: 'Rings',
-            purity: '18K Diamond',
-            tag: 'Limited',
-            name: 'Vintage Floral Diamond Band',
-            specs: '18K Dual-Tone Gold • Micro Pave Diamonds',
-            img: 'https://html.awaikenthemes.com/cignet/images/product-image-6.png',
-        },
-        {
-            id: 7,
-            code: 'RJ-NCK-307',
-            category: 'Necklaces',
-            purity: '22K Hallmarked Gold',
-            tag: 'Bridal Heritage',
-            name: 'Grandeur Pearl Choker Necklace',
-            specs: '22K Yellow Gold • Handpicked South Sea Pearls',
-            img: 'https://html.awaikenthemes.com/cignet/images/product-image-7.png',
-        },
-        {
-            id: 8,
-            code: 'RJ-EAR-208',
-            category: 'Earrings',
-            purity: '18K Diamond',
-            tag: 'Trending',
-            name: 'Graceful Diamond Hoop Studs',
-            specs: '18K Rose Gold • Brilliant Cut Solitaires',
-            img: 'https://html.awaikenthemes.com/cignet/images/product-image-8.png',
-        },
-        {
-            id: 9,
-            code: 'RJ-RNG-109',
-            category: 'Rings',
-            purity: '22K Hallmarked Gold',
-            tag: 'Traditional',
-            name: 'Mayur Peacock Gold Signet Ring',
-            specs: '22K BIS 916 Hallmark Yellow Gold',
-            img: 'https://html.awaikenthemes.com/cignet/images/top-selling-item-image-5.jpg',
-        },
-        {
-            id: 10,
-            code: 'RJ-EAR-210',
-            category: 'Earrings',
-            purity: '22K Hallmarked Gold',
-            tag: 'Jhumka',
-            name: 'Royal Heritage Chandbali Jhumkas',
-            specs: '22K Gold • Precious Enamel Meenakari Art',
-            img: 'https://html.awaikenthemes.com/cignet/images/top-selling-item-image-1.jpg',
-        },
-        {
-            id: 11,
-            code: 'RJ-PND-411',
-            category: 'Pendants',
-            purity: '18K Diamond',
-            tag: 'Modern',
-            name: 'Infinity Heart Diamond Pendant',
-            specs: '18K Gold • Certified VVS Diamond Centre',
-            img: 'https://html.awaikenthemes.com/cignet/images/top-selling-item-image-3.jpg',
-        },
-        {
-            id: 12,
-            code: 'RJ-BRC-512',
-            category: 'Bracelets',
-            purity: '22K Hallmarked Gold',
-            tag: 'Men Special',
-            name: 'Imperial Sovereign Kada',
-            specs: '22K Heavy Hallmark Gold • Solid Carved Finish',
-            img: 'https://html.awaikenthemes.com/cignet/images/top-selling-item-image-4.jpg',
-        },
-        {
-            id: 13,
-            code: 'RJ-EAR-213',
-            category: 'Earrings',
-            purity: '18K Diamond',
-            tag: 'Exclusive',
-            name: 'Solitaire Floral Diamond Studs',
-            specs: '18K Yellow Gold • Certified VVS-EF Diamonds',
-            img: 'https://html.awaikenthemes.com/cignet/images/product-image-2.png',
-        },
-        {
-            id: 14,
-            code: 'RJ-EAR-214',
-            category: 'Earrings',
-            purity: '22K Hallmarked Gold',
-            tag: 'Heritage',
-            name: 'Kundan Polki Royal Chandelier Earrings',
-            specs: '22K Yellow Gold • Natural Uncut Polki & Emerald Beads',
-            img: 'https://html.awaikenthemes.com/cignet/images/top-selling-item-image-1.jpg',
-        },
-        {
-            id: 15,
-            code: 'RJ-CHN-715',
-            category: 'Chains',
-            purity: '22K Hallmarked Gold',
-            tag: 'Classic',
-            name: 'Imperial BIS Solid Gold Rope Chain',
-            specs: '22K BIS 916 Hallmark Gold • Handcrafted Italian Weave',
-            img: 'https://html.awaikenthemes.com/cignet/images/top-selling-item-image-6.jpg',
-        },
-        {
-            id: 16,
-            code: 'RJ-CHN-716',
-            category: 'Chains',
-            purity: '18K Diamond',
-            tag: 'Modern Lux',
-            name: 'Italian Diamond-Faceted Curb Link Chain',
-            specs: '18K Yellow Gold • Precision Diamond Bevel Edge',
-            img: 'https://html.awaikenthemes.com/cignet/images/top-selling-item-image-6.jpg',
-        },
-        {
-            id: 17,
-            code: 'RJ-BNG-617',
-            category: 'Bangles',
-            purity: '22K Hallmarked Gold',
-            tag: 'Bridal Set',
-            name: 'Royal Rajasthani Meenakari Kada Bangles',
-            specs: '22K Hallmarked Gold • Pair of Traditional Hand-Carved Kadas',
-            img: 'https://html.awaikenthemes.com/cignet/images/top-selling-item-image-4.jpg',
-        },
-        {
-            id: 18,
-            code: 'RJ-BNG-618',
-            category: 'Bangles',
-            purity: '18K Diamond',
-            tag: 'Signature',
-            name: 'Aura Brilliant Diamond Pavé Sleek Bangle',
-            specs: '18K Rose Gold • Continuous Solitaire Diamond Line',
-            img: 'https://html.awaikenthemes.com/cignet/images/product-image-5.png',
-        },
-        {
-            id: 19,
-            code: 'RJ-PND-419',
-            category: 'Pendants',
-            purity: '22K Hallmarked Gold',
-            tag: 'Temple Art',
-            name: 'Sacred Lakshmi Nakshi Gold Pendant',
-            specs: '22K Antique Hallmarked Gold • Hand-engraved Nakshi Detailing',
-            img: 'https://html.awaikenthemes.com/cignet/images/top-selling-item-image-3.jpg',
-        },
-        {
-            id: 20,
-            code: 'RJ-NCK-320',
-            category: 'Necklaces',
-            purity: '22K Hallmarked Gold',
-            tag: 'Royal Bridal',
-            name: 'Imperial Polki Kundan Maharani Necklace Set',
-            specs: '22K Gold • Handcrafted Jadau Cluster with Matching Earrings',
-            img: 'https://html.awaikenthemes.com/cignet/images/top-selling-item-image-2.jpg',
-        },
-    ]
 
     const toggleWishlist = (id) => {
         setWishlist((prev) =>
@@ -280,12 +122,27 @@ const Catalogue = () => {
         setSearchParams(nextParams, { replace: true })
     }
 
+    const handleKaratSelect = (k) => {
+        setSelectedKarat(k)
+        const nextParams = new URLSearchParams(searchParams)
+        if (k === 'All') {
+            nextParams.delete('karat')
+            nextParams.delete('purity')
+        } else {
+            nextParams.set('karat', k.toLowerCase())
+            nextParams.delete('purity')
+        }
+        setSearchParams(nextParams, { replace: true })
+    }
+
     const handleResetFilters = () => {
         setSelectedCategory('All')
-        setSelectedPurity('All')
+        setSelectedKarat('All')
         setSearchQuery('')
         const nextParams = new URLSearchParams(searchParams)
         nextParams.delete('category')
+        nextParams.delete('karat')
+        nextParams.delete('purity')
         nextParams.delete('search')
         setSearchParams(nextParams, { replace: true })
     }
@@ -301,14 +158,39 @@ const Catalogue = () => {
         setSearchParams(nextParams, { replace: true })
     }
 
-    const filteredDesigns = allDesigns.filter((item) => {
+    const [dbProducts, setDbProducts] = useState([])
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        const loadProducts = async () => {
+            try {
+                setLoading(true)
+                const res = await api.get('/products')
+                if (res.data?.success && Array.isArray(res.data.data)) {
+                    setDbProducts(res.data.data)
+                }
+            } catch (err) {
+                console.error('Failed to load products from database:', err)
+            } finally {
+                setLoading(false)
+            }
+        }
+        loadProducts()
+    }, [])
+
+    const currentCatalog = dbProducts
+
+    const filteredDesigns = currentCatalog.filter((item) => {
         const matchesCategory =
             selectedCategory === 'All' ||
             item.category.toLowerCase() === selectedCategory.toLowerCase() ||
             item.category.toLowerCase().replace(/s$/, '') === selectedCategory.toLowerCase().replace(/s$/, '')
 
-        const matchesPurity =
-            selectedPurity === 'All' || item.purity.toLowerCase() === selectedPurity.toLowerCase()
+        const matchesKarat =
+            selectedKarat === 'All' ||
+            item.karat === selectedKarat ||
+            (item.purity && item.purity.toLowerCase().includes(selectedKarat.toLowerCase())) ||
+            (item.specs && item.specs.toLowerCase().includes(selectedKarat.toLowerCase()))
 
         const searchLower = searchQuery.toLowerCase().trim()
         const matchesSearch =
@@ -316,9 +198,10 @@ const Catalogue = () => {
             item.name.toLowerCase().includes(searchLower) ||
             item.code.toLowerCase().includes(searchLower) ||
             item.specs.toLowerCase().includes(searchLower) ||
-            item.category.toLowerCase().includes(searchLower)
+            item.category.toLowerCase().includes(searchLower) ||
+            (item.karat && item.karat.toLowerCase().includes(searchLower))
 
-        return matchesCategory && matchesPurity && matchesSearch
+        return matchesCategory && matchesKarat && matchesSearch
     })
 
     return (
@@ -366,9 +249,66 @@ const Catalogue = () => {
 
             {/* Filter Section */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+                {/* Shop by Gold Karat Selector */}
+                <div className="bg-white rounded-2xl p-4 sm:p-6 border border-[#EDE8E0] shadow-sm space-y-3.5">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-100 pb-3">
+                        <div className="space-y-0.5">
+                            <div className="flex items-center gap-2">
+                                <span className="text-[#d4af37] text-sm">✦</span>
+                                <h2 className="text-base sm:text-lg font-playfair font-medium text-primary">
+                                    Shop by Gold Karat (Purity)
+                                </h2>
+                            </div>
+                            <p className="text-xs text-gray-500 font-roboto">
+                                Select purity grade: 22K (916 BIS Hallmark), 20K (833 BIS Traditional), or 18K (750 Fine Diamonds)
+                            </p>
+                        </div>
+                        {selectedKarat !== 'All' && (
+                            <button
+                                onClick={() => handleKaratSelect('All')}
+                                className="text-xs text-[#d4af37] hover:underline font-roboto font-medium self-start sm:self-auto cursor-pointer"
+                            >
+                                Show All Karats
+                            </button>
+                        )}
+                    </div>
+
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5">
+                        {karats.map((k) => {
+                            const isSelected = selectedKarat === k.id
+                            return (
+                                <button
+                                    key={k.id}
+                                    onClick={() => handleKaratSelect(k.id)}
+                                    className={`relative p-3.5 rounded-xl border text-left transition-all duration-300 cursor-pointer group flex flex-col justify-between gap-1.5 ${
+                                        isSelected
+                                            ? 'bg-[#304037] text-white border-[#d4af37] shadow-md ring-1 ring-[#d4af37]'
+                                            : 'bg-[#FAFAF8] text-gray-700 border-gray-200 hover:border-[#d4af37]/50 hover:bg-white'
+                                    }`}
+                                >
+                                    <div className="flex items-center justify-between gap-2">
+                                        <span className={`font-roboto font-bold text-sm tracking-wide ${isSelected ? 'text-[#f3e5ab]' : 'text-primary'}`}>
+                                            {k.label}
+                                        </span>
+                                        <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold shrink-0 ${
+                                            isSelected ? 'bg-[#d4af37] text-[#1c2922]' : 'bg-gray-200 text-gray-700'
+                                        }`}>
+                                            {k.hallmark}
+                                        </span>
+                                    </div>
+                                    <p className={`text-[11px] font-roboto leading-snug line-clamp-1 ${isSelected ? 'text-gray-300' : 'text-gray-500'}`}>
+                                        {k.desc}
+                                    </p>
+                                </button>
+                            )
+                        })}
+                    </div>
+                </div>
+
                 {/* Category Pills */}
-                <div className="flex flex-wrap items-center justify-between gap-4 border-b border-gray-200 pb-6">
-                    <div className="flex flex-wrap items-center gap-2">
+                <div className="flex flex-wrap items-center justify-between gap-4 border-b border-gray-200 pb-5">
+                    <div className="flex items-center gap-2 flex-wrap">
+                        <span className="text-xs text-gray-500 font-roboto font-medium mr-1 hidden sm:inline">Category:</span>
                         {categories.map((cat) => (
                             <button
                                 key={cat}
@@ -383,30 +323,26 @@ const Catalogue = () => {
                             </button>
                         ))}
                     </div>
-
-                    {/* Purity Filter */}
-                    <div className="flex items-center gap-2 text-xs font-roboto">
-                        <span className="text-gray-500 font-medium">Purity:</span>
-                        <select
-                            value={selectedPurity}
-                            onChange={(e) => setSelectedPurity(e.target.value)}
-                            className="bg-white border border-gray-300 rounded-lg px-3 py-1.5 text-gray-700 text-xs font-roboto focus:outline-none focus:border-[#304037]"
-                        >
-                            {purities.map((p) => (
-                                <option key={p} value={p}>
-                                    {p}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
                 </div>
 
-                {/* Results Count & Active Category Indicator */}
+                {/* Results Count & Active Filter Indicator */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-gray-500 font-roboto">
                     <div className="flex items-center gap-2 flex-wrap">
                         <span>
                             Showing <strong className="text-gray-800">{filteredDesigns.length}</strong> Designs
                         </span>
+                        {selectedKarat !== 'All' && (
+                            <span className="inline-flex items-center gap-1.5 bg-[#d4af37]/15 text-[#304037] px-3 py-0.5 rounded-full font-medium text-[11px] border border-[#d4af37]/30">
+                                <span>Karat: <strong>{selectedKarat} Gold</strong></span>
+                                <button
+                                    onClick={() => handleKaratSelect('All')}
+                                    className="hover:text-red-500 font-bold ml-0.5 cursor-pointer"
+                                    title="Clear karat filter"
+                                >
+                                    ✕
+                                </button>
+                            </span>
+                        )}
                         {selectedCategory !== 'All' && (
                             <span className="inline-flex items-center gap-1.5 bg-[#304037]/10 text-[#304037] px-3 py-0.5 rounded-full font-medium text-[11px] border border-[#304037]/20">
                                 <span>Category: <strong>{selectedCategory}</strong></span>
@@ -432,7 +368,7 @@ const Catalogue = () => {
                             </span>
                         )}
                     </div>
-                    {(selectedCategory !== 'All' || selectedPurity !== 'All' || searchQuery) && (
+                    {(selectedCategory !== 'All' || selectedKarat !== 'All' || searchQuery) && (
                         <button
                             onClick={handleResetFilters}
                             className="text-[#304037] font-medium hover:underline cursor-pointer self-start sm:self-auto"
@@ -443,29 +379,46 @@ const Catalogue = () => {
                 </div>
 
                 {/* Design Grid */}
-                {filteredDesigns.length === 0 ? (
-                    <div className="py-20 text-center space-y-4">
-                        <p className="text-lg font-playfair text-gray-600">No designs match your filter.</p>
-                        <button
-                            onClick={handleResetFilters}
-                            className="px-6 py-2.5 rounded-full bg-[#304037] text-white text-xs font-roboto uppercase tracking-wider cursor-pointer hover:bg-[#233029] transition-colors"
-                        >
-                            View All Designs
-                        </button>
+                {loading ? (
+                    <div className="py-28 text-center space-y-4">
+                        <div className="w-10 h-10 border-2 border-[#d4af37] border-t-transparent rounded-full animate-spin mx-auto"></div>
+                        <p className="text-xs font-semibold uppercase tracking-widest text-[#304037]">
+                            Loading Rangoli Jewellery Designs...
+                        </p>
+                    </div>
+                ) : filteredDesigns.length === 0 ? (
+                    <div className="py-24 text-center space-y-4">
+                        <p className="text-base sm:text-lg font-playfair text-gray-500">
+                            {dbProducts.length === 0
+                                ? 'No designs in catalogue yet.'
+                                : 'No designs match your filter.'}
+                        </p>
+                        {(selectedCategory !== 'All' || selectedKarat !== 'All' || searchQuery) && (
+                            <button
+                                onClick={handleResetFilters}
+                                className="px-6 py-2.5 rounded-full bg-[#304037] text-white text-xs font-roboto uppercase tracking-wider cursor-pointer hover:bg-[#233029] transition-colors"
+                            >
+                                View All Designs
+                            </button>
+                        )}
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-7">
                         {filteredDesigns.map((item) => {
-                            const isWishlisted = wishlist.includes(item.id)
-                            const inBag = isInEnquiry(item.id)
+                            const itemId = item._id || item.customId || item.id
+                            const isWishlisted = wishlist.includes(itemId)
+                            const inBag = isInEnquiry(itemId)
 
                             return (
                                 <div
-                                    key={item.id}
+                                    key={itemId}
                                     className="group relative bg-white rounded-2xl overflow-hidden border border-[#EDE8E0] hover:border-[#d4af37]/60 hover:shadow-xl transition-all duration-500 flex flex-col justify-between"
                                 >
                                     {/* Image Container */}
-                                    <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-[#F9F7F3] flex items-center justify-center p-6">
+                                    <Link
+                                        to={`/product/${itemId}`}
+                                        className="relative h-64 sm:h-72 w-full overflow-hidden bg-[#F9F7F3] flex items-center justify-center p-6 block cursor-pointer"
+                                    >
                                         <img
                                             src={item.img}
                                             alt={item.name}
@@ -474,14 +427,25 @@ const Catalogue = () => {
 
                                         {/* Tag */}
                                         <span className="absolute top-3 left-3 bg-[#304037] text-white text-[10px] font-roboto font-semibold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm">
-                                            {item.tag}
+                                            {item.tag || 'Exclusive'}
+                                        </span>
+
+                                        {/* Karat Badge */}
+                                        <span className="absolute bottom-3 left-3 bg-white/95 backdrop-blur text-primary text-[10px] font-bold font-mono px-2 py-0.5 rounded border border-[#d4af37]/50 shadow-sm flex items-center gap-1">
+                                            <span className="text-[#d4af37]">✦</span>
+                                            <span>{item.karat} Gold</span>
                                         </span>
 
                                         {/* Wishlist Button */}
                                         <button
-                                            onClick={() => toggleWishlist(item.id)}
+                                            type="button"
+                                            onClick={(e) => {
+                                                e.preventDefault()
+                                                e.stopPropagation()
+                                                toggleWishlist(itemId)
+                                            }}
                                             aria-label="Wishlist"
-                                            className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm text-gray-500 hover:text-red-500 hover:bg-white shadow-md flex items-center justify-center transition-all duration-300 cursor-pointer"
+                                            className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm text-gray-500 hover:text-red-500 hover:bg-white shadow-md flex items-center justify-center transition-all duration-300 cursor-pointer z-10"
                                         >
                                             {isWishlisted ? (
                                                 <FaHeart className="text-red-500 text-sm" />
@@ -489,23 +453,31 @@ const Catalogue = () => {
                                                 <FaRegHeart className="text-sm" />
                                             )}
                                         </button>
-                                    </div>
+                                    </Link>
 
                                     {/* Info & Action Buttons */}
                                     <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
                                         <div className="space-y-1">
                                             <div className="flex items-center justify-between text-xs font-roboto">
-                                                <span className="uppercase tracking-widest text-[#d4af37] font-semibold text-[11px]">
-                                                    {item.category}
-                                                </span>
+                                                <div className="flex items-center gap-2">
+                                                    <span className="uppercase tracking-widest text-[#d4af37] font-semibold text-[11px]">
+                                                        {item.category}
+                                                    </span>
+                                                    <span className="bg-[#f4efe6] text-[#304037] text-[10px] font-bold font-mono px-1.5 py-0.2 rounded border border-[#d4af37]/30">
+                                                        {item.karat}
+                                                    </span>
+                                                </div>
                                                 <span className="text-gray-400 font-mono text-[11px]">
                                                     {item.code}
                                                 </span>
                                             </div>
 
-                                            <h3 className="text-base sm:text-lg text-primary font-playfair font-normal leading-snug group-hover:text-[#d4af37] transition-colors line-clamp-1">
+                                            <Link
+                                                to={`/product/${itemId}`}
+                                                className="block text-base sm:text-lg text-primary font-playfair font-normal leading-snug group-hover:text-[#d4af37] transition-colors line-clamp-1 cursor-pointer"
+                                            >
                                                 {item.name}
-                                            </h3>
+                                            </Link>
 
                                             <p className="text-xs text-gray-500 font-roboto font-light">
                                                 {item.specs}
@@ -527,7 +499,7 @@ const Catalogue = () => {
                                             <button
                                                 onClick={() => {
                                                     if (inBag) {
-                                                        removeFromEnquiry(item.id)
+                                                        removeFromEnquiry(itemId)
                                                     } else {
                                                         addToEnquiry(item)
                                                     }

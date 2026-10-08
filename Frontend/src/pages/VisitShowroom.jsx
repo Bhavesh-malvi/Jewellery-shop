@@ -77,17 +77,28 @@ Please confirm the appointment slot. Thank you!`
                                         Showroom Address
                                     </h3>
                                     <p className="text-xs sm:text-sm font-roboto text-gray-600 leading-relaxed">
-                                        Rangoli Jewellers, Rangoli Nagar, Narol, Ahmedabad, Gujarat 382405
+                                        Shop No 14, Pragati One, Nr. Hifi Char Rasta, Narolgam, Ahmedabad, Gujarat 382405
                                     </p>
-                                    <a
-                                        href="https://maps.google.com/?q=Rangoli+Nagar+Narol+Ahmedabad"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-1.5 text-xs text-[#d4af37] font-medium pt-1 hover:underline"
-                                    >
-                                        <IoNavigateCircleOutline className="text-base" />
-                                        <span>Open in Google Maps</span>
-                                    </a>
+                                    <div className="flex items-center gap-3 pt-1">
+                                        <a
+                                            href="https://maps.google.com/?q=22.955048,72.584717"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center gap-1.5 text-xs text-[#d4af37] font-medium hover:underline"
+                                        >
+                                            <IoNavigateCircleOutline className="text-base" />
+                                            <span>Open in Google Maps</span>
+                                        </a>
+                                        <span className="text-gray-300 text-xs">•</span>
+                                        <a
+                                            href="https://www.google.com/maps/dir/?api=1&destination=22.955048,72.584717"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-xs text-[#304037] font-medium hover:underline"
+                                        >
+                                            Directions
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
 
@@ -252,6 +263,98 @@ Please confirm the appointment slot. Thank you!`
                                 ✦ We will instantly confirm your consultation slot on WhatsApp (+91 7340681617).
                             </p>
                         </form>
+                    </div>
+                </div>
+
+                {/* Interactive Google Map Section */}
+                <div className="mt-16 sm:mt-20 space-y-6">
+                    <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-gray-200 pb-5">
+                        <div className="space-y-1.5">
+                            <div className="inline-flex items-center gap-1.5 border border-[#304037]/20 px-3 py-0.5 rounded-full text-xs font-roboto uppercase tracking-widest text-[#304037] bg-[#304037]/5">
+                                <span className="text-[#d4af37]">✦</span>
+                                <span>Interactive Location Map</span>
+                            </div>
+                            <h2 className="text-2xl sm:text-3xl font-playfair font-medium text-primary">
+                                Find Our Showroom on Google Maps
+                            </h2>
+                            <p className="text-xs sm:text-sm font-roboto text-gray-500 max-w-xl">
+                                Located at Shop No 14, Pragati One near Hifi Char Rasta, Narolgam, Ahmedabad. Easy landmark access with dedicated customer parking.
+                            </p>
+                        </div>
+
+                        <div className="flex items-center gap-2.5 shrink-0 flex-wrap">
+                            <a
+                                href="https://www.google.com/maps/dir/?api=1&destination=22.955048,72.584717"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-5 py-2.5 rounded-xl bg-[#304037] hover:bg-[#233029] text-white text-xs font-roboto font-medium tracking-wide flex items-center gap-2 shadow-sm transition-all hover:shadow-md border border-[#304037] hover:border-[#d4af37]"
+                            >
+                                <IoNavigateCircleOutline className="text-base text-[#d4af37]" />
+                                <span>Get Driving Directions</span>
+                            </a>
+                            <a
+                                href="https://maps.google.com/?q=22.955048,72.584717"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-5 py-2.5 rounded-xl bg-white hover:bg-gray-50 text-gray-700 text-xs font-roboto font-medium tracking-wide flex items-center gap-2 border border-gray-300 transition-all hover:border-[#d4af37]"
+                            >
+                                <IoLocationOutline className="text-base text-[#d4af37]" />
+                                <span>Open Fullscreen Map</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    {/* Map Frame Card */}
+                    <div className="bg-white rounded-3xl overflow-hidden border border-[#EDE8E0] shadow-xl hover:shadow-2xl transition-all duration-300">
+                        <div className="relative w-full h-[360px] sm:h-[440px] lg:h-[480px]">
+                            <iframe
+                                title="Rangoli Jewellers Showroom Location Map"
+                                src="https://maps.google.com/maps?q=22.955048,72.584717+(Rangoli+Jewellers+-+Shop+No+14,+Pragati+One,+Narolgam)&t=&z=17&ie=UTF8&iwloc=&output=embed"
+                                width="100%"
+                                height="100%"
+                                style={{ border: 0 }}
+                                allowFullScreen=""
+                                loading="lazy"
+                                referrerPolicy="no-referrer-when-downgrade"
+                                className="w-full h-full"
+                            />
+                        </div>
+
+                        {/* Location Detail Bar Under Map */}
+                        <div className="p-6 bg-[#24312a] text-white border-t border-[#3e5247] flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                            <div className="flex items-start gap-3.5">
+                                <div className="w-10 h-10 rounded-xl bg-[#304037] border border-[#d4af37]/40 flex items-center justify-center text-[#d4af37] text-xl shrink-0 mt-0.5">
+                                    <IoLocationOutline />
+                                </div>
+                                <div>
+                                    <h3 className="text-sm font-playfair font-medium text-[#f3e5ab]">
+                                        Rangoli Jewellers Flagship Store
+                                    </h3>
+                                    <p className="text-xs font-roboto text-gray-300 leading-relaxed mt-0.5">
+                                        Shop No 14, Pragati One, Nr. Hifi Char Rasta, Narolgam, Ahmedabad, Gujarat 382405
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="flex items-center gap-3 w-full md:w-auto">
+                                <a
+                                    href="https://www.google.com/maps/dir/?api=1&destination=22.955048,72.584717"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex-1 md:flex-none text-center px-5 py-2.5 rounded-xl bg-[#d4af37] hover:bg-[#e0be53] text-[#1c2922] text-xs font-roboto font-bold uppercase tracking-wider transition-colors shadow-sm"
+                                >
+                                    Directions on GPS
+                                </a>
+                                <a
+                                    href={`https://wa.me/${whatsappNumber}?text=Namaste%20Rangoli%20Jewellers,%20I%20am%20visiting%20your%20showroom%20at%20Shop%20No%2014,%20Pragati%20One,%20Narolgam.`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex-1 md:flex-none text-center px-4 py-2.5 rounded-xl bg-[#304037] hover:bg-[#1f2a24] text-white border border-[#3e5247] hover:border-[#d4af37] text-xs font-roboto font-medium transition-colors"
+                                >
+                                    WhatsApp Location
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

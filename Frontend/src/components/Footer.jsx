@@ -92,7 +92,10 @@ const Footer = () => {
                         <ul className="space-y-2.5 text-sm font-roboto font-light text-gray-300">
                             {[
                                 { name: 'Home', path: '/' },
-                                { name: 'Catalogue', path: '/catalogue' },
+                                { name: 'All Catalogue', path: '/catalogue' },
+                                { name: '22K Gold (916)', path: '/catalogue?karat=22k' },
+                                { name: '20K Gold (833)', path: '/catalogue?karat=20k' },
+                                { name: '18K Diamond (750)', path: '/catalogue?karat=18k' },
                                 { name: 'Collections', path: '/collections' },
                                 { name: 'Our Story', path: '/about' },
                                 { name: 'Visit Showroom', path: '/contact' },
@@ -143,9 +146,19 @@ const Footer = () => {
                         <div className="space-y-3.5 text-sm font-roboto font-light text-gray-300">
                             <div className="flex items-start gap-3">
                                 <IoLocationOutline className="text-lg text-[#d4af37] shrink-0 mt-0.5" />
-                                <p className="leading-snug">
-                                    Rangoli Jewellers, Rangoli Nagar, Narol, Ahmedabad, Gujarat
-                                </p>
+                                <div>
+                                    <p className="leading-snug">
+                                        Shop No 14, Pragati One, Nr. Hifi Char Rasta, Narolgam, Ahmedabad, Gujarat 382405
+                                    </p>
+                                    <a
+                                        href="https://maps.google.com/?q=22.955048,72.584717"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-block text-[11px] text-[#d4af37] hover:underline pt-1"
+                                    >
+                                        Get Directions on Maps →
+                                    </a>
+                                </div>
                             </div>
 
                             <div className="flex items-center gap-3">
@@ -188,7 +201,7 @@ const Footer = () => {
                         © 2026 <span className="text-[#f3e5ab] font-medium">Rangoli Jewellers</span>. All Rights Reserved. Crafted with Timeless Passion.
                     </p>
 
-                    <div className="flex items-center gap-4 text-[11px] text-gray-400">
+                    <div className="flex items-center gap-4 text-[11px] text-gray-400 flex-wrap justify-center">
                         <span className="flex items-center gap-1 text-[#d4af37]">
                             <span>✦</span> BIS Hallmarked
                         </span>
@@ -198,6 +211,13 @@ const Footer = () => {
                         <span className="flex items-center gap-1 text-[#d4af37]">
                             <span>✦</span> Insured Delivery
                         </span>
+                        <span className="text-gray-600">•</span>
+                        <Link
+                            to="/admin"
+                            className="hover:text-[#d4af37] transition-colors flex items-center gap-1 font-mono text-[10px] text-gray-400"
+                        >
+                            <span>🔐 Admin Portal</span>
+                        </Link>
                     </div>
                 </div>
             </div>
