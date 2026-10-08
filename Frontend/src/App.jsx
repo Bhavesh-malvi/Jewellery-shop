@@ -19,6 +19,9 @@ import AdminProtectedRoute from './components/admin/AdminProtectedRoute'
 import AdminDashboard from './pages/admin/AdminDashboard'
 import AdminProductList from './pages/admin/AdminProductList'
 import AdminProductForm from './pages/admin/AdminProductForm'
+import { PwaProvider } from './context/PwaContext'
+import InstallAppBanner from './components/InstallAppBanner'
+import InstallAppModal from './components/InstallAppModal'
 
 // Public layout wrapper with Store Navbar and Footer
 const PublicLayout = () => {
@@ -26,6 +29,8 @@ const PublicLayout = () => {
         <>
             <Navbar />
             <EnquiryDrawer />
+            <InstallAppBanner />
+            <InstallAppModal />
             <Outlet />
             <Footer />
         </>
@@ -35,9 +40,10 @@ const PublicLayout = () => {
 const App = () => {
     return (
         <AdminAuthProvider>
-            <EnquiryProvider>
-                <BrowserRouter>
-                    <ScrollToTop />
+            <PwaProvider>
+                <EnquiryProvider>
+                    <BrowserRouter>
+                        <ScrollToTop />
                     <Routes>
                         {/* Public Customer Routes */}
                         <Route element={<PublicLayout />}>
@@ -64,7 +70,8 @@ const App = () => {
                     </Routes>
                 </BrowserRouter>
             </EnquiryProvider>
-        </AdminAuthProvider>
+        </PwaProvider>
+    </AdminAuthProvider>
     )
 }
 

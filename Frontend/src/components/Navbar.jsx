@@ -3,13 +3,16 @@ import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { BsBagHeart } from 'react-icons/bs'
 import { IoSearchOutline, IoCloseOutline } from 'react-icons/io5'
 import { HiOutlineBars3, HiXMark, HiChevronDown } from 'react-icons/hi2'
+import { FiSmartphone } from 'react-icons/fi'
 import Logo from '../../public/logo.png'
 import { useEnquiry } from '../context/EnquiryContext'
+import { usePwa } from '../context/PwaContext'
 
 const Navbar = () => {
     const navigate = useNavigate()
     const location = useLocation()
     const { enquiryItems, setIsDrawerOpen } = useEnquiry()
+    const { openQrModal, installApp } = usePwa()
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isSearchOpen, setIsSearchOpen] = useState(false)
     const [searchQuery, setSearchQuery] = useState('')
@@ -272,6 +275,16 @@ const Navbar = () => {
                         )}
                     </div>
 
+                    {/* Download / Install App Button */}
+                    <button
+                        onClick={openQrModal}
+                        title="Download / Install Rangoli App (QR Code)"
+                        className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 hover:bg-[#d4af37]/20 border border-[#d4af37]/40 text-xs font-roboto text-gray-200 hover:text-gold transition-all duration-200 cursor-pointer shadow-xs active:scale-95"
+                    >
+                        <FiSmartphone className="text-sm text-gold shrink-0" />
+                        <span className="font-medium tracking-wide">Install App</span>
+                    </button>
+
                     {/* Enquiry Bag Icon */}
                     <button
                         onClick={() => setIsDrawerOpen(true)}
@@ -408,6 +421,24 @@ const Navbar = () => {
                             >
                                 <BsBagHeart className="text-lg" />
                                 <span>Enquiry Bag ({enquiryItems.length} Items)</span>
+                            </button>
+                        </li>
+
+                        <li className="pt-2">
+                            <button
+                                onClick={() => {
+                                    setIsMenuOpen(false)
+                                    installApp()
+                                }}
+                                className="w-full flex items-center justify-between py-2.5 px-3 rounded-xl bg-white/10 border border-[#d4af37]/40 text-gold text-sm font-roboto font-medium cursor-pointer active:scale-98 transition-transform"
+                            >
+                                <span className="flex items-center gap-2">
+                                    <FiSmartphone className="text-lg" />
+                                    <span>Download App on Phone</span>
+                                </span>
+                                <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-[#d4af37] text-[#1F2B24] font-bold">
+                                    Free PWA
+                                </span>
                             </button>
                         </li>
                     </ul>

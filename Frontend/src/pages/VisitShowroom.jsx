@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { GoDotFill } from 'react-icons/go'
 import { FaWhatsapp } from 'react-icons/fa6'
-import { IoLocationOutline, IoCallOutline, IoMailOutline, IoTimeOutline, IoNavigateCircleOutline } from 'react-icons/io5'
+import { IoLocationOutline, IoCallOutline, IoMailOutline, IoTimeOutline, IoNavigateCircleOutline, IoQrCodeOutline } from 'react-icons/io5'
 import { BsShieldCheck, BsCarFront, BsCupHot } from 'react-icons/bs'
+import { FiSmartphone } from 'react-icons/fi'
 import { useEnquiry } from '../context/EnquiryContext'
+import { usePwa } from '../context/PwaContext'
 
 const VisitShowroom = () => {
     const { whatsappNumber } = useEnquiry()
+    const { openQrModal } = usePwa()
 
     const [formData, setFormData] = useState({
         name: '',
@@ -137,6 +140,35 @@ Please confirm the appointment slot. Thank you!`
                                     </p>
                                 </div>
                             </div>
+                        </div>
+
+                        {/* Showroom Counter QR Standee Card */}
+                        <div className="p-6 rounded-2xl bg-gradient-to-br from-[#F9F7F3] to-[#FAF8F5] border-2 border-[#d4af37]/40 shadow-sm flex items-center justify-between gap-4">
+                            <div className="space-y-1.5 min-w-0">
+                                <span className="text-[10px] uppercase font-mono tracking-widest text-[#d4af37] font-bold">
+                                    Counter QR Code
+                                </span>
+                                <h4 className="text-sm font-playfair font-semibold text-[#1F2B24]">
+                                    Install App on Your Phone
+                                </h4>
+                                <p className="text-xs text-gray-500 font-roboto leading-relaxed">
+                                    Scan QR code with your phone camera to add our catalogue app directly to your home screen.
+                                </p>
+                                <button
+                                    onClick={openQrModal}
+                                    className="pt-1.5 inline-flex items-center gap-1.5 text-xs text-[#304037] font-semibold hover:text-[#d4af37] cursor-pointer group"
+                                >
+                                    <IoQrCodeOutline className="text-sm text-[#d4af37] group-hover:scale-110 transition-transform" />
+                                    <span className="underline underline-offset-2">View QR Code Standee</span>
+                                </button>
+                            </div>
+                            <button
+                                onClick={openQrModal}
+                                className="w-16 h-16 rounded-2xl bg-white p-2.5 border border-[#EDE8E0] shadow-md flex items-center justify-center shrink-0 hover:scale-105 hover:border-[#d4af37] transition-all cursor-pointer group"
+                                title="Click to view full QR code"
+                            >
+                                <IoQrCodeOutline className="text-4xl text-[#304037] group-hover:text-[#d4af37] transition-colors" />
+                            </button>
                         </div>
 
                         {/* In-Store Amenities */}

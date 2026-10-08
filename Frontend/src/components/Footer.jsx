@@ -3,11 +3,14 @@ import { Link } from 'react-router-dom'
 import { FaWhatsapp, FaInstagram, FaFacebookF, FaPinterestP } from 'react-icons/fa6'
 import { IoLocationOutline, IoCallOutline, IoMailOutline, IoTimeOutline } from 'react-icons/io5'
 import { HiArrowRight } from 'react-icons/hi2'
+import { FiSmartphone } from 'react-icons/fi'
 import Logo from '../../public/logo.png'
 import { useEnquiry } from '../context/EnquiryContext'
+import { usePwa } from '../context/PwaContext'
 
 const Footer = () => {
     const { whatsappNumber } = useEnquiry()
+    const { openQrModal } = usePwa()
 
     return (
         <footer className="w-full bg-[#304037] text-white border-t border-[#3e5247] relative">
@@ -56,6 +59,21 @@ const Footer = () => {
                                     <HiArrowRight />
                                 </span>
                             </a>
+
+                            {/* Download App & QR Code Button */}
+                            <button
+                                type="button"
+                                onClick={openQrModal}
+                                className="w-full inline-flex items-center justify-between px-4 py-2.5 rounded-xl bg-[#24312a] hover:bg-[#1c2922] text-gray-200 hover:text-[#d4af37] border border-[#3e5247] hover:border-[#d4af37] text-xs font-roboto transition-all duration-300 shadow-sm cursor-pointer group"
+                            >
+                                <span className="flex items-center gap-2.5">
+                                    <FiSmartphone className="text-base text-[#d4af37] group-hover:scale-110 transition-transform" />
+                                    <span className="font-medium">Download App / Scan QR</span>
+                                </span>
+                                <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-white/10 text-gray-300 group-hover:text-white font-semibold">
+                                    Instant PWA
+                                </span>
+                            </button>
                         </div>
 
                         {/* Social Media Links */}

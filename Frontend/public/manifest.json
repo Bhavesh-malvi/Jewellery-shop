@@ -1,0 +1,31 @@
+{
+  "name": "Rangoli Jewellers - Gold & Silver Jewellery",
+  "short_name": "Rangoli Jewellers",
+  "description": "Official Jewellery App of Rangoli Jewellers, Narol Ahmedabad. Browse 22K Gold & 925 Silver collections, live rates and WhatsApp enquiries.",
+  "start_url": "/",
+  "id": "/",
+  "display": "standalone",
+  "background_color": "#24312a",
+  "theme_color": "#304037",
+  "orientation": "portrait",
+  "scope": "/",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": [
+    "shopping",
+    "lifestyle"
+  ]
+}
