@@ -100,47 +100,55 @@ const EnquiryDrawer = () => {
                             </div>
 
                             <div className="space-y-3">
-                                {enquiryItems.map((item) => (
-                                    <div
-                                        key={item.id}
-                                        className="flex items-center gap-4 p-3 rounded-xl border border-gray-200 hover:border-[#d4af37]/50 bg-[#FAF9F6] transition-all"
-                                    >
-                                        <div className="w-16 h-16 rounded-lg bg-white p-1 shrink-0 border border-gray-200 flex items-center justify-center overflow-hidden">
-                                            <img
-                                                src={item.img}
-                                                alt={item.name}
-                                                className="w-full h-full object-contain"
-                                            />
-                                        </div>
-
-                                        <div className="flex-1 min-w-0">
-                                            <div className="flex items-center gap-2">
-                                                <span className="text-[10px] uppercase tracking-wider text-[#d4af37] font-semibold font-roboto">
-                                                    {item.category}
-                                                </span>
-                                                <span className="text-[10px] text-gray-400 font-roboto">
-                                                    • Code: {item.code || 'RJ-' + item.id}
-                                                </span>
-                                            </div>
-                                            <h4 className="text-sm font-playfair text-[#304037] font-medium truncate">
-                                                {item.name}
-                                            </h4>
-                                            {item.specs && (
-                                                <p className="text-[11px] text-gray-500 font-roboto truncate">
-                                                    {item.specs}
-                                                </p>
-                                            )}
-                                        </div>
-
-                                        <button
-                                            onClick={() => removeFromEnquiry(item.id)}
-                                            aria-label="Remove item"
-                                            className="text-gray-400 hover:text-red-500 p-2 transition-colors cursor-pointer"
+                                {enquiryItems.map((item) => {
+                                    const itemId = item._id || item.customId || item.id
+                                    const itemImg = item.img || item.images?.[0] || 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=400&auto=format&fit=crop&q=80'
+                                    return (
+                                        <div
+                                            key={itemId}
+                                            className="flex items-center gap-4 p-3 rounded-xl border border-gray-200 hover:border-[#d4af37]/50 bg-[#FAF9F6] transition-all"
                                         >
-                                            <HiOutlineTrash className="text-lg" />
-                                        </button>
-                                    </div>
-                                ))}
+                                            <div className="w-16 h-16 rounded-lg bg-white p-1 shrink-0 border border-gray-200 flex items-center justify-center overflow-hidden">
+                                                <img
+                                                    src={itemImg}
+                                                    alt={item.name}
+                                                    onError={(e) => {
+                                                        e.currentTarget.onerror = null
+                                                        e.currentTarget.src = 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=400&auto=format&fit=crop&q=80'
+                                                    }}
+                                                    className="w-full h-full object-contain"
+                                                />
+                                            </div>
+
+                                            <div className="flex-1 min-w-0">
+                                                <div className="flex items-center gap-2">
+                                                    <span className="text-[10px] uppercase tracking-wider text-[#d4af37] font-semibold font-roboto">
+                                                        {item.category}
+                                                    </span>
+                                                    <span className="text-[10px] text-gray-400 font-roboto">
+                                                        • Code: {item.code || 'RJ-' + itemId}
+                                                    </span>
+                                                </div>
+                                                <h4 className="text-sm font-playfair text-[#304037] font-medium truncate">
+                                                    {item.name}
+                                                </h4>
+                                                {(item.specs || item.purity) && (
+                                                    <p className="text-[11px] text-gray-500 font-roboto truncate">
+                                                        {item.specs || item.purity}
+                                                    </p>
+                                                )}
+                                            </div>
+
+                                            <button
+                                                onClick={() => removeFromEnquiry(itemId)}
+                                                aria-label="Remove item"
+                                                className="text-gray-400 hover:text-red-500 p-2 transition-colors cursor-pointer"
+                                            >
+                                                <HiOutlineTrash className="text-lg" />
+                                            </button>
+                                        </div>
+                                    )
+                                })}
                             </div>
                         </>
                     )}

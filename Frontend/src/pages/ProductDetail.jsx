@@ -526,7 +526,7 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                 type="button"
                                 onClick={() => {
                                     if (inBag) {
-                                        removeFromEnquiry(product.id)
+                                        removeFromEnquiry(productId)
                                     } else {
                                         addToEnquiry(product)
                                     }

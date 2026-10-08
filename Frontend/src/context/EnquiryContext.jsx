@@ -10,15 +10,36 @@ export const useEnquiry = () => {
     return context
 }
 
+// Helper to reliably extract the unique ID of any product (MongoDB _id, customId, or id)
+export const getProductIdentifier = (item) => {
+    if (!item) return ''
+    if (typeof item === 'string' || typeof item === 'number') return String(item)
+    return String(item._id || item.customId || item.id || '')
+}
+
 export const EnquiryProvider = ({ children }) => {
     // Phone number for WhatsApp enquiries
     const WHATSAPP_NUMBER = '917340681617'
 
-    // Load saved items from localStorage
+    // Load saved items from localStorage with ID normalization
     const [enquiryItems, setEnquiryItems] = useState(() => {
         try {
             const saved = localStorage.getItem('rangoli_enquiry_bag')
-            return saved ? JSON.parse(saved) : []
+            if (!saved) return []
+            const parsed = JSON.parse(saved)
+            if (!Array.isArray(parsed)) return []
+            return parsed
+                .filter(Boolean)
+                .map((item) => {
+                    const id = getProductIdentifier(item)
+                    return {
+                        ...item,
+                        id: item.id || id,
+                        _id: item._id || id,
+                        img: item.img || item.images?.[0] || '',
+                    }
+                })
+                .filter((item) => Boolean(getProductIdentifier(item)))
         } catch {
             return []
         }
@@ -50,16 +71,30 @@ export const EnquiryProvider = ({ children }) => {
     }
 
     const addToEnquiry = (product) => {
-        if (enquiryItems.some((item) => item.id === product.id)) {
+        if (!product) return
+        const prodId = getProductIdentifier(product)
+        if (!prodId) return
+
+        if (enquiryItems.some((item) => getProductIdentifier(item) === prodId)) {
             showToast(`"${product.name}" is already in your Enquiry Bag!`)
             return
         }
-        setEnquiryItems((prev) => [...prev, product])
+
+        const normalizedProduct = {
+            ...product,
+            id: prodId,
+            _id: product._id || prodId,
+            img: product.img || product.images?.[0] || '',
+        }
+
+        setEnquiryItems((prev) => [...prev, normalizedProduct])
         showToast(`Added "${product.name}" to Enquiry Bag`)
     }
 
-    const removeFromEnquiry = (id) => {
-        setEnquiryItems((prev) => prev.filter((item) => item.id !== id))
+    const removeFromEnquiry = (idOrProduct) => {
+        if (!idOrProduct) return
+        const targetId = getProductIdentifier(idOrProduct)
+        setEnquiryItems((prev) => prev.filter((item) => getProductIdentifier(item) !== targetId))
         showToast('Item removed from Enquiry Bag')
     }
 
@@ -68,20 +103,23 @@ export const EnquiryProvider = ({ children }) => {
         showToast('Enquiry Bag cleared')
     }
 
-    const isInEnquiry = (id) => {
-        return enquiryItems.some((item) => item.id === id)
+    const isInEnquiry = (idOrProduct) => {
+        if (!idOrProduct) return false
+        const targetId = getProductIdentifier(idOrProduct)
+        return enquiryItems.some((item) => getProductIdentifier(item) === targetId)
     }
 
     // Direct WhatsApp enquiry for a single product
     const sendSingleEnquiry = (product) => {
+        const prodId = getProductIdentifier(product)
         const text = `*Rangoli Jewellers - Product Enquiry*
 
 Namaste! I am interested in knowing more details about this design from your catalogue:
 
 • *Design:* ${product.name}
-• *Product Code:* ${product.code || 'RJ-' + product.id}
+• *Product Code:* ${product.code || 'RJ-' + prodId}
 • *Category:* ${product.category}
-• *Specifications:* ${product.specs || 'Certified Fine Jewellery'}
+• *Specifications:* ${product.specs || product.purity || 'Certified Fine Jewellery'}
 
 Please share the pricing, weight, purity, and customisation options. Thank you!`
 
@@ -96,7 +134,7 @@ Please share the pricing, weight, purity, and customisation options. Thank you!`
         let itemsList = enquiryItems
             .map(
                 (item, index) =>
-                    `${index + 1}. *${item.name}* (Code: ${item.code || 'RJ-' + item.id}, Category: ${item.category})`
+                    `${index + 1}. *${item.name}* (Code: ${item.code || 'RJ-' + getProductIdentifier(item)}, Category: ${item.category})`
             )
             .join('\n')
 
