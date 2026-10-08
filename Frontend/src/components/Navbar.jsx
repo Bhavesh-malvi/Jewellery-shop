@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { BsBagHeart } from 'react-icons/bs'
-import { FaRegHeart } from 'react-icons/fa6'
 import { IoSearchOutline, IoCloseOutline } from 'react-icons/io5'
 import { HiOutlineBars3, HiXMark, HiChevronDown } from 'react-icons/hi2'
 import Logo from '../../public/logo.png'
@@ -272,14 +271,6 @@ const Navbar = () => {
                             </button>
                         )}
                     </div>
-
-                    {/* Wishlist Icon */}
-                    <button
-                        aria-label="Wishlist"
-                        className="relative w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/10 text-gray-200 hover:text-gold transition-all duration-200 cursor-pointer"
-                    >
-                        <FaRegHeart className="text-lg" />
-                    </button>
 
                     {/* Enquiry Bag Icon */}
                     <button

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { GoDotFill } from 'react-icons/go'
-import { FaWhatsapp, FaRegHeart, FaHeart, FaMagnifyingGlass } from 'react-icons/fa6'
+import { FaWhatsapp, FaMagnifyingGlass } from 'react-icons/fa6'
 import { BsBagPlus, BsBagCheck } from 'react-icons/bs'
 import { IoCloseOutline } from 'react-icons/io5'
 import { useEnquiry } from '../context/EnquiryContext'
@@ -124,7 +124,6 @@ const Catalogue = () => {
     const [selectedCategory, setSelectedCategory] = useState(() => normalizeCategory(categoryParam))
     const [selectedKarat, setSelectedKarat] = useState(() => normalizeKarat(karatParam))
     const [searchQuery, setSearchQuery] = useState(() => searchParam || '')
-    const [wishlist, setWishlist] = useState([])
 
     useEffect(() => {
         if (metalParam) {
@@ -155,12 +154,6 @@ const Catalogue = () => {
             setSearchQuery(searchParam)
         }
     }, [searchParam])
-
-    const toggleWishlist = (id) => {
-        setWishlist((prev) =>
-            prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
-        )
-    }
 
     const handleMetalSelect = (m) => {
         setSelectedMetal(m)
@@ -577,7 +570,6 @@ const Catalogue = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-7">
                         {filteredDesigns.map((item) => {
                             const itemId = item._id || item.customId || item.id
-                            const isWishlisted = wishlist.includes(itemId)
                             const inBag = isInEnquiry(itemId)
 
                             return (
@@ -614,24 +606,6 @@ const Catalogue = () => {
                                             <span className={item.metal === 'Silver' ? 'text-slate-500' : 'text-[#d4af37]'}>✦</span>
                                             <span>{item.metal === 'Silver' ? `${item.karat || '925'} Silver` : `${item.karat || '22K'} Gold`}</span>
                                         </span>
-
-                                        {/* Wishlist Button */}
-                                        <button
-                                            type="button"
-                                            onClick={(e) => {
-                                                e.preventDefault()
-                                                e.stopPropagation()
-                                                toggleWishlist(itemId)
-                                            }}
-                                            aria-label="Wishlist"
-                                            className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm text-gray-500 hover:text-red-500 hover:bg-white shadow-md flex items-center justify-center transition-all duration-300 cursor-pointer z-10"
-                                        >
-                                            {isWishlisted ? (
-                                                <FaHeart className="text-red-500 text-sm" />
-                                            ) : (
-                                                <FaRegHeart className="text-sm" />
-                                            )}
-                                        </button>
                                     </Link>
 
                                     {/* Info & Action Buttons */}

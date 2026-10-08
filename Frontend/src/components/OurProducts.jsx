@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { GoDotFill } from 'react-icons/go'
-import { FaWhatsapp, FaRegHeart, FaHeart } from 'react-icons/fa6'
+import { FaWhatsapp } from 'react-icons/fa6'
 import { BsBagPlus, BsBagCheck } from 'react-icons/bs'
 import { HiArrowRight } from 'react-icons/hi2'
 import { useEnquiry } from '../context/EnquiryContext'
@@ -18,7 +18,6 @@ const OurProducts = () => {
     } = useEnquiry()
 
     const [activeTab, setActiveTab] = useState('All')
-    const [wishlist, setWishlist] = useState([])
     const [products, setProducts] = useState([])
     const [loading, setLoading] = useState(true)
 
@@ -40,12 +39,6 @@ const OurProducts = () => {
         }
         fetchProducts()
     }, [])
-
-    const toggleWishlist = (id) => {
-        setWishlist((prev) =>
-            prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
-        )
-    }
 
     const goldProducts = products.filter((p) => p.metal !== 'Silver')
 
@@ -125,7 +118,6 @@ const OurProducts = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
                         {filteredProducts.map((item) => {
                             const pId = item._id || item.customId || item.id
-                            const isWishlisted = wishlist.includes(pId)
                             const inBag = isInEnquiry(pId)
 
                             return (
@@ -151,23 +143,6 @@ const OurProducts = () => {
                                         <span className="absolute bottom-3 left-3 bg-white/95 text-primary text-[10px] font-bold font-mono px-2 py-0.5 rounded border border-[#d4af37]/40 shadow-xs">
                                             {item.karat} Gold
                                         </span>
-
-                                        <button
-                                            type="button"
-                                            onClick={(e) => {
-                                                e.preventDefault()
-                                                e.stopPropagation()
-                                                toggleWishlist(pId)
-                                            }}
-                                            aria-label="Wishlist"
-                                            className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm text-gray-500 hover:text-red-500 hover:bg-white shadow-md flex items-center justify-center transition-all duration-300 cursor-pointer z-10"
-                                        >
-                                            {isWishlisted ? (
-                                                <FaHeart className="text-red-500 text-sm" />
-                                            ) : (
-                                                <FaRegHeart className="text-sm" />
-                                            )}
-                                        </button>
                                     </Link>
 
                                     <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
