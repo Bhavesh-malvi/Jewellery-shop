@@ -136,7 +136,7 @@ const OurProducts = () => {
                                                 e.currentTarget.onerror = null
                                                 e.currentTarget.src = 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&auto=format&fit=crop&q=80'
                                             }}
-                                            className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110 drop-shadow-sm"
+                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 drop-shadow-sm"
                                         />
 
                                         {/* Karat Badge */}
@@ -217,7 +217,7 @@ const OurProducts = () => {
                         to="/catalogue"
                         className="inline-flex items-center gap-3 px-8 py-3.5 rounded-full bg-[#304037] text-white hover:bg-[#233029] text-xs sm:text-sm font-roboto uppercase tracking-wider transition-all duration-300 shadow-md group cursor-pointer"
                     >
-                        <span>View Full 2026 Catalogue</span>
+                        <span>View All Gold Catalogue</span>
                         <HiArrowRight className="text-base text-[#d4af37] group-hover:translate-x-1 transition-transform duration-200" />
                     </Link>
                 </div>

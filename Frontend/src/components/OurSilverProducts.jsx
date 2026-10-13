@@ -152,7 +152,7 @@ const OurSilverProducts = () => {
                                                 e.currentTarget.src =
                                                     'https://images.unsplash.com/photo-1611591475155-4284ec28d351?w=800&auto=format&fit=crop&q=80'
                                             }}
-                                            className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110 drop-shadow-sm"
+                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 drop-shadow-sm"
                                         />
 
                                         {/* Silver Purity Badge */}

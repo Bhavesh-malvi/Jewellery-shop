@@ -586,7 +586,7 @@ const Catalogue = () => {
                         )}
                     </div>
                 ) : (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-7">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-6 sm:gap-7">
                         {filteredDesigns.map((item) => {
                             const itemId = item._id || item.customId || item.id
                             const inBag = isInEnquiry(itemId)
@@ -608,7 +608,7 @@ const Catalogue = () => {
                                                 e.currentTarget.onerror = null
                                                 e.currentTarget.src = 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&auto=format&fit=crop&q=80'
                                             }}
-                                            className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110 drop-shadow-sm"
+                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 drop-shadow-sm"
                                         />
 
                                         {/* Tag */}
