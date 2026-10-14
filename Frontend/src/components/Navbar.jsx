@@ -150,7 +150,7 @@ const Navbar = () => {
                                                 key={item.karat}
                                                 to={item.path}
                                                 onClick={() => setIsKaratDropdownOpen(false)}
-                                                className="group/item flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#304037] border border-transparent hover:border-gold/30 transition-all duration-200"
+                                                className="group/item flex items-start gap-3 p-2.5 rounded-xl hover:bg-primary border border-transparent hover:border-gold/30 transition-all duration-200"
                                             >
                                                 <div className="w-10 h-10 rounded-lg bg-[#1b2520] border border-gold/30 flex items-center justify-center text-gold font-mono font-bold text-xs shrink-0 group-hover/item:border-gold group-hover/item:bg-gold group-hover/item:text-[#1b2520] transition-colors">
                                                     {item.karat}
@@ -176,7 +176,7 @@ const Navbar = () => {
                                         <Link
                                             to="/catalogue"
                                             onClick={() => setIsKaratDropdownOpen(false)}
-                                            className="text-xs text-gold-light hover:text-gold flex items-center justify-between font-roboto font-medium py-1 px-2 rounded-lg hover:bg-[#304037]/60 transition-colors"
+                                            className="text-xs text-gold-light hover:text-gold flex items-center justify-between font-roboto font-medium py-1 px-2 rounded-lg hover:bg-primary/60 transition-colors"
                                         >
                                             <span>View All Karats in Catalogue</span>
                                             <span>→</span>
@@ -296,7 +296,7 @@ const Navbar = () => {
                     <button
                         onClick={installApp}
                         title="Install Rangoli Jewellers App"
-                        className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 hover:bg-[#d4af37]/20 border border-[#d4af37]/40 text-xs font-roboto text-gray-200 hover:text-gold transition-all duration-200 cursor-pointer shadow-xs active:scale-95"
+                        className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 hover:bg-gold/20 border border-gold/40 text-xs font-roboto text-gray-200 hover:text-gold transition-all duration-200 cursor-pointer shadow-xs active:scale-95"
                     >
                         <FiSmartphone className="text-sm text-gold shrink-0" />
                         <span className="font-medium tracking-wide">Install App</span>
@@ -492,13 +492,13 @@ const Navbar = () => {
                                     setIsMenuOpen(false)
                                     installApp()
                                 }}
-                                className="w-full flex items-center justify-between py-2.5 px-3 rounded-xl bg-white/10 border border-[#d4af37]/40 text-gold text-sm font-roboto font-medium cursor-pointer active:scale-98 transition-transform"
+                                className="w-full flex items-center justify-between py-2.5 px-3 rounded-xl bg-white/10 border border-gold/40 text-gold text-sm font-roboto font-medium cursor-pointer active:scale-98 transition-transform"
                             >
                                 <span className="flex items-center gap-2">
                                     <FiSmartphone className="text-lg" />
                                     <span>Download App on Phone</span>
                                 </span>
-                                <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-[#d4af37] text-[#1F2B24] font-bold">
+                                <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-gold text-[#1F2B24] font-bold">
                                     Free PWA
                                 </span>
                             </button>

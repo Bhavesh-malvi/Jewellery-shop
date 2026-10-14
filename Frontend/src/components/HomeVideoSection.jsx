@@ -25,7 +25,7 @@ const HomeVideoSection = () => {
     ]
 
     return (
-        <section className="relative w-full min-h-[580px] lg:min-h-[640px] overflow-hidden flex flex-col justify-between py-12 lg:py-16">
+        <section className="relative w-full min-h-145 lg:min-h-160 overflow-hidden flex flex-col justify-between py-12 lg:py-16">
             {/* Background Video */}
             <video
                 className="absolute inset-0 w-full h-full object-cover scale-105"
@@ -37,12 +37,12 @@ const HomeVideoSection = () => {
             />
 
             {/* Cinematic Gradient Dark Overlay for Perfect Contrast */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/70 pointer-events-none" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/55 to-black/70 pointer-events-none" />
 
             {/* Center Brand Statement */}
             <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center my-auto space-y-4">
-                <div className="inline-flex items-center gap-2 border border-[#d4af37]/50 px-4 py-1.5 rounded-full text-xs font-roboto uppercase tracking-widest text-[#f3e5ab] bg-black/40 backdrop-blur-md shadow-sm">
-                    <span className="w-2 h-2 rounded-full bg-[#d4af37] animate-pulse" />
+                <div className="inline-flex items-center gap-2 border border-gold/50 px-4 py-1.5 rounded-full text-xs font-roboto uppercase tracking-widest text-gold-light bg-black/40 backdrop-blur-md shadow-sm">
+                    <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
                     <span>Crafted With Royal Passion</span>
                 </div>
 
@@ -65,7 +65,7 @@ const HomeVideoSection = () => {
                                 index !== pillars.length - 1 ? 'lg:border-r lg:border-white/20' : ''
                             }`}
                         >
-                            <div className="w-14 h-14 rounded-full bg-[#d4af37]/20 border border-[#d4af37]/40 flex items-center justify-center p-3 transition-transform duration-300 group-hover:scale-110 shadow-sm">
+                            <div className="w-14 h-14 rounded-full bg-gold/20 border border-gold/40 flex items-center justify-center p-3 transition-transform duration-300 group-hover:scale-110 shadow-sm">
                                 <img
                                     src={item.icon}
                                     alt={item.title}

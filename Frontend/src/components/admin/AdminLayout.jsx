@@ -45,18 +45,18 @@ const AdminLayout = () => {
     return (
         <div className="min-h-screen bg-[#F8F6F0] font-roboto text-gray-800">
             {/* Desktop Fixed Sidebar */}
-            <aside className="hidden lg:flex flex-col w-64 fixed inset-y-0 left-0 z-30 bg-[#1F2B24] text-white border-r border-[#d4af37]/20 select-none shadow-xl">
+            <aside className="hidden lg:flex flex-col w-64 fixed inset-y-0 left-0 z-30 bg-[#1F2B24] text-white border-r border-gold/20 select-none shadow-xl">
                 {/* Brand Logo Box */}
-                <div className="p-6 border-b border-[#304037] flex flex-col items-center text-center shrink-0">
-                    <div className="w-11 h-11 rounded-full bg-gradient-to-tr from-[#d4af37] to-[#f3e5ab] p-0.5 flex items-center justify-center shadow-md mb-2">
-                        <div className="w-full h-full rounded-full bg-[#1F2B24] flex items-center justify-center text-[#d4af37] font-playfair font-bold text-lg">
+                <div className="p-6 border-b border-primary flex flex-col items-center text-center shrink-0">
+                    <div className="w-11 h-11 rounded-full bg-linear-to-tr from-gold to-gold-light p-0.5 flex items-center justify-center shadow-md mb-2">
+                        <div className="w-full h-full rounded-full bg-[#1F2B24] flex items-center justify-center text-gold font-playfair font-bold text-lg">
                             RJ
                         </div>
                     </div>
                     <span className="font-playfair text-lg font-medium tracking-wide text-[#FAF7F2]">
                         Rangoli Jewellers
                     </span>
-                    <span className="text-[10px] uppercase tracking-widest text-[#d4af37] font-mono mt-0.5">
+                    <span className="text-[10px] uppercase tracking-widest text-gold font-mono mt-0.5">
                         Admin Portal
                     </span>
                 </div>
@@ -76,7 +76,7 @@ const AdminLayout = () => {
                                 className={({ isActive }) =>
                                     `flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium tracking-wide transition-all duration-200 ${
                                         isActive
-                                            ? 'bg-[#304037] text-[#d4af37] border border-[#d4af37]/50 shadow-sm font-semibold'
+                                            ? 'bg-primary text-gold border border-gold/50 shadow-sm font-semibold'
                                             : 'text-gray-300 hover:text-white hover:bg-[#2A3B31]'
                                     }`
                                 }
@@ -101,7 +101,7 @@ const AdminLayout = () => {
                                 <HiOutlineArrowTopRightOnSquare className="text-lg" />
                                 <span>View Public Store</span>
                             </span>
-                            <span className="text-[10px] text-[#d4af37] bg-[#304037] px-1.5 py-0.5 rounded font-mono">
+                            <span className="text-[10px] text-gold bg-primary px-1.5 py-0.5 rounded font-mono">
                                 Live
                             </span>
                         </a>
@@ -112,7 +112,7 @@ const AdminLayout = () => {
                             className="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium text-gray-300 hover:text-white hover:bg-[#2A3B31] transition-colors mt-1"
                         >
                             <span className="flex items-center gap-3">
-                                <HiOutlineSparkles className="text-lg text-[#d4af37]" />
+                                <HiOutlineSparkles className="text-lg text-gold" />
                                 <span>Public Catalogue</span>
                             </span>
                             <span className="text-[10px] text-gray-400">
@@ -123,9 +123,9 @@ const AdminLayout = () => {
                 </nav>
 
                 {/* Admin Profile & Logout Box - Pinned to Bottom */}
-                <div className="p-4 border-t border-[#304037] bg-[#1A251F] shrink-0">
+                <div className="p-4 border-t border-primary bg-[#1A251F] shrink-0">
                     <div className="flex items-center gap-3 mb-3">
-                        <div className="w-9 h-9 rounded-full bg-[#304037] border border-[#d4af37]/50 flex items-center justify-center text-[#d4af37] font-semibold text-xs shrink-0">
+                        <div className="w-9 h-9 rounded-full bg-primary border border-gold/50 flex items-center justify-center text-gold font-semibold text-xs shrink-0">
                             {adminUser?.name ? adminUser.name.charAt(0).toUpperCase() : 'A'}
                         </div>
                         <div className="overflow-hidden">
@@ -159,18 +159,18 @@ const AdminLayout = () => {
                     />
 
                     {/* Drawer Panel */}
-                    <aside className="fixed inset-y-0 left-0 w-72 max-w-[85vw] bg-[#1F2B24] text-white flex flex-col z-50 shadow-2xl border-r border-[#d4af37]/30 select-none">
+                    <aside className="fixed inset-y-0 left-0 w-72 max-w-[85vw] bg-[#1F2B24] text-white flex flex-col z-50 shadow-2xl border-r border-gold/30 select-none">
                         {/* Drawer Header */}
-                        <div className="p-5 border-b border-[#304037] flex items-center justify-between">
+                        <div className="p-5 border-b border-primary flex items-center justify-between">
                             <div className="flex items-center gap-3">
-                                <div className="w-9 h-9 rounded-full bg-[#304037] border border-[#d4af37]/40 flex items-center justify-center text-[#d4af37] font-playfair font-bold text-base">
+                                <div className="w-9 h-9 rounded-full bg-primary border border-gold/40 flex items-center justify-center text-gold font-playfair font-bold text-base">
                                     RJ
                                 </div>
                                 <div>
                                     <h2 className="font-playfair text-base font-medium text-white leading-tight">
                                         Rangoli Jewellers
                                     </h2>
-                                    <span className="text-[10px] text-[#d4af37] font-mono uppercase tracking-wider block">
+                                    <span className="text-[10px] text-gold font-mono uppercase tracking-wider block">
                                         Admin Portal
                                     </span>
                                 </div>
@@ -201,7 +201,7 @@ const AdminLayout = () => {
                                         className={({ isActive }) =>
                                             `flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium tracking-wide transition-colors ${
                                                 isActive
-                                                    ? 'bg-[#304037] text-[#d4af37] border border-[#d4af37]/50 font-semibold'
+                                                    ? 'bg-primary text-gold border border-gold/50 font-semibold'
                                                     : 'text-gray-300 hover:text-white hover:bg-[#2A3B31]'
                                             }`
                                         }
@@ -226,7 +226,7 @@ const AdminLayout = () => {
                                         <HiOutlineArrowTopRightOnSquare className="text-lg" />
                                         <span>Live Store</span>
                                     </span>
-                                    <span className="text-[10px] text-[#d4af37] bg-[#304037] px-1.5 py-0.5 rounded font-mono">
+                                    <span className="text-[10px] text-gold bg-primary px-1.5 py-0.5 rounded font-mono">
                                         Live
                                     </span>
                                 </a>
@@ -234,9 +234,9 @@ const AdminLayout = () => {
                         </nav>
 
                         {/* Drawer Profile & Logout */}
-                        <div className="p-4 border-t border-[#304037] bg-[#1A251F]">
+                        <div className="p-4 border-t border-primary bg-[#1A251F]">
                             <div className="flex items-center gap-3 mb-3">
-                                <div className="w-8 h-8 rounded-full bg-[#304037] border border-[#d4af37]/40 flex items-center justify-center text-[#d4af37] font-semibold text-xs">
+                                <div className="w-8 h-8 rounded-full bg-primary border border-gold/40 flex items-center justify-center text-gold font-semibold text-xs">
                                     {adminUser?.name ? adminUser.name.charAt(0).toUpperCase() : 'A'}
                                 </div>
                                 <div className="overflow-hidden">
@@ -275,8 +275,8 @@ const AdminLayout = () => {
                             <HiOutlineBars3 className="text-2xl" />
                         </button>
                         <div className="flex items-center gap-2">
-                            <BsPatchCheckFill className="text-[#d4af37] text-sm" />
-                            <span className="text-xs font-bold uppercase tracking-wider text-[#304037]">
+                            <BsPatchCheckFill className="text-gold text-sm" />
+                            <span className="text-xs font-bold uppercase tracking-wider text-primary">
                                 Authorized Showroom Admin
                             </span>
                         </div>
@@ -285,16 +285,16 @@ const AdminLayout = () => {
                     <div className="flex items-center gap-3">
                         <Link
                             to="/admin/products/new"
-                            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-[#304037] hover:bg-[#222E27] text-white text-xs font-medium tracking-wide shadow-xs transition-colors"
+                            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-primary hover:bg-primary-dark text-white text-xs font-medium tracking-wide shadow-xs transition-colors"
                         >
-                            <HiOutlinePlusCircle className="text-base text-[#d4af37]" />
+                            <HiOutlinePlusCircle className="text-base text-gold" />
                             <span>Add Product</span>
                         </Link>
                         <a
                             href="/"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="hidden sm:inline-flex text-xs text-gray-600 hover:text-[#304037] items-center gap-1 border border-gray-200 px-3 py-1.5 rounded-lg transition-colors"
+                            className="hidden sm:inline-flex text-xs text-gray-600 hover:text-primary items-center gap-1 border border-gray-200 px-3 py-1.5 rounded-lg transition-colors"
                         >
                             <span>Live Store</span>
                             <HiOutlineArrowTopRightOnSquare className="text-sm" />

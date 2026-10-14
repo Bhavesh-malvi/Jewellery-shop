@@ -13,11 +13,11 @@ const InstallAppBanner = () => {
     return (
         <aside
             aria-label="App download prompt"
-            className="fixed bottom-3 left-3 right-3 sm:left-auto sm:right-6 sm:bottom-6 sm:max-w-md z-40 bg-gradient-to-r from-[#24312A] to-[#304037] text-white rounded-2xl p-3.5 sm:p-4 shadow-2xl border border-[#d4af37]/40 flex items-center justify-between gap-3 animate-slideUp backdrop-blur-md"
+            className="fixed bottom-3 left-3 right-3 sm:left-auto sm:right-6 sm:bottom-6 sm:max-w-md z-40 bg-linear-to-r from-[#24312A] to-primary text-white rounded-2xl p-3.5 sm:p-4 shadow-2xl border border-gold/40 flex items-center justify-between gap-3 animate-slideUp backdrop-blur-md"
         >
             {/* Logo & Text */}
             <div className="flex items-center gap-3 min-w-0">
-                <div className="w-12 h-12 rounded-2xl shrink-0 shadow-md border border-[#d4af37]/40 overflow-hidden flex items-center justify-center bg-[#24312A]">
+                <div className="w-12 h-12 rounded-2xl shrink-0 shadow-md border border-gold/40 overflow-hidden flex items-center justify-center bg-[#24312A]">
                     <img src={AppIcon} alt="Rangoli App Icon" className="w-full h-full object-cover" />
                 </div>
                 <div className="min-w-0">
@@ -34,7 +34,7 @@ const InstallAppBanner = () => {
             <div className="flex items-center gap-1.5 shrink-0">
                 <button
                     onClick={installApp}
-                    className="py-1.5 px-3 sm:px-3.5 rounded-xl bg-[#d4af37] hover:bg-[#bfa030] text-[#1F2B24] text-xs font-roboto font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-md transition-all duration-200 cursor-pointer active:scale-95"
+                    className="py-1.5 px-3 sm:px-3.5 rounded-xl bg-gold hover:bg-[#bfa030] text-[#1F2B24] text-xs font-roboto font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-md transition-all duration-200 cursor-pointer active:scale-95"
                 >
                     <FiDownload className="text-sm shrink-0" />
                     <span>Install</span>

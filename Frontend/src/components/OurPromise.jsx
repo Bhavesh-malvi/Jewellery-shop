@@ -30,8 +30,8 @@ const OurPromise = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16">
                 {/* Section Header */}
                 <div className="flex flex-col items-center text-center space-y-3">
-                    <div className="inline-flex items-center gap-1.5 border border-[#304037]/25 px-3.5 py-1 rounded-full text-xs sm:text-sm text-primary font-roboto uppercase tracking-widest bg-[#304037]/5">
-                        <GoDotFill className="text-xs text-[#d4af37]" />
+                    <div className="inline-flex items-center gap-1.5 border border-primary/25 px-3.5 py-1 rounded-full text-xs sm:text-sm text-primary font-roboto uppercase tracking-widest bg-primary/5">
+                        <GoDotFill className="text-xs text-gold" />
                         <span>Our Promise</span>
                     </div>
 
@@ -50,7 +50,7 @@ const OurPromise = () => {
                             }`}
                         >
                             {/* Icon Box */}
-                            <div className="relative w-full aspect-square max-w-[170px] bg-[#F7F7F7] group-hover:bg-[#304037] rounded-xl flex items-center justify-center p-6 sm:p-7 transition-all duration-500 shadow-xs group-hover:shadow-xl overflow-hidden cursor-pointer">
+                            <div className="relative w-full aspect-square max-w-42.5 bg-[#F7F7F7] group-hover:bg-primary rounded-xl flex items-center justify-center p-6 sm:p-7 transition-all duration-500 shadow-xs group-hover:shadow-xl overflow-hidden cursor-pointer">
                                 <img
                                     src={item.icon}
                                     alt={item.title}
@@ -59,8 +59,8 @@ const OurPromise = () => {
                             </div>
 
                             {/* Title Content */}
-                            <div className="mt-5 max-w-[180px]">
-                                <h3 className="text-base sm:text-lg lg:text-[19px] font-playfair text-[#222E27] font-normal leading-snug group-hover:text-[#304037] transition-colors duration-300">
+                            <div className="mt-5 max-w-45">
+                                <h3 className="text-base sm:text-lg lg:text-[19px] font-playfair text-primary-dark font-normal leading-snug group-hover:text-primary transition-colors duration-300">
                                     {item.title}
                                 </h3>
                             </div>

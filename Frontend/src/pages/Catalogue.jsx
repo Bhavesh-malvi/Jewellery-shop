@@ -305,10 +305,10 @@ const Catalogue = () => {
     return (
         <div className="w-full bg-[#FAFAF8] min-h-screen">
             {/* Catalogue Hero Banner */}
-            <div className="bg-[#304037] text-white py-16 sm:py-20 px-4 sm:px-6 lg:px-8 border-b border-[#3e5247] relative overflow-hidden">
+            <div className="bg-primary text-white py-16 sm:py-20 px-4 sm:px-6 lg:px-8 border-b border-[#3e5247] relative overflow-hidden">
                 <div className="max-w-7xl mx-auto text-center space-y-4 relative z-10">
-                    <div className="inline-flex items-center gap-1.5 border border-[#d4af37]/40 px-4 py-1 rounded-full text-xs font-roboto uppercase tracking-widest text-[#f3e5ab] bg-[#24312a]/60 backdrop-blur-sm">
-                        <GoDotFill className="text-xs text-[#d4af37]" />
+                    <div className="inline-flex items-center gap-1.5 border border-gold/40 px-4 py-1 rounded-full text-xs font-roboto uppercase tracking-widest text-gold-light bg-[#24312a]/60 backdrop-blur-sm">
+                        <GoDotFill className="text-xs text-gold" />
                         <span>Rangoli Jewellers Design Archive</span>
                     </div>
 
@@ -322,8 +322,8 @@ const Catalogue = () => {
 
                     {/* Quick Search Bar */}
                     <div className="pt-4 max-w-xl mx-auto">
-                        <div className="relative flex items-center bg-white/10 backdrop-blur-md rounded-full border border-white/20 p-1.5 focus-within:border-[#d4af37] transition-all">
-                            <FaMagnifyingGlass className="text-[#d4af37] ml-4 text-base shrink-0" />
+                        <div className="relative flex items-center bg-white/10 backdrop-blur-md rounded-full border border-white/20 p-1.5 focus-within:border-gold transition-all">
+                            <FaMagnifyingGlass className="text-gold ml-4 text-base shrink-0" />
                             <input
                                 type="text"
                                 placeholder="Search by name, code (e.g. RJ-RNG-101), or stone..."
@@ -351,7 +351,7 @@ const Catalogue = () => {
                 <div className="bg-white rounded-2xl p-4 sm:p-5 border border-[#EDE8E0] shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
                         <div className="flex items-center gap-2">
-                            <span className={selectedMetal === 'Silver' ? 'text-slate-500 text-sm' : 'text-[#d4af37] text-sm'}>✦</span>
+                            <span className={selectedMetal === 'Silver' ? 'text-slate-500 text-sm' : 'text-gold text-sm'}>✦</span>
                             <span className="text-sm font-semibold uppercase tracking-wider text-primary font-roboto">
                                 Select Precious Metal Collection
                             </span>
@@ -367,7 +367,7 @@ const Catalogue = () => {
                             onClick={() => handleMetalSelect('All')}
                             className={`px-4 py-2 rounded-lg text-xs font-roboto font-semibold tracking-wide transition-all cursor-pointer ${
                                 selectedMetal === 'All'
-                                    ? 'bg-[#304037] text-white shadow-sm'
+                                    ? 'bg-primary text-white shadow-sm'
                                     : 'text-gray-600 hover:text-gray-900 hover:bg-white/60'
                             }`}
                         >
@@ -378,7 +378,7 @@ const Catalogue = () => {
                             onClick={() => handleMetalSelect('Gold')}
                             className={`px-4 py-2 rounded-lg text-xs font-roboto font-semibold tracking-wide transition-all flex items-center gap-1.5 cursor-pointer ${
                                 selectedMetal === 'Gold'
-                                    ? 'bg-[#d4af37] text-[#1c2922] shadow-sm font-bold'
+                                    ? 'bg-gold text-[#1c2922] shadow-sm font-bold'
                                     : 'text-amber-800 hover:text-amber-900 hover:bg-white/60'
                             }`}
                         >
@@ -405,7 +405,7 @@ const Catalogue = () => {
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-100 pb-3">
                         <div className="space-y-0.5">
                             <div className="flex items-center gap-2">
-                                <span className={selectedMetal === 'Silver' ? 'text-slate-500 text-sm' : 'text-[#d4af37] text-sm'}>✦</span>
+                                <span className={selectedMetal === 'Silver' ? 'text-slate-500 text-sm' : 'text-gold text-sm'}>✦</span>
                                 <h2 className="text-base sm:text-lg font-playfair font-medium text-primary">
                                     {selectedMetal === 'Silver'
                                         ? 'Shop by Silver Purity'
@@ -425,7 +425,7 @@ const Catalogue = () => {
                         {selectedKarat !== 'All' && (
                             <button
                                 onClick={() => handleKaratSelect('All')}
-                                className="text-xs text-[#d4af37] hover:underline font-roboto font-medium self-start sm:self-auto cursor-pointer"
+                                className="text-xs text-gold hover:underline font-roboto font-medium self-start sm:self-auto cursor-pointer"
                             >
                                 Show All Purity Grades
                             </button>
@@ -443,19 +443,19 @@ const Catalogue = () => {
                                         isSelected
                                             ? selectedMetal === 'Silver'
                                                 ? 'bg-slate-800 text-white border-slate-400 shadow-md ring-1 ring-slate-400'
-                                                : 'bg-[#304037] text-white border-[#d4af37] shadow-md ring-1 ring-[#d4af37]'
-                                            : 'bg-[#FAFAF8] text-gray-700 border-gray-200 hover:border-[#d4af37]/50 hover:bg-white'
+                                                : 'bg-primary text-white border-gold shadow-md ring-1 ring-gold'
+                                            : 'bg-[#FAFAF8] text-gray-700 border-gray-200 hover:border-gold/50 hover:bg-white'
                                     }`}
                                 >
                                     <div className="flex items-center justify-between gap-2">
-                                        <span className={`font-roboto font-bold text-sm tracking-wide ${isSelected ? (selectedMetal === 'Silver' ? 'text-white' : 'text-[#f3e5ab]') : 'text-primary'}`}>
+                                        <span className={`font-roboto font-bold text-sm tracking-wide ${isSelected ? (selectedMetal === 'Silver' ? 'text-white' : 'text-gold-light') : 'text-primary'}`}>
                                             {k.label}
                                         </span>
                                         <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold shrink-0 ${
                                             isSelected
                                                 ? selectedMetal === 'Silver'
                                                     ? 'bg-slate-200 text-slate-900'
-                                                    : 'bg-[#d4af37] text-[#1c2922]'
+                                                    : 'bg-gold text-[#1c2922]'
                                                 : 'bg-gray-200 text-gray-700'
                                         }`}>
                                             {k.hallmark}
@@ -482,7 +482,7 @@ const Catalogue = () => {
                                     selectedCategory === cat
                                         ? selectedMetal === 'Silver'
                                             ? 'bg-slate-800 text-white font-medium shadow-sm ring-1 ring-slate-400'
-                                            : 'bg-[#304037] text-[#f3e5ab] font-medium shadow-sm ring-1 ring-[#d4af37]/40'
+                                            : 'bg-primary text-gold-light font-medium shadow-sm ring-1 ring-gold/40'
                                         : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
                                 }`}
                             >
@@ -515,7 +515,7 @@ const Catalogue = () => {
                             </span>
                         )}
                         {selectedKarat !== 'All' && (
-                            <span className="inline-flex items-center gap-1.5 bg-[#d4af37]/15 text-[#304037] px-3 py-0.5 rounded-full font-medium text-[11px] border border-[#d4af37]/30">
+                            <span className="inline-flex items-center gap-1.5 bg-gold/15 text-primary px-3 py-0.5 rounded-full font-medium text-[11px] border border-gold/30">
                                 <span>Purity: <strong>{selectedKarat}</strong></span>
                                 <button
                                     onClick={() => handleKaratSelect('All')}
@@ -527,7 +527,7 @@ const Catalogue = () => {
                             </span>
                         )}
                         {selectedCategory !== 'All' && (
-                            <span className="inline-flex items-center gap-1.5 bg-[#304037]/10 text-[#304037] px-3 py-0.5 rounded-full font-medium text-[11px] border border-[#304037]/20">
+                            <span className="inline-flex items-center gap-1.5 bg-primary/10 text-primary px-3 py-0.5 rounded-full font-medium text-[11px] border border-primary/20">
                                 <span>Category: <strong>{selectedCategory}</strong></span>
                                 <button
                                     onClick={() => handleCategorySelect('All')}
@@ -539,7 +539,7 @@ const Catalogue = () => {
                             </span>
                         )}
                         {searchQuery && (
-                            <span className="inline-flex items-center gap-1.5 bg-[#d4af37]/15 text-[#304037] px-3 py-0.5 rounded-full font-medium text-[11px] border border-[#d4af37]/30">
+                            <span className="inline-flex items-center gap-1.5 bg-gold/15 text-primary px-3 py-0.5 rounded-full font-medium text-[11px] border border-gold/30">
                                 <span>Search: "{searchQuery}"</span>
                                 <button
                                     onClick={() => handleSearchChange('')}
@@ -554,7 +554,7 @@ const Catalogue = () => {
                     {(selectedCategory !== 'All' || selectedKarat !== 'All' || selectedMetal !== 'All' || searchQuery) && (
                         <button
                             onClick={handleResetFilters}
-                            className="text-[#304037] font-medium hover:underline cursor-pointer self-start sm:self-auto"
+                            className="text-primary font-medium hover:underline cursor-pointer self-start sm:self-auto"
                         >
                             Reset All Filters
                         </button>
@@ -564,8 +564,8 @@ const Catalogue = () => {
                 {/* Design Grid */}
                 {loading ? (
                     <div className="py-28 text-center space-y-4">
-                        <div className="w-10 h-10 border-2 border-[#d4af37] border-t-transparent rounded-full animate-spin mx-auto"></div>
-                        <p className="text-xs font-semibold uppercase tracking-widest text-[#304037]">
+                        <div className="w-10 h-10 border-2 border-gold border-t-transparent rounded-full animate-spin mx-auto"></div>
+                        <p className="text-xs font-semibold uppercase tracking-widest text-primary">
                             Loading Rangoli Jewellery Designs...
                         </p>
                     </div>
@@ -579,7 +579,7 @@ const Catalogue = () => {
                         {(selectedCategory !== 'All' || selectedKarat !== 'All' || searchQuery) && (
                             <button
                                 onClick={handleResetFilters}
-                                className="px-6 py-2.5 rounded-full bg-[#304037] text-white text-xs font-roboto uppercase tracking-wider cursor-pointer hover:bg-[#233029] transition-colors"
+                                className="px-6 py-2.5 rounded-full bg-primary text-white text-xs font-roboto uppercase tracking-wider cursor-pointer hover:bg-[#233029] transition-colors"
                             >
                                 View All Designs
                             </button>
@@ -594,7 +594,7 @@ const Catalogue = () => {
                             return (
                                 <div
                                     key={itemId}
-                                    className="group relative bg-white rounded-2xl overflow-hidden border border-[#EDE8E0] hover:border-[#d4af37]/60 hover:shadow-xl transition-all duration-500 flex flex-col justify-between"
+                                    className="group relative bg-white rounded-2xl overflow-hidden border border-[#EDE8E0] hover:border-gold/60 hover:shadow-xl transition-all duration-500 flex flex-col justify-between"
                                 >
                                     {/* Image Container */}
                                     <Link
@@ -612,7 +612,7 @@ const Catalogue = () => {
                                         />
 
                                         {/* Tag */}
-                                        <span className="absolute top-3 left-3 bg-[#304037] text-white text-[10px] font-roboto font-semibold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                                        <span className="absolute top-3 left-3 bg-primary text-white text-[10px] font-roboto font-semibold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm">
                                             {item.tag || 'Exclusive'}
                                         </span>
 
@@ -620,9 +620,9 @@ const Catalogue = () => {
                                         <span className={`absolute bottom-3 left-3 bg-white/95 backdrop-blur text-[10px] font-bold font-mono px-2 py-0.5 rounded border shadow-sm flex items-center gap-1 ${
                                             item.metal === 'Silver'
                                                 ? 'border-slate-300 text-slate-800'
-                                                : 'border-[#d4af37]/50 text-primary'
+                                                : 'border-gold/50 text-primary'
                                         }`}>
-                                            <span className={item.metal === 'Silver' ? 'text-slate-500' : 'text-[#d4af37]'}>✦</span>
+                                            <span className={item.metal === 'Silver' ? 'text-slate-500' : 'text-gold'}>✦</span>
                                             <span>{item.metal === 'Silver' ? `${item.karat || '925'} Silver` : `${item.karat || '22K'} Gold`}</span>
                                         </span>
                                     </Link>
@@ -633,14 +633,14 @@ const Catalogue = () => {
                                             <div className="flex items-center justify-between text-xs font-roboto">
                                                 <div className="flex items-center gap-2">
                                                     <span className={`uppercase tracking-widest font-semibold text-[11px] ${
-                                                        item.metal === 'Silver' ? 'text-slate-600' : 'text-[#d4af37]'
+                                                        item.metal === 'Silver' ? 'text-slate-600' : 'text-gold'
                                                     }`}>
                                                         {item.category}
                                                     </span>
                                                     <span className={`text-[10px] font-bold font-mono px-1.5 py-0.2 rounded border ${
                                                         item.metal === 'Silver'
                                                             ? 'bg-slate-100 text-slate-800 border-slate-300'
-                                                            : 'bg-[#f4efe6] text-[#304037] border-[#d4af37]/30'
+                                                            : 'bg-[#f4efe6] text-primary border-gold/30'
                                                     }`}>
                                                         {item.metal === 'Silver' ? `${item.karat || '925'} Silver` : item.karat}
                                                     </span>
@@ -652,7 +652,7 @@ const Catalogue = () => {
 
                                             <Link
                                                 to={`/product/${itemId}`}
-                                                className="block text-base sm:text-lg text-primary font-playfair font-normal leading-snug group-hover:text-[#d4af37] transition-colors line-clamp-1 cursor-pointer"
+                                                className="block text-base sm:text-lg text-primary font-playfair font-normal leading-snug group-hover:text-gold transition-colors line-clamp-1 cursor-pointer"
                                             >
                                                 {item.name}
                                             </Link>
@@ -667,9 +667,9 @@ const Catalogue = () => {
                                             {/* WhatsApp Enquiry Button */}
                                             <button
                                                 onClick={() => sendSingleEnquiry(item)}
-                                                className="group/btn w-full py-2.5 px-3 rounded-xl bg-[#304037] hover:bg-[#233029] text-white text-xs font-roboto font-medium uppercase tracking-wider flex items-center justify-center gap-2 border border-[#304037] hover:border-[#d4af37] shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer"
+                                                className="group/btn w-full py-2.5 px-3 rounded-xl bg-primary hover:bg-[#233029] text-white text-xs font-roboto font-medium uppercase tracking-wider flex items-center justify-center gap-2 border border-primary hover:border-gold shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer"
                                             >
-                                                <FaWhatsapp className="text-base text-[#d4af37] group-hover/btn:scale-110 transition-transform duration-200" />
+                                                <FaWhatsapp className="text-base text-gold group-hover/btn:scale-110 transition-transform duration-200" />
                                                 <span>Enquire on WhatsApp</span>
                                             </button>
 
@@ -684,13 +684,13 @@ const Catalogue = () => {
                                                 }}
                                                 className={`w-full py-2 px-3 rounded-xl text-xs font-roboto font-medium tracking-wide flex items-center justify-center gap-2 border transition-all duration-300 cursor-pointer ${
                                                     inBag
-                                                        ? 'bg-[#d4af37]/15 text-[#304037] border-[#d4af37] font-semibold'
-                                                        : 'bg-white hover:bg-[#304037]/5 text-[#304037] border-gray-300 hover:border-[#304037]'
+                                                        ? 'bg-gold/15 text-primary border-gold font-semibold'
+                                                        : 'bg-white hover:bg-primary/5 text-primary border-gray-300 hover:border-primary'
                                                 }`}
                                             >
                                                 {inBag ? (
                                                     <>
-                                                        <BsBagCheck className="text-sm text-[#304037]" />
+                                                        <BsBagCheck className="text-sm text-primary" />
                                                         <span>Added in Bag (Remove)</span>
                                                     </>
                                                 ) : (
@@ -709,9 +709,9 @@ const Catalogue = () => {
                 )}
 
                 {/* Bespoke Custom Design Banner */}
-                <div className="mt-16 p-8 sm:p-10 rounded-3xl bg-[#304037] text-white border border-[#3e5247] flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+                <div className="mt-16 p-8 sm:p-10 rounded-3xl bg-primary text-white border border-[#3e5247] flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
                     <div className="space-y-2 text-center md:text-left">
-                        <span className="text-xs uppercase tracking-widest text-[#d4af37] font-semibold font-roboto">
+                        <span className="text-xs uppercase tracking-widest text-gold font-semibold font-roboto">
                             Bespoke Custom Jewellery Studio
                         </span>
                         <h3 className="text-2xl sm:text-3xl font-playfair font-normal">
@@ -726,7 +726,7 @@ const Catalogue = () => {
                         href={`https://wa.me/${whatsappNumber}?text=Namaste%20Rangoli%20Jewellers,%20I%20have%20a%20custom%20jewellery%20design%20reference%20photo%20that%20I%20would%20like%20to%20craft.`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="shrink-0 px-8 py-3.5 rounded-full bg-[#d4af37] hover:bg-[#e0be53] text-[#1c2922] font-roboto font-semibold text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2.5 shadow-lg transition-all duration-300 cursor-pointer"
+                        className="shrink-0 px-8 py-3.5 rounded-full bg-gold hover:bg-[#e0be53] text-[#1c2922] font-roboto font-semibold text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2.5 shadow-lg transition-all duration-300 cursor-pointer"
                     >
                         <FaWhatsapp className="text-lg" />
                         <span>Send Custom Design Photo</span>

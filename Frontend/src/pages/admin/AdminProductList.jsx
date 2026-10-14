@@ -105,8 +105,8 @@ const AdminProductList = () => {
         <div className="space-y-6">
             {/* Toast Notification */}
             {toastMessage && (
-                <div className="fixed bottom-6 right-6 z-50 bg-[#304037] text-white px-5 py-3 rounded-xl shadow-xl border border-[#d4af37] text-xs font-medium flex items-center gap-2">
-                    <HiOutlineCheck className="text-base text-[#d4af37]" />
+                <div className="fixed bottom-6 right-6 z-50 bg-primary text-white px-5 py-3 rounded-xl shadow-xl border border-gold text-xs font-medium flex items-center gap-2">
+                    <HiOutlineCheck className="text-base text-gold" />
                     <span>{toastMessage}</span>
                 </div>
             )}
@@ -114,7 +114,7 @@ const AdminProductList = () => {
             {/* Header Title & Add Button */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                    <h1 className="font-playfair text-2xl sm:text-3xl font-medium text-[#304037]">
+                    <h1 className="font-playfair text-2xl sm:text-3xl font-medium text-primary">
                         Jewellery Catalogue Management
                     </h1>
                     <p className="text-xs text-gray-500 font-light mt-0.5">
@@ -124,9 +124,9 @@ const AdminProductList = () => {
 
                 <Link
                     to="/admin/products/new"
-                    className="self-start sm:self-auto px-5 py-2.5 rounded-xl bg-[#304037] hover:bg-[#222E27] text-white text-xs font-semibold uppercase tracking-wider transition-colors shadow-sm flex items-center gap-2 border border-[#304037] hover:border-[#d4af37]"
+                    className="self-start sm:self-auto px-5 py-2.5 rounded-xl bg-primary hover:bg-primary-dark text-white text-xs font-semibold uppercase tracking-wider transition-colors shadow-sm flex items-center gap-2 border border-primary hover:border-gold"
                 >
-                    <HiOutlinePlusCircle className="text-base text-[#d4af37]" />
+                    <HiOutlinePlusCircle className="text-base text-gold" />
                     <span>Add New Jewellery</span>
                 </Link>
             </div>
@@ -144,7 +144,7 @@ const AdminProductList = () => {
                         onClick={() => setSelectedMetal('All')}
                         className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer ${
                             selectedMetal === 'All'
-                                ? 'bg-[#304037] text-white shadow-xs'
+                                ? 'bg-primary text-white shadow-xs'
                                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                         }`}
                     >
@@ -155,7 +155,7 @@ const AdminProductList = () => {
                         onClick={() => setSelectedMetal('Gold')}
                         className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
                             selectedMetal === 'Gold'
-                                ? 'bg-[#d4af37] text-[#1a251f] font-bold shadow-xs'
+                                ? 'bg-gold text-[#1a251f] font-bold shadow-xs'
                                 : 'bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100'
                         }`}
                     >
@@ -188,7 +188,7 @@ const AdminProductList = () => {
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             placeholder="Search by product name, code (e.g. RJ-RNG-101), tag..."
-                            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-300 focus:border-[#304037] focus:ring-1 focus:ring-[#304037] outline-none text-xs"
+                            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-xs"
                         />
                     </div>
 
@@ -196,7 +196,7 @@ const AdminProductList = () => {
                     <select
                         value={selectedCategory}
                         onChange={(e) => setSelectedCategory(e.target.value)}
-                        className="w-full md:w-44 py-2.5 px-3 rounded-xl border border-gray-300 bg-white text-xs text-gray-700 outline-none focus:border-[#304037]"
+                        className="w-full md:w-44 py-2.5 px-3 rounded-xl border border-gray-300 bg-white text-xs text-gray-700 outline-none focus:border-primary"
                     >
                         {categories.map((c) => (
                             <option key={c} value={c}>
@@ -209,7 +209,7 @@ const AdminProductList = () => {
                     <select
                         value={selectedKarat}
                         onChange={(e) => setSelectedKarat(e.target.value)}
-                        className="w-full md:w-36 py-2.5 px-3 rounded-xl border border-gray-300 bg-white text-xs text-gray-700 outline-none focus:border-[#304037]"
+                        className="w-full md:w-36 py-2.5 px-3 rounded-xl border border-gray-300 bg-white text-xs text-gray-700 outline-none focus:border-primary"
                     >
                         {karats.map((k) => (
                             <option key={k} value={k}>
@@ -220,7 +220,7 @@ const AdminProductList = () => {
 
                     <button
                         type="submit"
-                        className="w-full md:w-auto px-5 py-2.5 bg-[#304037] text-white rounded-xl text-xs font-medium uppercase tracking-wider hover:bg-[#222E27] cursor-pointer"
+                        className="w-full md:w-auto px-5 py-2.5 bg-primary text-white rounded-xl text-xs font-medium uppercase tracking-wider hover:bg-primary-dark cursor-pointer"
                     >
                         Search
                     </button>
@@ -240,7 +240,7 @@ const AdminProductList = () => {
                                 setSelectedKarat('All')
                                 setSearchQuery('')
                             }}
-                            className="text-[#d4af37] font-medium hover:underline cursor-pointer"
+                            className="text-gold font-medium hover:underline cursor-pointer"
                         >
                             Reset Filters
                         </button>
@@ -252,12 +252,12 @@ const AdminProductList = () => {
             <div className="bg-white rounded-2xl border border-gray-200 shadow-xs overflow-hidden">
                 {loading ? (
                     <div className="py-20 text-center">
-                        <div className="w-8 h-8 border-2 border-[#d4af37] border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+                        <div className="w-8 h-8 border-2 border-gold border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
                         <span className="text-xs text-gray-500">Loading catalogue...</span>
                     </div>
                 ) : products.length === 0 ? (
                     <div className="py-16 text-center space-y-3">
-                        <div className="w-12 h-12 rounded-full bg-[#FAF7F2] text-[#d4af37] flex items-center justify-center mx-auto text-xl font-bold">
+                        <div className="w-12 h-12 rounded-full bg-[#FAF7F2] text-gold flex items-center justify-center mx-auto text-xl font-bold">
                             ✦
                         </div>
                         <h3 className="font-playfair text-lg text-gray-700">
@@ -268,7 +268,7 @@ const AdminProductList = () => {
                         </p>
                         <Link
                             to="/admin/products/new"
-                            className="inline-block px-4 py-2 bg-[#304037] text-white rounded-xl text-xs font-semibold uppercase tracking-wider"
+                            className="inline-block px-4 py-2 bg-primary text-white rounded-xl text-xs font-semibold uppercase tracking-wider"
                         >
                             Add New Design
                         </Link>
@@ -311,7 +311,7 @@ const AdminProductList = () => {
                                                         />
                                                     </div>
                                                     <div>
-                                                        <span className="font-medium text-[#304037] text-sm block">
+                                                        <span className="font-medium text-primary text-sm block">
                                                             {item.name}
                                                         </span>
                                                         <span className="text-[11px] text-gray-400 line-clamp-1">
@@ -329,7 +329,7 @@ const AdminProductList = () => {
                                                         SILVER
                                                     </span>
                                                 ) : (
-                                                    <span className="bg-[#FAF7F2] text-[#d4af37] border border-[#d4af37]/40 px-2.5 py-0.5 rounded-full text-[10px] font-bold font-mono tracking-wider">
+                                                    <span className="bg-[#FAF7F2] text-gold border border-gold/40 px-2.5 py-0.5 rounded-full text-[10px] font-bold font-mono tracking-wider">
                                                         GOLD
                                                     </span>
                                                 )}
@@ -343,7 +343,7 @@ const AdminProductList = () => {
                                                 <span className={`px-2 py-0.5 rounded text-[11px] font-mono font-bold ${
                                                     isItemSilver
                                                         ? 'bg-slate-100 text-slate-800'
-                                                        : 'bg-[#304037] text-[#d4af37]'
+                                                        : 'bg-primary text-gold'
                                                 }`}>
                                                     {isItemSilver ? `${item.karat || '925'} Silver` : `${item.karat} Gold`}
                                                 </span>
@@ -359,7 +359,7 @@ const AdminProductList = () => {
                                                         target="_blank"
                                                         rel="noopener noreferrer"
                                                         title="View on Live Store"
-                                                        className="p-2 text-gray-500 hover:text-[#304037] hover:bg-gray-100 rounded-lg transition-colors"
+                                                        className="p-2 text-gray-500 hover:text-primary hover:bg-gray-100 rounded-lg transition-colors"
                                                     >
                                                         <HiOutlineEye className="text-base" />
                                                     </a>
@@ -368,7 +368,7 @@ const AdminProductList = () => {
                                                     <Link
                                                         to={`/admin/products/edit/${id}`}
                                                         title="Edit Product"
-                                                        className="p-2 text-[#304037] hover:bg-[#FAF7F2] border border-gray-200 rounded-lg transition-colors"
+                                                        className="p-2 text-primary hover:bg-[#FAF7F2] border border-gray-200 rounded-lg transition-colors"
                                                     >
                                                         <HiOutlinePencilSquare className="text-base" />
                                                     </Link>

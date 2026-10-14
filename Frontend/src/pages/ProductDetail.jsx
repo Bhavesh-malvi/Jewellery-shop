@@ -259,8 +259,8 @@ const ProductDetail = () => {
     if (loading) {
         return (
             <div className="min-h-[75vh] flex flex-col items-center justify-center bg-[#FCFBF8]">
-                <div className="w-10 h-10 border-2 border-[#d4af37] border-t-transparent rounded-full animate-spin mb-3"></div>
-                <p className="text-xs uppercase tracking-widest text-[#304037] font-semibold">
+                <div className="w-10 h-10 border-2 border-gold border-t-transparent rounded-full animate-spin mb-3"></div>
+                <p className="text-xs uppercase tracking-widest text-primary font-semibold">
                     Loading Jewellery Details...
                 </p>
             </div>
@@ -270,10 +270,10 @@ const ProductDetail = () => {
     if (!product || notFound) {
         return (
             <div className="min-h-[75vh] flex flex-col items-center justify-center bg-[#FCFBF8] text-center px-4">
-                <div className="w-16 h-16 rounded-full bg-[#FAF7F2] border border-[#d4af37]/40 flex items-center justify-center text-[#d4af37] text-2xl mx-auto mb-4">
+                <div className="w-16 h-16 rounded-full bg-[#FAF7F2] border border-gold/40 flex items-center justify-center text-gold text-2xl mx-auto mb-4">
                     💍
                 </div>
-                <h2 className="text-2xl sm:text-3xl font-playfair text-[#304037] mb-2">
+                <h2 className="text-2xl sm:text-3xl font-playfair text-primary mb-2">
                     Jewellery Piece Not Found
                 </h2>
                 <p className="text-xs sm:text-sm text-gray-500 max-w-md mb-6">
@@ -282,13 +282,13 @@ const ProductDetail = () => {
                 <div className="flex gap-3">
                     <Link
                         to="/catalogue"
-                        className="px-6 py-2.5 rounded-xl bg-[#304037] text-white text-xs uppercase tracking-wider font-semibold"
+                        className="px-6 py-2.5 rounded-xl bg-primary text-white text-xs uppercase tracking-wider font-semibold"
                     >
                         Browse Catalogue
                     </Link>
                     <Link
                         to="/contact"
-                        className="px-6 py-2.5 rounded-xl border border-[#d4af37] text-[#304037] text-xs uppercase tracking-wider font-semibold"
+                        className="px-6 py-2.5 rounded-xl border border-gold text-primary text-xs uppercase tracking-wider font-semibold"
                     >
                         Visit Showroom
                     </Link>
@@ -334,7 +334,7 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
     const galleryImages = rawImages.length > 0 ? rawImages : [product.img]
 
     return (
-        <div className="bg-[#FCFBF8] text-[#304037] min-h-screen pt-24 pb-20 font-roboto">
+        <div className="bg-[#FCFBF8] text-primary min-h-screen pt-24 pb-20 font-roboto">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* 1. Breadcrumbs */}
                 <nav
@@ -343,21 +343,21 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                 >
                     <Link
                         to="/"
-                        className="hover:text-[#304037] transition-colors"
+                        className="hover:text-primary transition-colors"
                     >
                         Home
                     </Link>
                     <span className="text-gray-300">→</span>
                     <Link
                         to={isSilver ? '/catalogue?metal=silver' : '/catalogue?metal=gold'}
-                        className="hover:text-[#304037] transition-colors"
+                        className="hover:text-primary transition-colors"
                     >
                         {isSilver ? 'Silver Collection' : 'Jewellery'}
                     </Link>
                     <span className="text-gray-300">→</span>
                     <Link
                         to={isSilver ? `/catalogue?metal=silver&category=${encodeURIComponent(product.category)}` : `/catalogue?category=${encodeURIComponent(product.category)}`}
-                        className="hover:text-[#304037] transition-colors"
+                        className="hover:text-primary transition-colors"
                     >
                         {product.category}
                     </Link>
@@ -385,7 +385,7 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                             isSelected
                                                 ? isSilver
                                                     ? 'border-slate-700 shadow-md scale-102 ring-1 ring-slate-400'
-                                                    : 'border-[#304037] shadow-md scale-102 ring-1 ring-[#304037]/20'
+                                                    : 'border-primary shadow-md scale-102 ring-1 ring-primary/20'
                                                 : 'border-transparent hover:border-gray-300 opacity-75 hover:opacity-100'
                                         }`}
                                     >
@@ -404,7 +404,7 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                         </div>
 
                         {/* Large Main Interactive Image Card */}
-                        <div className="flex-1 bg-[#F9F7F3] rounded-2xl border border-[#EDE8E0] p-6 sm:p-10 flex items-center justify-center relative min-h-[380px] sm:min-h-[480px] md:min-h-[520px] overflow-hidden group shadow-sm">
+                        <div className="flex-1 bg-[#F9F7F3] rounded-2xl border border-[#EDE8E0] p-6 sm:p-10 flex items-center justify-center relative min-h-95 sm:min-h-120 md:min-h-130 overflow-hidden group shadow-sm">
                             <img
                                 src={galleryImages[selectedImageIndex] || product.img || product.images?.[0] || 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80'}
                                 alt={product.name}
@@ -412,20 +412,20 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                     e.currentTarget.onerror = null
                                     e.currentTarget.src = 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80'
                                 }}
-                                className="w-full h-full max-h-[440px] object-contain transition-transform duration-700 group-hover:scale-108 drop-shadow-md select-none"
+                                className="w-full h-full max-h-110 object-contain transition-transform duration-700 group-hover:scale-108 drop-shadow-md select-none"
                             />
 
                             {/* Hallmark Overlay Tag */}
-                            <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-full border border-[#d4af37]/40 shadow-sm flex items-center gap-1.5">
-                                <BsPatchCheckFill className={isSilver ? "text-slate-600 text-xs" : "text-[#d4af37] text-xs"} />
-                                <span className="text-[11px] font-roboto font-semibold text-[#304037] tracking-wider uppercase">
+                            <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-full border border-gold/40 shadow-sm flex items-center gap-1.5">
+                                <BsPatchCheckFill className={isSilver ? "text-slate-600 text-xs" : "text-gold text-xs"} />
+                                <span className="text-[11px] font-roboto font-semibold text-primary tracking-wider uppercase">
                                     {isSilver ? `${selectedKarat || '925'} BIS Hallmarked Silver` : 'BIS Hallmarked'}
                                 </span>
                             </div>
 
                             {/* Tag */}
                             {product.tag && (
-                                <div className="absolute top-4 right-4 bg-[#304037] text-white px-3 py-1 rounded-full text-[10px] font-roboto font-medium uppercase tracking-wider shadow-sm">
+                                <div className="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-[10px] font-roboto font-medium uppercase tracking-wider shadow-sm">
                                     {product.tag}
                                 </div>
                             )}
@@ -441,11 +441,11 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                     <div className="lg:col-span-5 flex flex-col space-y-6">
                         {/* Title & Category */}
                         <div>
-                            <h1 className="font-playfair text-2xl sm:text-3xl md:text-4xl text-[#304037] font-normal tracking-tight leading-tight">
+                            <h1 className="font-playfair text-2xl sm:text-3xl md:text-4xl text-primary font-normal tracking-tight leading-tight">
                                 {product.name}
                             </h1>
                             <div className="flex items-center gap-2 mt-2">
-                                <span className={`text-xs uppercase tracking-widest font-semibold ${isSilver ? 'text-slate-600' : 'text-[#d4af37]'}`}>
+                                <span className={`text-xs uppercase tracking-widest font-semibold ${isSilver ? 'text-slate-600' : 'text-gold'}`}>
                                     {product.category}
                                 </span>
                                 <span className="text-gray-300">•</span>
@@ -461,12 +461,12 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                         </p>
 
                         {/* Hallmark & Live Gold/Silver Quotation Badge (Replaces price) */}
-                        <div className="bg-[#FAF7F2] border border-[#d4af37]/35 rounded-xl p-4 flex items-center justify-between">
+                        <div className="bg-[#FAF7F2] border border-gold/35 rounded-xl p-4 flex items-center justify-between">
                             <div>
-                                <span className={`text-[11px] uppercase tracking-wider font-bold font-roboto ${isSilver ? 'text-slate-700' : 'text-[#d4af37]'}`}>
+                                <span className={`text-[11px] uppercase tracking-wider font-bold font-roboto ${isSilver ? 'text-slate-700' : 'text-gold'}`}>
                                     {isSilver ? 'Live Silver Rate Valuation' : 'Live Gold Rate Valuation'}
                                 </span>
-                                <p className="text-sm font-playfair text-[#304037] font-medium mt-0.5">
+                                <p className="text-sm font-playfair text-primary font-medium mt-0.5">
                                     {isSilver ? 'Custom Quote on Live Market Silver Rate' : 'Custom Quote on Live Market Gold Rate'}
                                 </p>
                                 <p className="text-[11px] text-gray-500 font-roboto mt-0.5">
@@ -474,7 +474,7 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                 </p>
                             </div>
                             <div className="text-right shrink-0 ml-3">
-                                <span className="inline-block bg-[#304037] text-[#d4af37] text-[11px] font-mono font-bold px-3 py-1.5 rounded-lg shadow-sm">
+                                <span className="inline-block bg-primary text-gold text-[11px] font-mono font-bold px-3 py-1.5 rounded-lg shadow-sm">
                                     {isSilver ? 'BIS 925 / 999' : 'BIS 916 / 750'}
                                 </span>
                             </div>
@@ -486,7 +486,7 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                 <label className="text-sm font-medium text-gray-800 font-roboto">
                                     {isSilver ? 'Silver Purity Standard' : 'Carat'}
                                 </label>
-                                <span className={`text-xs font-medium font-roboto ${isSilver ? 'text-slate-700' : 'text-[#d4af37]'}`}>
+                                <span className={`text-xs font-medium font-roboto ${isSilver ? 'text-slate-700' : 'text-gold'}`}>
                                     Selected: {selectedKarat} ({activeKaratDetails.purityPercentage} {isSilver ? 'Silver' : 'Gold'})
                                 </span>
                             </div>
@@ -504,8 +504,8 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                                 isSelected
                                                     ? isSilver
                                                         ? 'bg-slate-800 text-white shadow-sm border border-slate-700'
-                                                        : 'bg-[#304037] text-white shadow-sm border border-[#304037]'
-                                                    : 'bg-white text-gray-700 border border-gray-200 hover:border-[#304037] hover:text-[#304037]'
+                                                        : 'bg-primary text-white shadow-sm border border-primary'
+                                                    : 'bg-white text-gray-700 border border-gray-200 hover:border-primary hover:text-primary'
                                             }`}
                                         >
                                             {kt}
@@ -515,15 +515,15 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                             </div>
 
                             {/* DYNAMIC PURITY & SPECIFICATIONS CARD FOR SELECTED CARAT / STANDARD */}
-                            <div className="mt-3 bg-gradient-to-br from-[#FDFBF7] to-[#F5EFE6] border border-[#d4af37]/30 rounded-xl p-4 space-y-2.5 shadow-xs">
+                            <div className="mt-3 bg-linear-to-br from-[#FDFBF7] to-[#F5EFE6] border border-gold/30 rounded-xl p-4 space-y-2.5 shadow-xs">
                                 <div className="flex items-center justify-between border-b border-[#EDE3D0] pb-2">
                                     <div className="flex items-center gap-2">
-                                        <span className={`w-2 h-2 rounded-full animate-pulse ${isSilver ? 'bg-slate-600' : 'bg-[#d4af37]'}`}></span>
-                                        <span className="text-xs font-bold text-[#304037] uppercase tracking-wide">
+                                        <span className={`w-2 h-2 rounded-full animate-pulse ${isSilver ? 'bg-slate-600' : 'bg-gold'}`}></span>
+                                        <span className="text-xs font-bold text-primary uppercase tracking-wide">
                                             {selectedKarat} {isSilver ? 'Silver' : 'Gold'} Purity Details
                                         </span>
                                     </div>
-                                    <span className="text-xs font-mono font-bold text-[#304037] bg-white px-2 py-0.5 rounded border border-[#d4af37]/30">
+                                    <span className="text-xs font-mono font-bold text-primary bg-white px-2 py-0.5 rounded border border-gold/30">
                                         {activeKaratDetails.purityPercentage} Pure
                                     </span>
                                 </div>
@@ -583,18 +583,18 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                 }}
                                 className={`w-full py-3.5 px-5 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2.5 cursor-pointer shadow-sm ${
                                     inBag
-                                        ? 'bg-[#222e27] text-[#d4af37] border border-[#d4af37]'
-                                        : 'bg-[#304037] hover:bg-[#233029] text-white border border-[#304037] hover:border-[#d4af37]'
+                                        ? 'bg-primary-dark text-gold border border-gold'
+                                        : 'bg-primary hover:bg-[#233029] text-white border border-primary hover:border-gold'
                                 }`}
                             >
                                 {inBag ? (
                                     <>
-                                        <BsBagCheck className="text-base text-[#d4af37]" />
+                                        <BsBagCheck className="text-base text-gold" />
                                         <span>Added to Enquiry Bag</span>
                                     </>
                                 ) : (
                                     <>
-                                        <BsBagPlus className="text-base text-[#d4af37]" />
+                                        <BsBagPlus className="text-base text-gold" />
                                         <span>Add to Enquiry Bag</span>
                                     </>
                                 )}
@@ -604,7 +604,7 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                             <button
                                 type="button"
                                 onClick={handleWhatsAppEnquiry}
-                                className="w-full py-3.5 px-5 rounded-xl bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#20bd5a] hover:to-[#0f7a6e] text-white text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2.5 shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer"
+                                className="w-full py-3.5 px-5 rounded-xl bg-linear-to-r from-[#25D366] to-[#128C7E] hover:from-[#20bd5a] hover:to-[#0f7a6e] text-white text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2.5 shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer"
                             >
                                 <FaWhatsapp className="text-lg" />
                                 <span>Enquire on WhatsApp ({selectedKarat} {isSilver ? 'Silver' : 'Gold'})</span>
@@ -614,21 +614,21 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                         {/* 3 VALUE PERKS (matching Screenshot 1) */}
                         <div className="pt-6 border-t border-gray-100 space-y-3.5">
                             <div className="flex items-center gap-3 text-xs text-gray-600">
-                                <div className="w-8 h-8 rounded-full bg-[#F5EFE6] flex items-center justify-center text-[#304037] shrink-0">
+                                <div className="w-8 h-8 rounded-full bg-[#F5EFE6] flex items-center justify-center text-primary shrink-0">
                                     <HiOutlineTruck className="text-base" />
                                 </div>
                                 <span>Free Shipping & Showroom Trial</span>
                             </div>
 
                             <div className="flex items-center gap-3 text-xs text-gray-600">
-                                <div className="w-8 h-8 rounded-full bg-[#F5EFE6] flex items-center justify-center text-[#304037] shrink-0">
+                                <div className="w-8 h-8 rounded-full bg-[#F5EFE6] flex items-center justify-center text-primary shrink-0">
                                     <HiOutlineShieldCheck className="text-base" />
                                 </div>
                                 <span>Flexible and Secure Payment, Pay on Delivery</span>
                             </div>
 
                             <div className="flex items-center gap-3 text-xs text-gray-600">
-                                <div className="w-8 h-8 rounded-full bg-[#F5EFE6] flex items-center justify-center text-[#304037] shrink-0">
+                                <div className="w-8 h-8 rounded-full bg-[#F5EFE6] flex items-center justify-center text-primary shrink-0">
                                     <HiOutlineSparkles className="text-base" />
                                 </div>
                                 <span>600,000+ Happy Customers & BIS Hallmarked Trust</span>
@@ -646,7 +646,7 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                             onClick={() => setActiveTab('description')}
                             className={`pb-4 text-sm sm:text-base font-playfair transition-all duration-200 cursor-pointer relative ${
                                 activeTab === 'description'
-                                    ? 'text-[#304037] font-semibold border-b-2 border-[#304037]'
+                                    ? 'text-primary font-semibold border-b-2 border-primary'
                                     : 'text-gray-400 hover:text-gray-700'
                             }`}
                         >
@@ -657,7 +657,7 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                             onClick={() => setActiveTab('specifications')}
                             className={`pb-4 text-sm sm:text-base font-playfair transition-all duration-200 cursor-pointer relative ${
                                 activeTab === 'specifications'
-                                    ? 'text-[#304037] font-semibold border-b-2 border-[#304037]'
+                                    ? 'text-primary font-semibold border-b-2 border-primary'
                                     : 'text-gray-400 hover:text-gray-700'
                             }`}
                         >
@@ -678,25 +678,25 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                             {/* Bullet points matching Screenshot 2 */}
                             <ul className="space-y-3 pt-2 text-sm text-gray-600 font-roboto">
                                 <li className="flex items-start gap-2.5">
-                                    <span className="text-[#304037] text-lg leading-none mt-0.5">•</span>
+                                    <span className="text-primary text-lg leading-none mt-0.5">•</span>
                                     <span>
                                         Crafted with a clean, refined look that represents simplicity and luxury together, making it suitable for both modern and traditional styles.
                                     </span>
                                 </li>
                                 <li className="flex items-start gap-2.5">
-                                    <span className="text-[#304037] text-lg leading-none mt-0.5">•</span>
+                                    <span className="text-primary text-lg leading-none mt-0.5">•</span>
                                     <span>
                                         Ideal for daily wear, office use, parties, weddings, engagements, and special celebrations, making it a versatile jewelry piece.
                                     </span>
                                 </li>
                                 <li className="flex items-start gap-2.5">
-                                    <span className="text-[#304037] text-lg leading-none mt-0.5">•</span>
+                                    <span className="text-primary text-lg leading-none mt-0.5">•</span>
                                     <span>
                                         Designed with a smooth inner finish and lightweight structure so you can wear it comfortably throughout the day without irritation.
                                     </span>
                                 </li>
                                 <li className="flex items-start gap-2.5">
-                                    <span className="text-[#304037] text-lg leading-none mt-0.5">•</span>
+                                    <span className="text-primary text-lg leading-none mt-0.5">•</span>
                                     <span>
                                         {isSilver
                                             ? 'Govt. Approved BIS Hallmarked Silver with official 925 / 999 stamp assuring genuine sterling purity.'
@@ -707,7 +707,7 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
 
                             {/* Centered navigation dots matching Screenshot 2 */}
                             <div className="flex justify-center items-center gap-2 pt-6">
-                                <span className="w-2.5 h-2.5 rounded-full bg-[#304037]"></span>
+                                <span className="w-2.5 h-2.5 rounded-full bg-primary"></span>
                                 <span className="w-2 h-2 rounded-full bg-gray-300"></span>
                             </div>
                         </div>
@@ -720,7 +720,7 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                 <table className="w-full text-left text-xs sm:text-sm font-roboto">
                                     <tbody className="divide-y divide-gray-100">
                                         <tr className="bg-[#FAF7F2]">
-                                            <td className="py-3.5 px-5 font-semibold text-[#304037] w-1/3">
+                                            <td className="py-3.5 px-5 font-semibold text-primary w-1/3">
                                                 Selected {isSilver ? 'Silver Purity' : 'Gold Karat'}
                                             </td>
                                             <td className="py-3.5 px-5 text-gray-700 font-mono font-bold">
@@ -728,7 +728,7 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td className="py-3.5 px-5 font-semibold text-[#304037]">
+                                            <td className="py-3.5 px-5 font-semibold text-primary">
                                                 Hallmark Certification
                                             </td>
                                             <td className="py-3.5 px-5 text-gray-700">
@@ -737,7 +737,7 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                             </td>
                                         </tr>
                                         <tr className="bg-[#FAF7F2]">
-                                            <td className="py-3.5 px-5 font-semibold text-[#304037]">
+                                            <td className="py-3.5 px-5 font-semibold text-primary">
                                                 {isSilver ? 'Net Silver Weight' : 'Net Gold Weight'}
                                             </td>
                                             <td className="py-3.5 px-5 text-gray-700 font-mono">
@@ -745,7 +745,7 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td className="py-3.5 px-5 font-semibold text-[#304037]">
+                                            <td className="py-3.5 px-5 font-semibold text-primary">
                                                 Approx. Gross Weight
                                             </td>
                                             <td className="py-3.5 px-5 text-gray-700 font-mono">
@@ -753,7 +753,7 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                             </td>
                                         </tr>
                                         <tr className="bg-[#FAF7F2]">
-                                            <td className="py-3.5 px-5 font-semibold text-[#304037]">
+                                            <td className="py-3.5 px-5 font-semibold text-primary">
                                                 Diamond / Stone Details
                                             </td>
                                             <td className="py-3.5 px-5 text-gray-700">
@@ -762,7 +762,7 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td className="py-3.5 px-5 font-semibold text-[#304037]">
+                                            <td className="py-3.5 px-5 font-semibold text-primary">
                                                 Metal Color / Tone
                                             </td>
                                             <td className="py-3.5 px-5 text-gray-700">
@@ -771,7 +771,7 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                             </td>
                                         </tr>
                                         <tr className="bg-[#FAF7F2]">
-                                            <td className="py-3.5 px-5 font-semibold text-[#304037]">
+                                            <td className="py-3.5 px-5 font-semibold text-primary">
                                                 Sizing & Custom Fit
                                             </td>
                                             <td className="py-3.5 px-5 text-gray-700">
@@ -780,7 +780,7 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td className="py-3.5 px-5 font-semibold text-[#304037]">
+                                            <td className="py-3.5 px-5 font-semibold text-primary">
                                                 Showroom Availability
                                             </td>
                                             <td className="py-3.5 px-5 text-gray-700">
@@ -801,12 +801,12 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                         <div className="text-center mb-10">
                             {/* Pill badge matching Screenshot 2 */}
                             <div className="inline-flex items-center gap-1.5 px-4 py-1 rounded-full border border-gray-300 bg-white text-[11px] font-roboto font-semibold tracking-wider uppercase text-gray-700 mb-3 shadow-xs">
-                                <span className="w-1.5 h-1.5 rounded-full bg-[#304037]"></span>
+                                <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
                                 <span>Featured Products</span>
                             </div>
 
                             {/* Title matching Screenshot 2 */}
-                            <h2 className="font-playfair text-2xl sm:text-3xl md:text-4xl text-[#304037] font-normal tracking-tight">
+                            <h2 className="font-playfair text-2xl sm:text-3xl md:text-4xl text-primary font-normal tracking-tight">
                                 Explore Our Signature Jewellery Pieces
                             </h2>
                         </div>
@@ -818,7 +818,7 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                 return (
                                     <div
                                         key={rId}
-                                        className="group bg-white rounded-2xl overflow-hidden border border-[#EDE8E0] hover:border-[#d4af37]/60 hover:shadow-xl transition-all duration-500 flex flex-col justify-between"
+                                        className="group bg-white rounded-2xl overflow-hidden border border-[#EDE8E0] hover:border-gold/60 hover:shadow-xl transition-all duration-500 flex flex-col justify-between"
                                     >
                                         {/* Image */}
                                         <Link
@@ -834,7 +834,7 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                                 }}
                                                 className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110 drop-shadow-sm"
                                             />
-                                            <span className="absolute bottom-3 left-3 bg-white/95 text-primary text-[10px] font-bold font-mono px-2 py-0.5 rounded border border-[#d4af37]/40 shadow-xs">
+                                            <span className="absolute bottom-3 left-3 bg-white/95 text-primary text-[10px] font-bold font-mono px-2 py-0.5 rounded border border-gold/40 shadow-xs">
                                                 {item.karat} Gold
                                             </span>
                                         </Link>
@@ -843,7 +843,7 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                         <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
                                             <div className="space-y-1">
                                                 <div className="flex items-center justify-between text-xs">
-                                                    <span className="uppercase tracking-widest text-[#d4af37] font-semibold text-[10px]">
+                                                    <span className="uppercase tracking-widest text-gold font-semibold text-[10px]">
                                                         {item.category}
                                                     </span>
                                                     <span className="text-gray-400 font-mono text-[10px]">
@@ -852,7 +852,7 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
                                                 </div>
                                                 <Link
                                                     to={`/product/${rId}`}
-                                                    className="block font-playfair text-base text-[#304037] font-normal group-hover:text-[#d4af37] transition-colors line-clamp-1"
+                                                    className="block font-playfair text-base text-primary font-normal group-hover:text-gold transition-colors line-clamp-1"
                                                 >
                                                     {item.name}
                                                 </Link>
@@ -863,10 +863,10 @@ Kindly share today's live rate quote, custom sizing options, and showroom availa
 
                                             <Link
                                                 to={`/product/${rId}`}
-                                                className="w-full py-2.5 px-3 rounded-xl bg-[#304037] hover:bg-[#233029] text-white text-xs font-roboto font-medium uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all duration-200"
+                                                className="w-full py-2.5 px-3 rounded-xl bg-primary hover:bg-[#233029] text-white text-xs font-roboto font-medium uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all duration-200"
                                             >
                                                 <span>View Details</span>
-                                                <FaArrowRight className="text-[10px] text-[#d4af37]" />
+                                                <FaArrowRight className="text-[10px] text-gold" />
                                             </Link>
                                         </div>
                                     </div>

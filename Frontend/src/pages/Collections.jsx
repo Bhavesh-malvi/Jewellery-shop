@@ -54,9 +54,9 @@ const Collections = () => {
     return (
         <div className="w-full bg-[#FAFAF8] min-h-screen">
             {/* Header Banner */}
-            <div className="bg-[#304037] text-white py-16 sm:py-20 px-4 sm:px-6 lg:px-8 border-b border-[#3e5247] text-center space-y-4">
-                <div className="inline-flex items-center gap-1.5 border border-[#d4af37]/40 px-4 py-1 rounded-full text-xs font-roboto uppercase tracking-widest text-[#f3e5ab] bg-[#24312a]/60 backdrop-blur-sm">
-                    <GoDotFill className="text-xs text-[#d4af37]" />
+            <div className="bg-primary text-white py-16 sm:py-20 px-4 sm:px-6 lg:px-8 border-b border-[#3e5247] text-center space-y-4">
+                <div className="inline-flex items-center gap-1.5 border border-gold/40 px-4 py-1 rounded-full text-xs font-roboto uppercase tracking-widest text-gold-light bg-[#24312a]/60 backdrop-blur-sm">
+                    <GoDotFill className="text-xs text-gold" />
                     <span>Curated Design Lookbooks</span>
                 </div>
 
@@ -77,7 +77,7 @@ const Collections = () => {
                     return (
                         <div
                             key={index}
-                            className={`p-8 sm:p-12 rounded-3xl bg-white border border-[#EDE8E0] hover:border-[#d4af37]/60 shadow-sm hover:shadow-xl transition-all duration-500 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center ${
+                            className={`p-8 sm:p-12 rounded-3xl bg-white border border-[#EDE8E0] hover:border-gold/60 shadow-sm hover:shadow-xl transition-all duration-500 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center ${
                                 isEven ? 'lg:flex-row-reverse' : ''
                             }`}
                         >
@@ -85,7 +85,7 @@ const Collections = () => {
                             <div className={`lg:col-span-7 space-y-5 ${isEven ? 'lg:order-2' : ''}`}>
                                 <div className="space-y-1.5">
                                     <div className="flex items-center gap-2">
-                                        <span className="text-xs uppercase tracking-widest text-[#d4af37] font-semibold font-roboto">
+                                        <span className="text-xs uppercase tracking-widest text-gold font-semibold font-roboto">
                                             {item.tag}
                                         </span>
                                         <span className="text-xs text-gray-400 font-roboto">• {item.featuredCount}</span>
@@ -95,7 +95,7 @@ const Collections = () => {
                                         {item.title}
                                     </h2>
 
-                                    <p className="text-sm font-roboto font-medium text-[#304037]/80 italic">
+                                    <p className="text-sm font-roboto font-medium text-primary/80 italic">
                                         {item.subtitle}
                                     </p>
                                 </div>
@@ -108,7 +108,7 @@ const Collections = () => {
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2">
                                     {item.highlights.map((h, hIdx) => (
                                         <div key={hIdx} className="flex items-center gap-2 text-xs sm:text-sm font-roboto text-gray-700">
-                                            <span className="text-[#d4af37]">✦</span>
+                                            <span className="text-gold">✦</span>
                                             <span>{h}</span>
                                         </div>
                                     ))}
@@ -122,15 +122,15 @@ const Collections = () => {
                                         )}.`}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-[#304037] hover:bg-[#233029] text-white text-xs sm:text-sm font-roboto font-medium tracking-wide transition-all duration-300 shadow-sm cursor-pointer border border-[#304037] hover:border-[#d4af37]"
+                                        className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-primary hover:bg-[#233029] text-white text-xs sm:text-sm font-roboto font-medium tracking-wide transition-all duration-300 shadow-sm cursor-pointer border border-primary hover:border-gold"
                                     >
-                                        <FaWhatsapp className="text-lg text-[#d4af37]" />
+                                        <FaWhatsapp className="text-lg text-gold" />
                                         <span>Consult on WhatsApp</span>
                                     </a>
 
                                     <Link
                                         to="/catalogue"
-                                        className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white hover:bg-gray-100 text-[#304037] text-xs sm:text-sm font-roboto font-medium tracking-wide transition-all duration-300 shadow-sm cursor-pointer border border-gray-300 hover:border-[#304037]"
+                                        className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white hover:bg-gray-100 text-primary text-xs sm:text-sm font-roboto font-medium tracking-wide transition-all duration-300 shadow-sm cursor-pointer border border-gray-300 hover:border-primary"
                                     >
                                         <span>Browse Catalogue</span>
                                         <HiArrowRight className="text-base" />
@@ -146,8 +146,8 @@ const Collections = () => {
                                         alt={item.title}
                                         className="w-full h-72 sm:h-84 object-contain rounded-xl transition-transform duration-700 group-hover:scale-108"
                                     />
-                                    <div className="absolute bottom-4 left-4 bg-[#304037]/85 backdrop-blur-sm text-white px-3.5 py-1.5 rounded-full text-xs font-roboto">
-                                        <span className="text-[#f3e5ab] font-medium">{item.featuredCount}</span>
+                                    <div className="absolute bottom-4 left-4 bg-primary/85 backdrop-blur-sm text-white px-3.5 py-1.5 rounded-full text-xs font-roboto">
+                                        <span className="text-gold-light font-medium">{item.featuredCount}</span>
                                     </div>
                                 </div>
                             </div>

@@ -352,7 +352,7 @@ const AdminProductForm = () => {
                 <div className="flex items-center justify-between">
                     <div>
                         <div className="flex items-center gap-1.5">
-                            <span className="text-xs font-bold text-[#304037]">{label}</span>
+                            <span className="text-xs font-bold text-primary">{label}</span>
                             {isRequired && <span className="text-red-500 text-xs font-bold">*</span>}
                         </div>
                         {badgeText && <span className="text-[10px] text-gray-500">{badgeText}</span>}
@@ -365,7 +365,7 @@ const AdminProductForm = () => {
                                 [slotKey]: !prev[slotKey],
                             }))
                         }
-                        className="text-[11px] text-[#304037] hover:text-[#d4af37] font-medium flex items-center gap-1 cursor-pointer"
+                        className="text-[11px] text-primary hover:text-gold font-medium flex items-center gap-1 cursor-pointer"
                     >
                         {isUrlMode ? (
                             <>
@@ -382,11 +382,11 @@ const AdminProductForm = () => {
                 </div>
 
                 {/* Preview Box or Upload Dropzone */}
-                <div className="relative h-44 rounded-xl border-2 border-dashed border-gray-300 hover:border-[#d4af37] bg-white transition-all overflow-hidden flex items-center justify-center group">
+                <div className="relative h-44 rounded-xl border-2 border-dashed border-gray-300 hover:border-gold bg-white transition-all overflow-hidden flex items-center justify-center group">
                     {isUploading ? (
                         <div className="flex flex-col items-center gap-2 p-4 text-center">
-                            <div className="w-8 h-8 border-2 border-[#d4af37] border-t-transparent rounded-full animate-spin"></div>
-                            <span className="text-xs font-semibold text-[#304037]">
+                            <div className="w-8 h-8 border-2 border-gold border-t-transparent rounded-full animate-spin"></div>
+                            <span className="text-xs font-semibold text-primary">
                                 Uploading image...
                             </span>
                             <span className="text-[10px] text-gray-500">Processing Cloudinary CDN</span>
@@ -403,11 +403,11 @@ const AdminProductForm = () => {
                                 }}
                             />
                             {/* Hover Overlay */}
-                            <div className="absolute inset-0 bg-[#304037]/75 backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2 p-3">
+                            <div className="absolute inset-0 bg-primary/75 backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2 p-3">
                                 <button
                                     type="button"
                                     onClick={() => fileInputRefs[slotKey].current?.click()}
-                                    className="px-3 py-1.5 rounded-lg bg-[#d4af37] text-[#1a251f] text-xs font-bold flex items-center gap-1.5 shadow-sm hover:bg-[#c39f2f] cursor-pointer"
+                                    className="px-3 py-1.5 rounded-lg bg-gold text-[#1a251f] text-xs font-bold flex items-center gap-1.5 shadow-sm hover:bg-[#c39f2f] cursor-pointer"
                                 >
                                     <HiOutlineArrowUpTray />
                                     <span>Replace Photo</span>
@@ -435,10 +435,10 @@ const AdminProductForm = () => {
                             onClick={() => fileInputRefs[slotKey].current?.click()}
                             className="w-full h-full flex flex-col items-center justify-center p-4 text-center cursor-pointer hover:bg-[#FAF7F2]/50 transition-colors"
                         >
-                            <div className="w-10 h-10 rounded-full bg-[#FAF7F2] border border-gray-200 flex items-center justify-center text-[#304037] mb-2 group-hover:scale-110 group-hover:text-[#d4af37] transition-all">
+                            <div className="w-10 h-10 rounded-full bg-[#FAF7F2] border border-gray-200 flex items-center justify-center text-primary mb-2 group-hover:scale-110 group-hover:text-gold transition-all">
                                 <HiOutlineCloudArrowUp className="text-xl" />
                             </div>
-                            <span className="text-xs font-bold text-[#304037]">
+                            <span className="text-xs font-bold text-primary">
                                 Click to browse photo
                             </span>
                             <span className="text-[10px] text-gray-500 mt-0.5">
@@ -467,7 +467,7 @@ const AdminProductForm = () => {
                                 setFormData({ ...formData, [slotKey]: e.target.value })
                             }
                             placeholder="https://..."
-                            className="w-full px-3 py-2 rounded-xl border border-gray-300 text-xs outline-none focus:border-[#304037]"
+                            className="w-full px-3 py-2 rounded-xl border border-gray-300 text-xs outline-none focus:border-primary"
                         />
                     </div>
                 ) : (
@@ -475,13 +475,13 @@ const AdminProductForm = () => {
                         <button
                             type="button"
                             onClick={() => fileInputRefs[slotKey].current?.click()}
-                            className="text-[#304037] font-semibold hover:text-[#d4af37] flex items-center gap-1 cursor-pointer"
+                            className="text-primary font-semibold hover:text-gold flex items-center gap-1 cursor-pointer"
                         >
                             <HiOutlinePhoto />
                             <span>{imageUrl ? 'Change file' : 'Choose local image'}</span>
                         </button>
                         {imageUrl && (
-                            <span className="text-[10px] font-mono text-gray-400 truncate max-w-[120px]">
+                            <span className="text-[10px] font-mono text-gray-400 truncate max-w-30">
                                 {imageUrl.split('/').pop()}
                             </span>
                         )}
@@ -494,7 +494,7 @@ const AdminProductForm = () => {
     if (loading) {
         return (
             <div className="py-20 text-center">
-                <div className="w-8 h-8 border-2 border-[#d4af37] border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+                <div className="w-8 h-8 border-2 border-gold border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
                 <span className="text-xs text-gray-500">Loading design details...</span>
             </div>
         )
@@ -507,13 +507,13 @@ const AdminProductForm = () => {
                 <div className="flex items-center gap-3">
                     <Link
                         to="/admin/products"
-                        className="p-2 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-[#304037] hover:border-[#304037] transition-colors"
+                        className="p-2 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-primary hover:border-primary transition-colors"
                         title="Back to Catalogue"
                     >
                         <HiOutlineArrowLeft className="text-lg" />
                     </Link>
                     <div>
-                        <h1 className="font-playfair text-2xl font-medium text-[#304037]">
+                        <h1 className="font-playfair text-2xl font-medium text-primary">
                             {isEditMode ? 'Edit Jewellery Design' : 'Add New Jewellery Design'}
                         </h1>
                         <p className="text-xs text-gray-500">
@@ -546,16 +546,16 @@ const AdminProductForm = () => {
                 {/* 1. BASIC INFORMATION CARD */}
                 <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-xs space-y-5">
                     <div className="flex items-center gap-2 border-b border-gray-100 pb-3">
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#d4af37]"></span>
-                        <h2 className="text-sm font-bold uppercase tracking-wider text-[#304037]">
+                        <span className="w-2.5 h-2.5 rounded-full bg-gold"></span>
+                        <h2 className="text-sm font-bold uppercase tracking-wider text-primary">
                             1. Basic Jewellery Details
                         </h2>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {/* Metal Type Selector (Gold vs Silver) */}
-                        <div className="sm:col-span-2 bg-[#FAF7F2] p-4 rounded-xl border border-[#d4af37]/30">
-                            <label className="block text-xs font-bold text-[#304037] uppercase tracking-wider mb-2.5">
+                        <div className="sm:col-span-2 bg-[#FAF7F2] p-4 rounded-xl border border-gold/30">
+                            <label className="block text-xs font-bold text-primary uppercase tracking-wider mb-2.5">
                                 Select Jewellery Metal Type *
                             </label>
                             <div className="grid grid-cols-2 gap-3">
@@ -586,11 +586,11 @@ const AdminProductForm = () => {
                                     }}
                                     className={`py-3 px-4 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 border-2 transition-all cursor-pointer ${
                                         formData.metal === 'Gold'
-                                            ? 'bg-[#304037] text-[#f3e5ab] border-[#d4af37] shadow-md'
+                                            ? 'bg-primary text-gold-light border-gold shadow-md'
                                             : 'bg-white text-gray-600 border-gray-200 hover:border-amber-300'
                                     }`}
                                 >
-                                    <span className="text-base text-[#d4af37]">✦</span>
+                                    <span className="text-base text-gold">✦</span>
                                     <span>Gold Jewellery (BIS 916)</span>
                                 </button>
 
@@ -648,7 +648,7 @@ const AdminProductForm = () => {
                                         ? 'e.g. Royal Bridal Chandi Payal with Ghunghroo'
                                         : 'e.g. Royal Solitaire Diamond Ring'
                                 }
-                                className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:border-[#304037] focus:ring-1 focus:ring-[#304037] outline-none text-xs"
+                                className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-xs"
                             />
                         </div>
 
@@ -665,7 +665,7 @@ const AdminProductForm = () => {
                                     setFormData({ ...formData, code: e.target.value })
                                 }
                                 placeholder={isSilver ? 'e.g. RJ-SLV-101' : 'e.g. RJ-RNG-101'}
-                                className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:border-[#304037] focus:ring-1 focus:ring-[#304037] outline-none text-xs font-mono uppercase"
+                                className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-xs font-mono uppercase"
                             />
                         </div>
 
@@ -679,7 +679,7 @@ const AdminProductForm = () => {
                                 onChange={(e) =>
                                     setFormData({ ...formData, category: e.target.value })
                                 }
-                                className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 bg-white text-xs outline-none focus:border-[#304037]"
+                                className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 bg-white text-xs outline-none focus:border-primary"
                             >
                                 {categories.map((c) => (
                                     <option key={c} value={c}>
@@ -705,7 +705,7 @@ const AdminProductForm = () => {
                                             : `${e.target.value} Hallmarked Gold`,
                                     })
                                 }
-                                className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 bg-white text-xs outline-none focus:border-[#304037] font-mono font-semibold"
+                                className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 bg-white text-xs outline-none focus:border-primary font-mono font-semibold"
                             >
                                 {karatOptions.map((k) => (
                                     <option key={k} value={k}>
@@ -733,7 +733,7 @@ const AdminProductForm = () => {
                                     setFormData({ ...formData, tag: e.target.value })
                                 }
                                 placeholder="e.g. Best Seller, New Design, Heritage"
-                                className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:border-[#304037] outline-none text-xs"
+                                className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:border-primary outline-none text-xs"
                             />
                         </div>
 
@@ -752,14 +752,14 @@ const AdminProductForm = () => {
                                             onClick={() => handleKaratToggle(kt)}
                                             className={`px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer border flex items-center gap-2 ${
                                                 isChecked
-                                                    ? 'bg-[#304037] text-white border-[#304037] shadow-xs'
+                                                    ? 'bg-primary text-white border-primary shadow-xs'
                                                     : 'bg-gray-50 text-gray-600 border-gray-300 hover:border-gray-400'
                                             }`}
                                         >
                                             <span
                                                 className={`w-3.5 h-3.5 rounded flex items-center justify-center text-[10px] ${
                                                     isChecked
-                                                        ? 'bg-[#d4af37] text-[#1a251f]'
+                                                        ? 'bg-gold text-[#1a251f]'
                                                         : 'border border-gray-400'
                                                 }`}
                                             >
@@ -777,8 +777,8 @@ const AdminProductForm = () => {
                 {/* 2. DESCRIPTION & HIGHLIGHTS CARD */}
                 <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-xs space-y-5">
                     <div className="flex items-center gap-2 border-b border-gray-100 pb-3">
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#d4af37]"></span>
-                        <h2 className="text-sm font-bold uppercase tracking-wider text-[#304037]">
+                        <span className="w-2.5 h-2.5 rounded-full bg-gold"></span>
+                        <h2 className="text-sm font-bold uppercase tracking-wider text-primary">
                             2. Descriptions & Story
                         </h2>
                     </div>
@@ -797,7 +797,7 @@ const AdminProductForm = () => {
                                 })
                             }
                             placeholder="Brief description shown under the title on the detail page..."
-                            className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:border-[#304037] outline-none text-xs leading-relaxed"
+                            className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:border-primary outline-none text-xs leading-relaxed"
                         />
                     </div>
 
@@ -816,7 +816,7 @@ const AdminProductForm = () => {
                                 })
                             }
                             placeholder="Detailed description of craftsmanship, texture, comfort, and heritage..."
-                            className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:border-[#304037] outline-none text-xs leading-relaxed"
+                            className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:border-primary outline-none text-xs leading-relaxed"
                         />
                     </div>
 
@@ -829,7 +829,7 @@ const AdminProductForm = () => {
                             <button
                                 type="button"
                                 onClick={addHighlight}
-                                className="text-xs text-[#304037] font-semibold flex items-center gap-1 hover:text-[#d4af37] cursor-pointer"
+                                className="text-xs text-primary font-semibold flex items-center gap-1 hover:text-gold cursor-pointer"
                             >
                                 <HiOutlinePlus />
                                 <span>Add Bullet Point</span>
@@ -838,7 +838,7 @@ const AdminProductForm = () => {
                         <div className="space-y-2">
                             {formData.highlights.map((point, index) => (
                                 <div key={index} className="flex items-center gap-2">
-                                    <span className="text-[#d4af37] text-base">•</span>
+                                    <span className="text-gold text-base">•</span>
                                     <input
                                         type="text"
                                         value={point}
@@ -846,7 +846,7 @@ const AdminProductForm = () => {
                                             handleHighlightChange(index, e.target.value)
                                         }
                                         placeholder={`Highlight point ${index + 1}`}
-                                        className="flex-1 px-3 py-2 rounded-xl border border-gray-300 focus:border-[#304037] outline-none text-xs"
+                                        className="flex-1 px-3 py-2 rounded-xl border border-gray-300 focus:border-primary outline-none text-xs"
                                     />
                                     {formData.highlights.length > 1 && (
                                         <button
@@ -866,8 +866,8 @@ const AdminProductForm = () => {
                 {/* 3. GOLD & STONE SPECIFICATIONS TABLE */}
                 <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-xs space-y-5">
                     <div className="flex items-center gap-2 border-b border-gray-100 pb-3">
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#d4af37]"></span>
-                        <h2 className="text-sm font-bold uppercase tracking-wider text-[#304037]">
+                        <span className="w-2.5 h-2.5 rounded-full bg-gold"></span>
+                        <h2 className="text-sm font-bold uppercase tracking-wider text-primary">
                             {isSilver
                                 ? '3. Silver & Stone Specifications (Additional Information Tab)'
                                 : '3. Gold & Stone Specifications (Additional Information Tab)'}
@@ -896,7 +896,7 @@ const AdminProductForm = () => {
                                         ? 'e.g. 925 (92.5% Sterling Silver)'
                                         : 'e.g. 22K (916 BIS Hallmark)'
                                 }
-                                className="w-full px-3.5 py-2 rounded-xl border border-gray-300 focus:border-[#304037] outline-none text-xs"
+                                className="w-full px-3.5 py-2 rounded-xl border border-gray-300 focus:border-primary outline-none text-xs"
                             />
                         </div>
 
@@ -921,7 +921,7 @@ const AdminProductForm = () => {
                                         ? 'e.g. BIS 925 Hallmark Certification'
                                         : 'e.g. BIS 916 Hallmark with Unique Laser HUID Stamp'
                                 }
-                                className="w-full px-3.5 py-2 rounded-xl border border-gray-300 focus:border-[#304037] outline-none text-xs"
+                                className="w-full px-3.5 py-2 rounded-xl border border-gray-300 focus:border-primary outline-none text-xs"
                             />
                         </div>
 
@@ -946,7 +946,7 @@ const AdminProductForm = () => {
                                         ? 'e.g. 15.500 gm pure silver'
                                         : 'e.g. 5.500 gm solid gold'
                                 }
-                                className="w-full px-3.5 py-2 rounded-xl border border-gray-300 focus:border-[#304037] outline-none text-xs font-mono"
+                                className="w-full px-3.5 py-2 rounded-xl border border-gray-300 focus:border-primary outline-none text-xs font-mono"
                             />
                         </div>
 
@@ -967,7 +967,7 @@ const AdminProductForm = () => {
                                     })
                                 }
                                 placeholder="e.g. 5.800 gm (Approx.)"
-                                className="w-full px-3.5 py-2 rounded-xl border border-gray-300 focus:border-[#304037] outline-none text-xs font-mono"
+                                className="w-full px-3.5 py-2 rounded-xl border border-gray-300 focus:border-primary outline-none text-xs font-mono"
                             />
                         </div>
 
@@ -988,7 +988,7 @@ const AdminProductForm = () => {
                                     })
                                 }
                                 placeholder="e.g. 100% Solid Gold Casting or 0.45 ct VVS"
-                                className="w-full px-3.5 py-2 rounded-xl border border-gray-300 focus:border-[#304037] outline-none text-xs"
+                                className="w-full px-3.5 py-2 rounded-xl border border-gray-300 focus:border-primary outline-none text-xs"
                             />
                         </div>
 
@@ -1009,7 +1009,7 @@ const AdminProductForm = () => {
                                     })
                                 }
                                 placeholder="e.g. Traditional Warm Yellow Gold / Rose Gold"
-                                className="w-full px-3.5 py-2 rounded-xl border border-gray-300 focus:border-[#304037] outline-none text-xs"
+                                className="w-full px-3.5 py-2 rounded-xl border border-gray-300 focus:border-primary outline-none text-xs"
                             />
                         </div>
 
@@ -1030,7 +1030,7 @@ const AdminProductForm = () => {
                                     })
                                 }
                                 placeholder="e.g. Standard Indian Sizes 12 - 20 (Custom fitting available)"
-                                className="w-full px-3.5 py-2 rounded-xl border border-gray-300 focus:border-[#304037] outline-none text-xs"
+                                className="w-full px-3.5 py-2 rounded-xl border border-gray-300 focus:border-primary outline-none text-xs"
                             />
                         </div>
 
@@ -1051,7 +1051,7 @@ const AdminProductForm = () => {
                                     })
                                 }
                                 placeholder="e.g. Ready in stock at Narolgam Showroom"
-                                className="w-full px-3.5 py-2 rounded-xl border border-gray-300 focus:border-[#304037] outline-none text-xs"
+                                className="w-full px-3.5 py-2 rounded-xl border border-gray-300 focus:border-primary outline-none text-xs"
                             />
                         </div>
                     </div>
@@ -1061,9 +1061,9 @@ const AdminProductForm = () => {
                 <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-xs space-y-5">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gray-100 pb-3">
                         <div className="flex items-center gap-2">
-                            <span className="w-2.5 h-2.5 rounded-full bg-[#d4af37]"></span>
+                            <span className="w-2.5 h-2.5 rounded-full bg-gold"></span>
                             <div>
-                                <h2 className="text-sm font-bold uppercase tracking-wider text-[#304037]">
+                                <h2 className="text-sm font-bold uppercase tracking-wider text-primary">
                                     4. Jewellery Photo Gallery (Upload Real Images)
                                 </h2>
                                 <p className="text-[11px] text-gray-500">
@@ -1086,7 +1086,7 @@ const AdminProductForm = () => {
                                 type="button"
                                 disabled={uploadingSlot !== null}
                                 onClick={() => fileInputRefs.bulk.current?.click()}
-                                className="px-3.5 py-1.5 rounded-xl bg-[#FAF7F2] border border-[#d4af37]/60 text-[#304037] hover:bg-[#d4af37] hover:text-[#1a251f] text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 disabled:opacity-50"
+                                className="px-3.5 py-1.5 rounded-xl bg-[#FAF7F2] border border-gold/60 text-primary hover:bg-gold hover:text-[#1a251f] text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 disabled:opacity-50"
                             >
                                 <HiOutlineCloudArrowUp className="text-base" />
                                 <span>Batch Upload (Up to 3 Photos)</span>
@@ -1126,7 +1126,7 @@ const AdminProductForm = () => {
                                 onChange={(e) =>
                                     setFormData({ ...formData, isFeatured: e.target.checked })
                                 }
-                                className="w-4 h-4 rounded text-[#304037] focus:ring-[#304037] cursor-pointer"
+                                className="w-4 h-4 rounded text-primary focus:ring-primary cursor-pointer"
                             />
                             <span>Feature on Homepage Signature Collection</span>
                         </label>
@@ -1138,7 +1138,7 @@ const AdminProductForm = () => {
                                 onChange={(e) =>
                                     setFormData({ ...formData, inStock: e.target.checked })
                                 }
-                                className="w-4 h-4 rounded text-[#304037] focus:ring-[#304037] cursor-pointer"
+                                className="w-4 h-4 rounded text-primary focus:ring-primary cursor-pointer"
                             />
                             <span>Ready in Stock at Showroom</span>
                         </label>
@@ -1154,12 +1154,12 @@ const AdminProductForm = () => {
                         <button
                             type="submit"
                             disabled={submitting || uploadingSlot !== null}
-                            className="px-6 py-2.5 rounded-xl bg-[#304037] hover:bg-[#222E27] text-white text-xs font-semibold uppercase tracking-wider border border-[#304037] hover:border-[#d4af37] shadow-sm transition-colors cursor-pointer flex items-center gap-2 disabled:opacity-50"
+                            className="px-6 py-2.5 rounded-xl bg-primary hover:bg-primary-dark text-white text-xs font-semibold uppercase tracking-wider border border-primary hover:border-gold shadow-sm transition-colors cursor-pointer flex items-center gap-2 disabled:opacity-50"
                         >
                             {submitting ? (
                                 <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                             ) : (
-                                <HiOutlineCheck className="text-base text-[#d4af37]" />
+                                <HiOutlineCheck className="text-base text-gold" />
                             )}
                             <span>{isEditMode ? 'Update Design' : 'Publish to Catalogue'}</span>
                         </button>

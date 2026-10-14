@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { FaWhatsapp, FaInstagram, FaFacebookF, FaPinterestP } from 'react-icons/fa6'
+import { FaWhatsapp} from 'react-icons/fa6'
 import { IoLocationOutline, IoCallOutline, IoMailOutline, IoTimeOutline } from 'react-icons/io5'
 import { HiArrowRight } from 'react-icons/hi2'
 import { FiSmartphone } from 'react-icons/fi'
@@ -13,7 +13,7 @@ const Footer = () => {
     const { openQrModal } = usePwa()
 
     return (
-        <footer className="w-full bg-[#304037] text-white border-t border-[#3e5247] relative">
+        <footer className="w-full bg-primary text-white border-t border-[#3e5247] relative">
             {/* Main Footer Container */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12">
@@ -33,10 +33,10 @@ const Footer = () => {
                         </p>
 
                         {/* WhatsApp Enquiry Box (Replacing Email Newsletter) */}
-                        <div className="p-5 rounded-2xl bg-[#24312a] border border-[#d4af37]/40 space-y-3.5 shadow-lg">
+                        <div className="p-5 rounded-2xl bg-[#24312a] border border-gold/40 space-y-3.5 shadow-lg">
                             <div className="flex items-center gap-2">
-                                <span className="w-2 h-2 rounded-full bg-[#d4af37] animate-pulse" />
-                                <span className="text-xs uppercase tracking-widest text-[#d4af37] font-semibold font-roboto">
+                                <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
+                                <span className="text-xs uppercase tracking-widest text-gold font-semibold font-roboto">
                                     Instant WhatsApp Enquiry
                                 </span>
                             </div>
@@ -49,13 +49,13 @@ const Footer = () => {
                                 href={`https://wa.me/${whatsappNumber}?text=Namaste%20Rangoli%20Jewellers,%20I%20have%20an%20enquiry%20regarding%20your%20jewellery%20catalogue.`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="group flex items-center justify-between w-full py-3 px-4 rounded-xl bg-[#304037] hover:bg-[#1f2a24] text-white border border-[#3e5247] hover:border-[#d4af37] transition-all duration-300 shadow-sm cursor-pointer"
+                                className="group flex items-center justify-between w-full py-3 px-4 rounded-xl bg-primary hover:bg-[#1f2a24] text-white border border-[#3e5247] hover:border-gold transition-all duration-300 shadow-sm cursor-pointer"
                             >
                                 <span className="flex items-center gap-2.5 text-xs sm:text-sm font-roboto font-medium">
-                                    <FaWhatsapp className="text-xl text-[#d4af37] group-hover:scale-110 transition-transform duration-200" />
+                                    <FaWhatsapp className="text-xl text-gold group-hover:scale-110 transition-transform duration-200" />
                                     <span>Chat with Jewellery Expert</span>
                                 </span>
-                                <span className="w-7 h-7 rounded-lg bg-[#d4af37] text-[#1c2922] flex items-center justify-center text-xs font-bold transition-transform duration-300 group-hover:translate-x-1">
+                                <span className="w-7 h-7 rounded-lg bg-gold text-[#1c2922] flex items-center justify-center text-xs font-bold transition-transform duration-300 group-hover:translate-x-1">
                                     <HiArrowRight />
                                 </span>
                             </a>
@@ -64,10 +64,10 @@ const Footer = () => {
                             <button
                                 type="button"
                                 onClick={openQrModal}
-                                className="w-full inline-flex items-center justify-between px-4 py-2.5 rounded-xl bg-[#24312a] hover:bg-[#1c2922] text-gray-200 hover:text-[#d4af37] border border-[#3e5247] hover:border-[#d4af37] text-xs font-roboto transition-all duration-300 shadow-sm cursor-pointer group"
+                                className="w-full inline-flex items-center justify-between px-4 py-2.5 rounded-xl bg-[#24312a] hover:bg-[#1c2922] text-gray-200 hover:text-gold border border-[#3e5247] hover:border-gold text-xs font-roboto transition-all duration-300 shadow-sm cursor-pointer group"
                             >
                                 <span className="flex items-center gap-2.5">
-                                    <FiSmartphone className="text-base text-[#d4af37] group-hover:scale-110 transition-transform" />
+                                    <FiSmartphone className="text-base text-gold group-hover:scale-110 transition-transform" />
                                     <span className="font-medium">Download App / Scan QR</span>
                                 </span>
                                 <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-white/10 text-gray-300 group-hover:text-white font-semibold">
@@ -97,9 +97,9 @@ const Footer = () => {
                                 <li key={idx}>
                                     <Link
                                         to={item.path}
-                                        className="hover:text-[#d4af37] transition-colors duration-200 flex items-center gap-2 group"
+                                        className="hover:text-gold transition-colors duration-200 flex items-center gap-2 group"
                                     >
-                                        <span className="text-[#d4af37] text-xs opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <span className="text-gold text-xs opacity-0 group-hover:opacity-100 transition-opacity">
                                             ✦
                                         </span>
                                         <span>{item.name}</span>
@@ -124,7 +124,7 @@ const Footer = () => {
                                 'Jewellery Care & Cleaning Guide',
                             ].map((item, idx) => (
                                 <li key={idx} className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors">
-                                    <span className="text-[#d4af37] text-xs">✦</span>
+                                    <span className="text-gold text-xs">✦</span>
                                     <span>{item}</span>
                                 </li>
                             ))}
@@ -139,7 +139,7 @@ const Footer = () => {
 
                         <div className="space-y-3.5 text-sm font-roboto font-light text-gray-300">
                             <div className="flex items-start gap-3">
-                                <IoLocationOutline className="text-lg text-[#d4af37] shrink-0 mt-0.5" />
+                                <IoLocationOutline className="text-lg text-gold shrink-0 mt-0.5" />
                                 <div>
                                     <p className="leading-snug">
                                         Shop No 14, Pragati One, Nr. Hifi Char Rasta, Narolgam, Ahmedabad, Gujarat 382405
@@ -148,7 +148,7 @@ const Footer = () => {
                                         href="https://maps.google.com/?q=22.955048,72.584717"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-block text-[11px] text-[#d4af37] hover:underline pt-1"
+                                        className="inline-block text-[11px] text-gold hover:underline pt-1"
                                     >
                                         Get Directions on Maps →
                                     </a>
@@ -156,27 +156,27 @@ const Footer = () => {
                             </div>
 
                             <div className="flex items-center gap-3">
-                                <IoCallOutline className="text-lg text-[#d4af37] shrink-0" />
+                                <IoCallOutline className="text-lg text-gold shrink-0" />
                                 <a
                                     href="tel:+917340681617"
-                                    className="hover:text-[#d4af37] transition-colors"
+                                    className="hover:text-gold transition-colors"
                                 >
                                     +91 7340681617
                                 </a>
                             </div>
 
                             <div className="flex items-center gap-3">
-                                <IoMailOutline className="text-lg text-[#d4af37] shrink-0" />
+                                <IoMailOutline className="text-lg text-gold shrink-0" />
                                 <a
                                     href="mailto:care@rangolijewellers.com"
-                                    className="hover:text-[#d4af37] transition-colors"
+                                    className="hover:text-gold transition-colors"
                                 >
                                     care@rangolijewellers.com
                                 </a>
                             </div>
 
                             <div className="flex items-start gap-3">
-                                <IoTimeOutline className="text-lg text-[#d4af37] shrink-0 mt-0.5" />
+                                <IoTimeOutline className="text-lg text-gold shrink-0 mt-0.5" />
                                 <p className="text-xs leading-relaxed text-gray-400">
                                     Mon - Sun: 10:30 AM - 8:30 PM
                                     <br />
@@ -192,23 +192,23 @@ const Footer = () => {
             <div className="w-full bg-[#24312a] border-t border-[#34463c] py-4 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-roboto text-gray-400">
                     <p className="text-center sm:text-left">
-                        © 2026 <span className="text-[#f3e5ab] font-medium">Rangoli Jewellers</span>. All Rights Reserved. Crafted with Timeless Passion.
+                        © 2026 <span className="text-gold-light font-medium">Rangoli Jewellers</span>. All Rights Reserved. Crafted with Timeless Passion.
                     </p>
 
                     <div className="flex items-center gap-4 text-[11px] text-gray-400 flex-wrap justify-center">
-                        <span className="flex items-center gap-1 text-[#d4af37]">
+                        <span className="flex items-center gap-1 text-gold">
                             <span>✦</span> BIS Hallmarked
                         </span>
-                        <span className="flex items-center gap-1 text-[#d4af37]">
+                        <span className="flex items-center gap-1 text-gold ">
                             <span>✦</span> IGI Certified
                         </span>
-                        <span className="flex items-center gap-1 text-[#d4af37]">
+                        <span className="flex items-center gap-1 text-gold">
                             <span>✦</span> Insured Delivery
                         </span>
                         <span className="text-gray-600">•</span>
                         <Link
                             to="/admin"
-                            className="hover:text-[#d4af37] transition-colors flex items-center gap-1 font-mono text-[10px] text-gray-400"
+                            className="hover:text-gold transition-colors flex items-center gap-1 font-mono text-[10px] text-gray-400"
                         >
                             <span>🔐 Admin Portal</span>
                         </Link>

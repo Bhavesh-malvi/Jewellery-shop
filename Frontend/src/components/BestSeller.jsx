@@ -65,8 +65,8 @@ const BestSeller = () => {
                 {/* Section Header */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-gray-200/80 pb-6">
                     <div>
-                        <div className="inline-flex items-center gap-1.5 border border-[#304037]/25 px-3.5 py-1 rounded-full text-xs sm:text-sm text-primary font-roboto uppercase tracking-widest bg-[#304037]/5">
-                            <GoDotFill className="text-xs text-[#d4af37]" />
+                        <div className="inline-flex items-center gap-1.5 border border-primary/25 px-3.5 py-1 rounded-full text-xs sm:text-sm text-primary font-roboto uppercase tracking-widest bg-primary/5">
+                            <GoDotFill className="text-xs text-gold" />
                             <span>Best Seller Collections</span>
                         </div>
                         <h2 className="text-3xl sm:text-4xl lg:text-[42px] text-primary font-playfair font-medium tracking-tight leading-tight mt-3">
@@ -76,7 +76,7 @@ const BestSeller = () => {
 
                     <Link
                         to="/catalogue"
-                        className="group self-start md:self-end border border-[#304037] text-primary hover:bg-[#304037] hover:text-white px-7 py-3 rounded-full text-sm font-roboto font-medium transition-all duration-300 flex items-center gap-2 shadow-sm hover:shadow-md cursor-pointer"
+                        className="group self-start md:self-end border border-primary text-primary hover:bg-primary hover:text-white px-7 py-3 rounded-full text-sm font-roboto font-medium transition-all duration-300 flex items-center gap-2 shadow-sm hover:shadow-md cursor-pointer"
                     >
                         <span>View All Collections</span>
                         <HiArrowRight className="text-base transition-transform duration-300 group-hover:translate-x-1" />
@@ -91,7 +91,7 @@ const BestSeller = () => {
                             to={`/catalogue?category=${encodeURIComponent(item.name)}`}
                             className="group text-center flex flex-col items-center gap-3 cursor-pointer"
                         >
-                            <div className="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-full p-1 border-2 border-transparent group-hover:border-[#d4af37] transition-all duration-500 shadow-md group-hover:shadow-xl bg-white">
+                            <div className="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-full p-1 border-2 border-transparent group-hover:border-gold transition-all duration-500 shadow-md group-hover:shadow-xl bg-white">
                                 <div className="w-full h-full rounded-full overflow-hidden">
                                     <img
                                         src={item.img}
@@ -101,7 +101,7 @@ const BestSeller = () => {
                                 </div>
                             </div>
                             <div className="space-y-0.5">
-                                <h3 className="text-lg sm:text-xl text-primary font-playfair font-normal tracking-wide group-hover:text-[#d4af37] transition-colors duration-300">
+                                <h3 className="text-lg sm:text-xl text-primary font-playfair font-normal tracking-wide group-hover:text-gold transition-colors duration-300">
                                     {item.name}
                                 </h3>
                                 <p className="text-xs text-gray-400 font-roboto tracking-wider uppercase">{item.items}</p>
@@ -119,14 +119,14 @@ const BestSeller = () => {
                             className="group relative flex items-center justify-between rounded-2xl bg-[#F8F7F4] hover:bg-[#F3EFEA] border border-[#E9E4DC] p-6 sm:p-7 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-500 overflow-hidden cursor-pointer"
                         >
                             <div className="w-[60%] flex flex-col justify-center gap-3 z-10">
-                                <span className="text-[11px] uppercase tracking-widest text-[#d4af37] font-semibold font-roboto">
+                                <span className="text-[11px] uppercase tracking-widest text-gold font-semibold font-roboto">
                                     {offer.tag}
                                 </span>
-                                <h3 className="text-xl sm:text-2xl text-primary font-playfair font-normal leading-snug group-hover:text-[#304037]">
+                                <h3 className="text-xl sm:text-2xl text-primary font-playfair font-normal leading-snug group-hover:text-primary">
                                     {offer.title}
                                 </h3>
                                 <div className="pt-2">
-                                    <span className="text-sm font-roboto font-medium text-primary flex items-center gap-1.5 group-hover:text-[#d4af37] transition-colors">
+                                    <span className="text-sm font-roboto font-medium text-primary flex items-center gap-1.5 group-hover:text-gold transition-colors">
                                         View Catalogue{' '}
                                         <RiArrowRightUpLine className="text-lg transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
                                     </span>

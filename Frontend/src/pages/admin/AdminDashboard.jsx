@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import {
-    HiOutlineSquares2X2,
     HiOutlinePlusCircle,
-    HiOutlineSparkles,
-    HiOutlineArrowTopRightOnSquare,
     HiOutlineEye,
     HiOutlinePencilSquare,
 } from 'react-icons/hi2'
@@ -47,7 +44,7 @@ const AdminDashboard = () => {
     if (loading) {
         return (
             <div className="py-20 flex flex-col items-center justify-center">
-                <div className="w-10 h-10 border-3 border-[#d4af37]/30 border-t-[#304037] rounded-full animate-spin mb-3"></div>
+                <div className="w-10 h-10 border-3 border-gold/30 border-t-primary rounded-full animate-spin mb-3"></div>
                 <p className="text-xs uppercase tracking-wider text-gray-500 font-mono">
                     Loading Showroom Analytics...
                 </p>
@@ -61,11 +58,11 @@ const AdminDashboard = () => {
     return (
         <div className="space-y-8">
             {/* Hero Welcome Banner */}
-            <div className="bg-gradient-to-r from-[#222E27] via-[#2D3E35] to-[#1E2922] rounded-3xl p-6 sm:p-8 text-white border border-[#d4af37]/40 shadow-lg relative overflow-hidden">
+            <div className="bg-linear-to-r from-[#222E27] via-[#2D3E35] to-[#1E2922] rounded-3xl p-6 sm:p-8 text-white border border-gold/40 shadow-lg relative overflow-hidden">
                 <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
-                        <div className="inline-flex items-center gap-1.5 bg-white/10 px-3 py-1 rounded-full text-[11px] font-mono text-[#f3e5ab] mb-2 border border-white/10">
-                            <BsPatchCheckFill className="text-xs text-[#d4af37]" />
+                        <div className="inline-flex items-center gap-1.5 bg-white/10 px-3 py-1 rounded-full text-[11px] font-mono text-gold-light mb-2 border border-white/10">
+                            <BsPatchCheckFill className="text-xs text-gold" />
                             <span>Rangoli Jewellers Management Portal</span>
                         </div>
                         <h1 className="font-playfair text-2xl sm:text-3xl font-normal text-white">
@@ -79,7 +76,7 @@ const AdminDashboard = () => {
                     <div className="flex items-center gap-3 shrink-0">
                         <Link
                             to="/admin/products/new"
-                            className="px-5 py-3 rounded-xl bg-[#d4af37] hover:bg-[#e0be53] text-[#1c2922] text-xs font-bold uppercase tracking-wider transition-colors shadow-md flex items-center gap-2"
+                            className="px-5 py-3 rounded-xl bg-gold hover:bg-[#e0be53] text-[#1c2922] text-xs font-bold uppercase tracking-wider transition-colors shadow-md flex items-center gap-2"
                         >
                             <HiOutlinePlusCircle className="text-base" />
                             <span>Add New Jewellery</span>
@@ -91,12 +88,12 @@ const AdminDashboard = () => {
             {/* Metrics Statistics Grid */}
             <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5">
                 {/* Total Products */}
-                <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-xs hover:border-[#d4af37]/60 transition-all col-span-2 sm:col-span-1">
+                <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-xs hover:border-gold/60 transition-all col-span-2 sm:col-span-1">
                     <span className="text-[11px] font-bold uppercase tracking-wider text-gray-400 block mb-1">
                         Total Designs
                     </span>
                     <div className="flex items-baseline gap-2">
-                        <span className="text-3xl font-playfair font-normal text-[#304037]">
+                        <span className="text-3xl font-playfair font-normal text-primary">
                             {totalCount}
                         </span>
                         <span className="text-xs text-green-600 font-medium">Pieces</span>
@@ -107,16 +104,16 @@ const AdminDashboard = () => {
                 </div>
 
                 {/* 22K Count */}
-                <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-xs hover:border-[#d4af37]/60 transition-all">
+                <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-xs hover:border-gold/60 transition-all">
                     <div className="flex items-center justify-between mb-1">
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-[#d4af37]">
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-gold">
                             22K Gold
                         </span>
-                        <span className="text-[10px] bg-[#FAF7F2] border border-[#d4af37]/30 text-[#304037] font-mono px-1.5 py-0.5 rounded">
+                        <span className="text-[10px] bg-[#FAF7F2] border border-gold/30 text-primary font-mono px-1.5 py-0.5 rounded">
                             BIS 916
                         </span>
                     </div>
-                    <span className="text-3xl font-playfair font-normal text-[#304037]">
+                    <span className="text-3xl font-playfair font-normal text-primary">
                         {karatCounts['22K'] || 0}
                     </span>
                     <span className="text-[11px] text-gray-400 mt-2 block">
@@ -125,16 +122,16 @@ const AdminDashboard = () => {
                 </div>
 
                 {/* 20K Count */}
-                <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-xs hover:border-[#d4af37]/60 transition-all">
+                <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-xs hover:border-gold/60 transition-all">
                     <div className="flex items-center justify-between mb-1">
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-[#d4af37]">
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-gold">
                             20K Gold
                         </span>
-                        <span className="text-[10px] bg-[#FAF7F2] border border-[#d4af37]/30 text-[#304037] font-mono px-1.5 py-0.5 rounded">
+                        <span className="text-[10px] bg-[#FAF7F2] border border-gold/30 text-primary font-mono px-1.5 py-0.5 rounded">
                             BIS 833
                         </span>
                     </div>
-                    <span className="text-3xl font-playfair font-normal text-[#304037]">
+                    <span className="text-3xl font-playfair font-normal text-primary">
                         {karatCounts['20K'] || 0}
                     </span>
                     <span className="text-[11px] text-gray-400 mt-2 block">
@@ -143,16 +140,16 @@ const AdminDashboard = () => {
                 </div>
 
                 {/* 18K Count */}
-                <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-xs hover:border-[#d4af37]/60 transition-all">
+                <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-xs hover:border-gold/60 transition-all">
                     <div className="flex items-center justify-between mb-1">
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-[#d4af37]">
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-gold">
                             18K Gold
                         </span>
-                        <span className="text-[10px] bg-[#FAF7F2] border border-[#d4af37]/30 text-[#304037] font-mono px-1.5 py-0.5 rounded">
+                        <span className="text-[10px] bg-[#FAF7F2] border border-gold/30 text-primary font-mono px-1.5 py-0.5 rounded">
                             BIS 750
                         </span>
                     </div>
-                    <span className="text-3xl font-playfair font-normal text-[#304037]">
+                    <span className="text-3xl font-playfair font-normal text-primary">
                         {karatCounts['18K'] || 0}
                     </span>
                     <span className="text-[11px] text-gray-400 mt-2 block">
@@ -161,16 +158,16 @@ const AdminDashboard = () => {
                 </div>
 
                 {/* 14K Count */}
-                <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-xs hover:border-[#d4af37]/60 transition-all">
+                <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-xs hover:border-gold/60 transition-all">
                     <div className="flex items-center justify-between mb-1">
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-[#d4af37]">
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-gold">
                             14K Gold
                         </span>
-                        <span className="text-[10px] bg-[#FAF7F2] border border-[#d4af37]/30 text-[#304037] font-mono px-1.5 py-0.5 rounded">
+                        <span className="text-[10px] bg-[#FAF7F2] border border-gold/30 text-primary font-mono px-1.5 py-0.5 rounded">
                             BIS 585
                         </span>
                     </div>
-                    <span className="text-3xl font-playfair font-normal text-[#304037]">
+                    <span className="text-3xl font-playfair font-normal text-primary">
                         {karatCounts['14K'] || 0}
                     </span>
                     <span className="text-[11px] text-gray-400 mt-2 block">
@@ -190,10 +187,10 @@ const AdminDashboard = () => {
                             <Link
                                 key={cat}
                                 to={`/admin/products?category=${cat}`}
-                                className="px-3.5 py-1.5 rounded-xl bg-[#FAF7F2] hover:bg-[#F2ECE1] border border-[#EDE8E0] text-xs font-medium text-[#304037] flex items-center gap-2 transition-colors"
+                                className="px-3.5 py-1.5 rounded-xl bg-[#FAF7F2] hover:bg-[#F2ECE1] border border-[#EDE8E0] text-xs font-medium text-primary flex items-center gap-2 transition-colors"
                             >
                                 <span>{cat}</span>
-                                <span className="w-5 h-5 rounded-full bg-[#304037] text-white text-[10px] flex items-center justify-center font-mono">
+                                <span className="w-5 h-5 rounded-full bg-primary text-white text-[10px] flex items-center justify-center font-mono">
                                     {count}
                                 </span>
                             </Link>
@@ -206,7 +203,7 @@ const AdminDashboard = () => {
             <div className="bg-white rounded-2xl border border-gray-200 shadow-xs overflow-hidden">
                 <div className="p-6 border-b border-gray-100 flex items-center justify-between">
                     <div>
-                        <h2 className="font-playfair text-lg text-[#304037] font-medium">
+                        <h2 className="font-playfair text-lg text-primary font-medium">
                             Recently Added Jewellery Pieces
                         </h2>
                         <p className="text-xs text-gray-500">
@@ -215,7 +212,7 @@ const AdminDashboard = () => {
                     </div>
                     <Link
                         to="/admin/products"
-                        className="text-xs font-semibold text-[#d4af37] hover:underline"
+                        className="text-xs font-semibold text-primary hover:underline"
                     >
                         View Full Catalogue →
                     </Link>
@@ -243,7 +240,7 @@ const AdminDashboard = () => {
                                             <div className="pt-2">
                                                 <Link
                                                     to="/admin/products/new"
-                                                    className="inline-block px-5 py-2 rounded-xl bg-[#304037] hover:bg-[#222E27] text-white text-xs font-semibold uppercase tracking-wider transition-all"
+                                                    className="inline-block px-5 py-2 rounded-xl bg-primary hover:bg-primary-dark text-white text-xs font-semibold uppercase tracking-wider transition-all"
                                                 >
                                                     + Add First Jewellery Design
                                                 </Link>
@@ -266,7 +263,7 @@ const AdminDashboard = () => {
                                                     />
                                                 </div>
                                                 <div>
-                                                    <span className="font-medium text-[#304037] text-sm block">
+                                                    <span className="font-medium text-primary text-sm block">
                                                         {p.name}
                                                     </span>
                                                     <span className="text-[11px] text-gray-400">
@@ -282,7 +279,7 @@ const AdminDashboard = () => {
                                             {p.category}
                                         </td>
                                         <td className="py-3.5 px-4">
-                                            <span className="bg-[#304037] text-[#d4af37] px-2 py-0.5 rounded text-[11px] font-mono font-bold">
+                                            <span className="bg-primary text-primary-content px-2 py-0.5 rounded text-[11px] font-mono font-bold">
                                                 {p.karat}
                                             </span>
                                         </td>
@@ -305,14 +302,14 @@ const AdminDashboard = () => {
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                     title="View Public Page"
-                                                    className="p-1.5 text-gray-500 hover:text-[#304037] hover:bg-gray-100 rounded-lg transition-colors"
+                                                    className="p-1.5 text-gray-500 hover:text-primary hover:bg-gray-100 rounded-lg transition-colors"
                                                 >
                                                     <HiOutlineEye className="text-base" />
                                                 </a>
                                                 <Link
                                                     to={`/admin/products/edit/${p._id || p.customId || p.id}`}
                                                     title="Edit Design"
-                                                    className="p-1.5 text-[#304037] hover:bg-[#FAF7F2] border border-gray-200 rounded-lg transition-colors"
+                                                    className="p-1.5 text-primary hover:bg-[#FAF7F2] border border-gray-200 rounded-lg transition-colors"
                                                 >
                                                     <HiOutlinePencilSquare className="text-base" />
                                                 </Link>

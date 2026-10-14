@@ -66,7 +66,7 @@ const OurSilverProducts = () => {
     }
 
     return (
-        <section className="w-full py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#F2F4F7] to-[#FAF7F2] border-t border-b border-gray-200 relative overflow-hidden">
+        <section className="w-full py-16 sm:py-20 lg:py-24 bg-linear-to-b from-[#F2F4F7] to-[#FAF7F2] border-t border-b border-gray-200 relative overflow-hidden">
             {/* Subtle Silver Metallic Watermark */}
             <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-slate-300/20 blur-3xl pointer-events-none" />
 

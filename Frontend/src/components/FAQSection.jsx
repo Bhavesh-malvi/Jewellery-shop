@@ -43,8 +43,8 @@ const FAQSection = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
                     {/* Left Column: Title & Information */}
                     <div className="lg:col-span-5 space-y-6">
-                        <div className="inline-flex items-center gap-1.5 border border-[#304037]/25 px-3.5 py-1 rounded-full text-xs sm:text-sm text-primary font-roboto uppercase tracking-widest bg-[#304037]/5">
-                            <GoDotFill className="text-xs text-[#d4af37]" />
+                        <div className="inline-flex items-center gap-1.5 border border-primary/25 px-3.5 py-1 rounded-full text-xs sm:text-sm text-primary font-roboto uppercase tracking-widest bg-primary/5">
+                            <GoDotFill className="text-xs text-gold" />
                             <span>Frequently Asked Questions</span>
                         </div>
 
@@ -57,7 +57,7 @@ const FAQSection = () => {
                         </p>
 
                         <div className="pt-2">
-                            <button className="border border-gray-400 hover:border-[#304037] text-primary hover:bg-[#304037] hover:text-white px-7 py-3 rounded-md text-xs font-roboto font-semibold uppercase tracking-wider transition-all duration-300 shadow-xs hover:shadow-md cursor-pointer">
+                            <button className="border border-gray-400 hover:border-primary text-primary hover:bg-primary hover:text-white px-7 py-3 rounded-md text-xs font-roboto font-semibold uppercase tracking-wider transition-all duration-300 shadow-xs hover:shadow-md cursor-pointer">
                                 View All FAQ's
                             </button>
                         </div>
@@ -78,13 +78,13 @@ const FAQSection = () => {
                                             className={`text-lg sm:text-xl font-playfair transition-colors duration-200 ${
                                                 isOpen
                                                     ? 'text-primary font-medium'
-                                                    : 'text-[#222E27] group-hover:text-primary font-normal'
+                                                    : 'text-primary-dark group-hover:text-primary font-normal'
                                             }`}
                                         >
                                             {faq.question}
                                         </h3>
 
-                                        <span className="shrink-0 w-6 h-6 border border-gray-400 rounded flex items-center justify-center text-xs text-gray-600 transition-colors duration-200 group-hover:border-[#304037]">
+                                        <span className="shrink-0 w-6 h-6 border border-gray-400 rounded flex items-center justify-center text-xs text-gray-600 transition-colors duration-200 group-hover:border-primary">
                                             {isOpen ? <FiMinus /> : <FiPlus />}
                                         </span>
                                     </button>

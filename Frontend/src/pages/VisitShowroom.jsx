@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { GoDotFill } from 'react-icons/go'
 import { FaWhatsapp } from 'react-icons/fa6'
-import { IoLocationOutline, IoCallOutline, IoMailOutline, IoTimeOutline, IoNavigateCircleOutline, IoQrCodeOutline } from 'react-icons/io5'
+import { IoLocationOutline, IoCallOutline, IoTimeOutline, IoNavigateCircleOutline, IoQrCodeOutline } from 'react-icons/io5'
 import { BsShieldCheck, BsCarFront, BsCupHot } from 'react-icons/bs'
-import { FiSmartphone } from 'react-icons/fi'
 import { useEnquiry } from '../context/EnquiryContext'
 import { usePwa } from '../context/PwaContext'
 
@@ -40,9 +39,9 @@ Please confirm the appointment slot. Thank you!`
     return (
         <div className="w-full bg-[#FAFAF8] min-h-screen">
             {/* Header Banner */}
-            <div className="bg-[#304037] text-white py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-b border-[#3e5247] text-center space-y-4">
-                <div className="inline-flex items-center gap-1.5 border border-[#d4af37]/40 px-4 py-1 rounded-full text-xs font-roboto uppercase tracking-widest text-[#f3e5ab] bg-[#24312a]/60 backdrop-blur-sm">
-                    <GoDotFill className="text-xs text-[#d4af37]" />
+            <div className="bg-primary text-white py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-b border-[#3e5247] text-center space-y-4">
+                <div className="inline-flex items-center gap-1.5 border border-gold/40 px-4 py-1 rounded-full text-xs font-roboto uppercase tracking-widest text-gold-light bg-[#24312a]/60 backdrop-blur-sm">
+                    <GoDotFill className="text-xs text-gold" />
                     <span>Ahmedabad Flagship Showroom</span>
                 </div>
 
@@ -61,7 +60,7 @@ Please confirm the appointment slot. Thank you!`
                     {/* Left Column: Showroom Details & Contact Cards */}
                     <div className="lg:col-span-5 space-y-8">
                         <div>
-                            <span className="text-xs uppercase tracking-widest text-[#d4af37] font-semibold font-roboto">
+                            <span className="text-xs uppercase tracking-widest text-gold font-semibold font-roboto">
                                 Store Information
                             </span>
                             <h2 className="text-2xl sm:text-3xl font-playfair font-medium text-primary mt-1">
@@ -72,7 +71,7 @@ Please confirm the appointment slot. Thank you!`
                         {/* Contact Details List */}
                         <div className="space-y-5">
                             <div className="p-6 rounded-2xl bg-white border border-[#EDE8E0] shadow-sm flex items-start gap-4">
-                                <div className="w-12 h-12 rounded-xl bg-[#304037]/10 flex items-center justify-center text-[#304037] shrink-0 text-2xl">
+                                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0 text-2xl">
                                     <IoLocationOutline />
                                 </div>
                                 <div className="space-y-1">
@@ -87,7 +86,7 @@ Please confirm the appointment slot. Thank you!`
                                             href="https://maps.google.com/?q=22.955048,72.584717"
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="inline-flex items-center gap-1.5 text-xs text-[#d4af37] font-medium hover:underline"
+                                            className="inline-flex items-center gap-1.5 text-xs text-gold font-medium hover:underline"
                                         >
                                             <IoNavigateCircleOutline className="text-base" />
                                             <span>Open in Google Maps</span>
@@ -97,7 +96,7 @@ Please confirm the appointment slot. Thank you!`
                                             href="https://www.google.com/maps/dir/?api=1&destination=22.955048,72.584717"
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-xs text-[#304037] font-medium hover:underline"
+                                            className="text-xs text-primary font-medium hover:underline"
                                         >
                                             Directions
                                         </a>
@@ -106,7 +105,7 @@ Please confirm the appointment slot. Thank you!`
                             </div>
 
                             <div className="p-6 rounded-2xl bg-white border border-[#EDE8E0] shadow-sm flex items-start gap-4">
-                                <div className="w-12 h-12 rounded-xl bg-[#304037]/10 flex items-center justify-center text-[#304037] shrink-0 text-2xl">
+                                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0 text-2xl">
                                     <IoCallOutline />
                                 </div>
                                 <div className="space-y-1">
@@ -124,7 +123,7 @@ Please confirm the appointment slot. Thank you!`
                             </div>
 
                             <div className="p-6 rounded-2xl bg-white border border-[#EDE8E0] shadow-sm flex items-start gap-4">
-                                <div className="w-12 h-12 rounded-xl bg-[#304037]/10 flex items-center justify-center text-[#304037] shrink-0 text-2xl">
+                                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0 text-2xl">
                                     <IoTimeOutline />
                                 </div>
                                 <div className="space-y-1">
@@ -143,9 +142,9 @@ Please confirm the appointment slot. Thank you!`
                         </div>
 
                         {/* Showroom Counter QR Standee Card */}
-                        <div className="p-6 rounded-2xl bg-gradient-to-br from-[#F9F7F3] to-[#FAF8F5] border-2 border-[#d4af37]/40 shadow-sm flex items-center justify-between gap-4">
+                        <div className="p-6 rounded-2xl bg-linear-to-br from-[#F9F7F3] to-[#FAF8F5] border-2 border-gold/40 shadow-sm flex items-center justify-between gap-4">
                             <div className="space-y-1.5 min-w-0">
-                                <span className="text-[10px] uppercase font-mono tracking-widest text-[#d4af37] font-bold">
+                                <span className="text-[10px] uppercase font-mono tracking-widest text-gold font-bold">
                                     Counter QR Code
                                 </span>
                                 <h4 className="text-sm font-playfair font-semibold text-[#1F2B24]">
@@ -156,41 +155,41 @@ Please confirm the appointment slot. Thank you!`
                                 </p>
                                 <button
                                     onClick={openQrModal}
-                                    className="pt-1.5 inline-flex items-center gap-1.5 text-xs text-[#304037] font-semibold hover:text-[#d4af37] cursor-pointer group"
+                                    className="pt-1.5 inline-flex items-center gap-1.5 text-xs text-primary font-semibold hover:text-gold cursor-pointer group"
                                 >
-                                    <IoQrCodeOutline className="text-sm text-[#d4af37] group-hover:scale-110 transition-transform" />
+                                    <IoQrCodeOutline className="text-sm text-gold group-hover:scale-110 transition-transform" />
                                     <span className="underline underline-offset-2">View QR Code Standee</span>
                                 </button>
                             </div>
                             <button
                                 onClick={openQrModal}
-                                className="w-16 h-16 rounded-2xl bg-white p-2.5 border border-[#EDE8E0] shadow-md flex items-center justify-center shrink-0 hover:scale-105 hover:border-[#d4af37] transition-all cursor-pointer group"
+                                className="w-16 h-16 rounded-2xl bg-white p-2.5 border border-[#EDE8E0] shadow-md flex items-center justify-center shrink-0 hover:scale-105 hover:border-gold transition-all cursor-pointer group"
                                 title="Click to view full QR code"
                             >
-                                <IoQrCodeOutline className="text-4xl text-[#304037] group-hover:text-[#d4af37] transition-colors" />
+                                <IoQrCodeOutline className="text-4xl text-primary group-hover:text-gold transition-colors" />
                             </button>
                         </div>
 
                         {/* In-Store Amenities */}
-                        <div className="p-6 rounded-2xl bg-[#304037] text-white space-y-4 shadow-lg">
-                            <h3 className="text-base font-playfair font-medium text-[#f3e5ab]">
+                        <div className="p-6 rounded-2xl bg-primary text-white space-y-4 shadow-lg">
+                            <h3 className="text-base font-playfair font-medium text-gold-light">
                                 In-Store Experience & Amenities
                             </h3>
                             <div className="grid grid-cols-2 gap-3 text-xs font-roboto text-gray-300">
                                 <div className="flex items-center gap-2">
-                                    <BsShieldCheck className="text-[#d4af37] text-base" />
+                                    <BsShieldCheck className="text-gold text-base" />
                                     <span>Live Karatmeter Testing</span>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                    <BsCupHot className="text-[#d4af37] text-base" />
+                                    <BsCupHot className="text-gold text-base" />
                                     <span>Private Bridal Lounge</span>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                    <BsCarFront className="text-[#d4af37] text-base" />
+                                    <BsCarFront className="text-gold text-base" />
                                     <span>Convenient Parking</span>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                    <span className="text-[#d4af37]">✦</span>
+                                    <span className="text-gold">✦</span>
                                     <span>Free Cleaning & Polish</span>
                                 </div>
                             </div>
@@ -200,7 +199,7 @@ Please confirm the appointment slot. Thank you!`
                     {/* Right Column: Book In-Store Consultation Form */}
                     <div className="lg:col-span-7 bg-white p-8 sm:p-12 rounded-3xl border border-[#EDE8E0] shadow-xl space-y-6">
                         <div>
-                            <span className="text-xs uppercase tracking-widest text-[#d4af37] font-semibold font-roboto">
+                            <span className="text-xs uppercase tracking-widest text-gold font-semibold font-roboto">
                                 VIP Appointment
                             </span>
                             <h2 className="text-2xl sm:text-3xl font-playfair font-medium text-primary mt-1">
@@ -223,7 +222,7 @@ Please confirm the appointment slot. Thank you!`
                                         placeholder="Enter your name"
                                         value={formData.name}
                                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                        className="w-full px-4 py-3 rounded-xl border border-gray-300 text-sm font-roboto focus:outline-none focus:border-[#304037] bg-[#FAFAF8]"
+                                        className="w-full px-4 py-3 rounded-xl border border-gray-300 text-sm font-roboto focus:outline-none focus:border-primary bg-[#FAFAF8]"
                                     />
                                 </div>
 
@@ -237,7 +236,7 @@ Please confirm the appointment slot. Thank you!`
                                         placeholder="e.g. 7340681617"
                                         value={formData.phone}
                                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                        className="w-full px-4 py-3 rounded-xl border border-gray-300 text-sm font-roboto focus:outline-none focus:border-[#304037] bg-[#FAFAF8]"
+                                        className="w-full px-4 py-3 rounded-xl border border-gray-300 text-sm font-roboto focus:outline-none focus:border-primary bg-[#FAFAF8]"
                                     />
                                 </div>
                             </div>
@@ -251,7 +250,7 @@ Please confirm the appointment slot. Thank you!`
                                         type="date"
                                         value={formData.date}
                                         onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                                        className="w-full px-4 py-3 rounded-xl border border-gray-300 text-sm font-roboto focus:outline-none focus:border-[#304037] bg-[#FAFAF8]"
+                                        className="w-full px-4 py-3 rounded-xl border border-gray-300 text-sm font-roboto focus:outline-none focus:border-primary bg-[#FAFAF8]"
                                     />
                                 </div>
 
@@ -262,7 +261,7 @@ Please confirm the appointment slot. Thank you!`
                                     <select
                                         value={formData.requirement}
                                         onChange={(e) => setFormData({ ...formData, requirement: e.target.value })}
-                                        className="w-full px-4 py-3 rounded-xl border border-gray-300 text-sm font-roboto focus:outline-none focus:border-[#304037] bg-[#FAFAF8]"
+                                        className="w-full px-4 py-3 rounded-xl border border-gray-300 text-sm font-roboto focus:outline-none focus:border-primary bg-[#FAFAF8]"
                                     >
                                         <option value="Bridal Jewellery Consultation">Bridal Jewellery Consultation</option>
                                         <option value="Engagement Rings & Solitaires">Engagement Rings & Solitaires</option>
@@ -282,15 +281,15 @@ Please confirm the appointment slot. Thank you!`
                                     placeholder="Tell us if you have any specific gold weight, diamond carat, or design preferences..."
                                     value={formData.message}
                                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                                    className="w-full px-4 py-3 rounded-xl border border-gray-300 text-sm font-roboto focus:outline-none focus:border-[#304037] bg-[#FAFAF8]"
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-300 text-sm font-roboto focus:outline-none focus:border-primary bg-[#FAFAF8]"
                                 />
                             </div>
 
                             <button
                                 type="submit"
-                                className="w-full py-4 rounded-xl bg-[#304037] hover:bg-[#233029] text-white font-roboto font-semibold text-sm tracking-wide transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-2.5 cursor-pointer border border-[#304037] hover:border-[#d4af37]"
+                                className="w-full py-4 rounded-xl bg-primary hover:bg-[#233029] text-white font-roboto font-semibold text-sm tracking-wide transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-2.5 cursor-pointer border border-primary hover:border-gold"
                             >
-                                <FaWhatsapp className="text-xl text-[#d4af37]" />
+                                <FaWhatsapp className="text-xl text-gold" />
                                 <span>Confirm Appointment via WhatsApp</span>
                             </button>
 
@@ -305,8 +304,8 @@ Please confirm the appointment slot. Thank you!`
                 <div className="mt-16 sm:mt-20 space-y-6">
                     <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-gray-200 pb-5">
                         <div className="space-y-1.5">
-                            <div className="inline-flex items-center gap-1.5 border border-[#304037]/20 px-3 py-0.5 rounded-full text-xs font-roboto uppercase tracking-widest text-[#304037] bg-[#304037]/5">
-                                <span className="text-[#d4af37]">✦</span>
+                            <div className="inline-flex items-center gap-1.5 border border-primary/20 px-3 py-0.5 rounded-full text-xs font-roboto uppercase tracking-widest text-primary bg-primary/5">
+                                <span className="text-gold">✦</span>
                                 <span>Interactive Location Map</span>
                             </div>
                             <h2 className="text-2xl sm:text-3xl font-playfair font-medium text-primary">
@@ -322,18 +321,18 @@ Please confirm the appointment slot. Thank you!`
                                 href="https://www.google.com/maps/dir/?api=1&destination=22.955048,72.584717"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="px-5 py-2.5 rounded-xl bg-[#304037] hover:bg-[#233029] text-white text-xs font-roboto font-medium tracking-wide flex items-center gap-2 shadow-sm transition-all hover:shadow-md border border-[#304037] hover:border-[#d4af37]"
+                                className="px-5 py-2.5 rounded-xl bg-primary hover:bg-[#233029] text-white text-xs font-roboto font-medium tracking-wide flex items-center gap-2 shadow-sm transition-all hover:shadow-md border border-primary hover:border-gold"
                             >
-                                <IoNavigateCircleOutline className="text-base text-[#d4af37]" />
+                                <IoNavigateCircleOutline className="text-base text-gold" />
                                 <span>Get Driving Directions</span>
                             </a>
                             <a
                                 href="https://maps.google.com/?q=22.955048,72.584717"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="px-5 py-2.5 rounded-xl bg-white hover:bg-gray-50 text-gray-700 text-xs font-roboto font-medium tracking-wide flex items-center gap-2 border border-gray-300 transition-all hover:border-[#d4af37]"
+                                className="px-5 py-2.5 rounded-xl bg-white hover:bg-gray-50 text-gray-700 text-xs font-roboto font-medium tracking-wide flex items-center gap-2 border border-gray-300 transition-all hover:border-gold"
                             >
-                                <IoLocationOutline className="text-base text-[#d4af37]" />
+                                <IoLocationOutline className="text-base text-gold" />
                                 <span>Open Fullscreen Map</span>
                             </a>
                         </div>
@@ -341,7 +340,7 @@ Please confirm the appointment slot. Thank you!`
 
                     {/* Map Frame Card */}
                     <div className="bg-white rounded-3xl overflow-hidden border border-[#EDE8E0] shadow-xl hover:shadow-2xl transition-all duration-300">
-                        <div className="relative w-full h-[360px] sm:h-[440px] lg:h-[480px]">
+                        <div className="relative w-full h-90 sm:h-110 lg:h-120">
                             <iframe
                                 title="Rangoli Jewellers Showroom Location Map"
                                 src="https://maps.google.com/maps?q=22.955048,72.584717+(Rangoli+Jewellers+-+Shop+No+14,+Pragati+One,+Narolgam)&t=&z=17&ie=UTF8&iwloc=&output=embed"
@@ -358,11 +357,11 @@ Please confirm the appointment slot. Thank you!`
                         {/* Location Detail Bar Under Map */}
                         <div className="p-6 bg-[#24312a] text-white border-t border-[#3e5247] flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                             <div className="flex items-start gap-3.5">
-                                <div className="w-10 h-10 rounded-xl bg-[#304037] border border-[#d4af37]/40 flex items-center justify-center text-[#d4af37] text-xl shrink-0 mt-0.5">
+                                <div className="w-10 h-10 rounded-xl bg-primary border border-gold/40 flex items-center justify-center text-gold text-xl shrink-0 mt-0.5">
                                     <IoLocationOutline />
                                 </div>
                                 <div>
-                                    <h3 className="text-sm font-playfair font-medium text-[#f3e5ab]">
+                                    <h3 className="text-sm font-playfair font-medium text-gold-light">
                                         Rangoli Jewellers Flagship Store
                                     </h3>
                                     <p className="text-xs font-roboto text-gray-300 leading-relaxed mt-0.5">
@@ -376,7 +375,7 @@ Please confirm the appointment slot. Thank you!`
                                     href="https://www.google.com/maps/dir/?api=1&destination=22.955048,72.584717"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex-1 md:flex-none text-center px-5 py-2.5 rounded-xl bg-[#d4af37] hover:bg-[#e0be53] text-[#1c2922] text-xs font-roboto font-bold uppercase tracking-wider transition-colors shadow-sm"
+                                    className="flex-1 md:flex-none text-center px-5 py-2.5 rounded-xl bg-gold hover:bg-[#e0be53] text-[#1c2922] text-xs font-roboto font-bold uppercase tracking-wider transition-colors shadow-sm"
                                 >
                                     Directions on GPS
                                 </a>
@@ -384,7 +383,7 @@ Please confirm the appointment slot. Thank you!`
                                     href={`https://wa.me/${whatsappNumber}?text=Namaste%20Rangoli%20Jewellers,%20I%20am%20visiting%20your%20showroom%20at%20Shop%20No%2014,%20Pragati%20One,%20Narolgam.`}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex-1 md:flex-none text-center px-4 py-2.5 rounded-xl bg-[#304037] hover:bg-[#1f2a24] text-white border border-[#3e5247] hover:border-[#d4af37] text-xs font-roboto font-medium transition-colors"
+                                    className="flex-1 md:flex-none text-center px-4 py-2.5 rounded-xl bg-primary hover:bg-[#1f2a24] text-white border border-[#3e5247] hover:border-gold text-xs font-roboto font-medium transition-colors"
                                 >
                                     WhatsApp Location
                                 </a>

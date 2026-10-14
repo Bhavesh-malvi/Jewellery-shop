@@ -30,8 +30,8 @@ const OurCollection = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
                 {/* Section Header */}
                 <div className="flex flex-col items-center text-center space-y-3">
-                    <div className="inline-flex items-center gap-1.5 border border-[#304037]/25 px-3.5 py-1 rounded-full text-xs sm:text-sm text-primary font-roboto uppercase tracking-widest bg-[#304037]/5">
-                        <GoDotFill className="text-xs text-[#d4af37]" />
+                    <div className="inline-flex items-center gap-1.5 border border-primary/25 px-3.5 py-1 rounded-full text-xs sm:text-sm text-primary font-roboto uppercase tracking-widest bg-primary/5">
+                        <GoDotFill className="text-xs text-gold" />
                         <span>Curated Distinction</span>
                     </div>
 
@@ -49,12 +49,12 @@ const OurCollection = () => {
                     {collections.map((item, index) => (
                         <div
                             key={index}
-                            className="group bg-white rounded-3xl border border-[#EDE8E0] hover:border-[#d4af37]/60 shadow-sm hover:shadow-2xl transition-all duration-500 p-6 sm:p-8 lg:p-10 flex flex-col sm:flex-row justify-between gap-6 sm:gap-8 items-center"
+                            className="group bg-white rounded-3xl border border-[#EDE8E0] hover:border-gold/60 shadow-sm hover:shadow-2xl transition-all duration-500 p-6 sm:p-8 lg:p-10 flex flex-col sm:flex-row justify-between gap-6 sm:gap-8 items-center"
                         >
                             {/* Left Text Column */}
                             <div className="flex-1 flex flex-col justify-between h-full space-y-4">
                                 <div className="space-y-2">
-                                    <span className="text-[11px] uppercase tracking-widest text-[#d4af37] font-semibold font-roboto">
+                                    <span className="text-[11px] uppercase tracking-widest text-gold font-semibold font-roboto">
                                         {item.tag}
                                     </span>
                                     <h3 className="text-2xl sm:text-3xl lg:text-[32px] font-playfair font-medium text-primary leading-tight">
@@ -78,7 +78,7 @@ const OurCollection = () => {
                                 <div className="pt-2">
                                     <Link
                                         to="/collections"
-                                        className="group/btn inline-flex items-center gap-2 border border-[#304037] text-primary hover:bg-[#304037] hover:text-white px-7 py-3 rounded-full text-xs sm:text-sm font-roboto font-medium tracking-wide transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer"
+                                        className="group/btn inline-flex items-center gap-2 border border-primary text-primary hover:bg-primary hover:text-white px-7 py-3 rounded-full text-xs sm:text-sm font-roboto font-medium tracking-wide transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer"
                                     >
                                         <span>Explore Collection</span>
                                         <HiArrowRight className="text-base transition-transform duration-300 group-hover/btn:translate-x-1" />
@@ -95,7 +95,7 @@ const OurCollection = () => {
                                 />
 
                                 {/* Floating Tag */}
-                                <span className="absolute bottom-4 left-4 bg-[#304037]/85 backdrop-blur-sm text-white text-[11px] font-roboto font-medium px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
+                                <span className="absolute bottom-4 left-4 bg-primary/85 backdrop-blur-sm text-white text-[11px] font-roboto font-medium px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
                                     {item.badge}
                                 </span>
                             </div>
